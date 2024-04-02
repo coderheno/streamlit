@@ -3,7 +3,49 @@ import streamlit as st
 import requests
 import pandas as pd
 import os
+def topic2():
+    st.subheader("Data Indexing and Selection with Pandas")
 
+    # Create a sample DataFrame
+    df = pd.DataFrame({'A': [1, 2, 3], 'B': [4, 5, 6], 'C': [7, 8, 9]})
+
+    st.write("Original DataFrame:")
+    st.write(df)
+
+    st.subheader("1. Indexing with []:")
+    # Selecting single column
+    st.write("Selecting single column 'A':")
+    col_A = df['A']
+    st.write(col_A)
+
+    # Selecting multiple columns
+    st.write("Selecting multiple columns 'A' and 'B':")
+    cols_AB = df[['A', 'B']]
+    st.write(cols_AB)
+
+    st.subheader("2. Selection by Label (.loc[]):")
+    # Selecting rows and columns by label
+    st.write("Selecting rows 1 to 2 and columns 'A' and 'B':")
+    subset_loc = df.loc[1:2, ['A', 'B']]
+    st.write(subset_loc)
+
+    st.subheader("3. Selection by Position (.iloc[]):")
+    # Selecting rows and columns by position
+    st.write("Selecting rows 1 to 2 and columns 0 to 1:")
+    subset_iloc = df.iloc[1:3, 0:2]
+    st.write(subset_iloc)
+
+    st.subheader("4. Boolean Indexing:")
+    # Boolean indexing to select rows based on a condition
+    st.write("Selecting rows where column 'A' > 1:")
+    filtered_df = df[df['A'] > 1]
+    st.write(filtered_df)
+
+    st.subheader("5. Attribute Access:")
+    # Accessing columns as attributes
+    st.write("Accessing column 'A' as attribute:")
+    col_A_attr = df.A
+    st.write(col_A_attr)
 def submission():
     st.title("Add Student Submission")
 
@@ -187,7 +229,7 @@ def main():
         st.write("Error loading dataset")
     # Sidebar tabs and hyperlinks
     st.sidebar.title('Unit-4: Quick Navigation')
-    tab = st.sidebar.radio('Go to', ['Contents', 'Class Lectures', 'Examples', 'Assignments', 'Practicals', 'Submissions'])
+    tab = st.sidebar.radio('Go to', ['Contents', 'Lecture-I', 'Lecture-II','Examples', 'Assignments', 'Practicals', 'Submissions'])
 
     if tab == 'Contents':
         st.subheader("File Handling in Python")
@@ -198,8 +240,10 @@ def main():
         st.write("7.Write a script to perform CRUD operations using corresponding SQL statements and load the data into the internal Data Structure.")
         st.write("8.Construct a script to work like a SQL Inner Join for an internal Data Structure")
         
-    elif tab == 'Class Lectures':
+    elif tab == 'Lecture-I':
         class_lectures()
+    elif tab == 'Lecture-II':
+        topic2()
     elif tab == 'Examples':
         # Explore the dataset
         explore_data(df)
