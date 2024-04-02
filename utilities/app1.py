@@ -148,7 +148,7 @@ def main():
     st.title("UNIT-4: Introduction to Pandas")
 
     # Load the dataset
-    file_path = "/election_bonds_dataset.csv"
+    file_path = ".\election_bonds_dataset.csv"
     df = load_data(file_path)
 
     # Sidebar tabs and hyperlinks
