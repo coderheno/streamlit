@@ -1,3 +1,4 @@
+import io
 import streamlit as st
 import requests
 import pandas as pd
@@ -149,10 +150,11 @@ def main():
     st.title("UNIT-4: Introduction to Pandas")
 
     # Load the dataset
-    file_path = "https://github.com/vijayarpu/fakers/blob/main/utilities/election_bonds_dataset.csv"
+    file_path = "https://raw.githubusercontent.com/coderheno/streamlit/main/utilities/election_bonds_dataset.csv"
     response = requests.get(file_path)
     if response.status_code == 200:
-        df= pd.read_csv(response.content)
+        csv_content = io.BytesIO(response.content)
+        df= pd.read_csv(csv_content)
     else:
         st.write("Error loading dataset")
     # Sidebar tabs and hyperlinks
