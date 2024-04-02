@@ -2,6 +2,34 @@ import io
 import streamlit as st
 import requests
 import pandas as pd
+import os
+
+def submission():
+    st.title("Add Student Submission")
+
+    # Input fields for student details
+    name = st.text_input("Enter your name:")
+    reg_no = st.text_input("Enter your registration number:")
+
+    # File upload
+    st.write("Upload your submission file:")
+    uploaded_file = st.file_uploader("Choose a file", type=['pdf', 'docx', 'txt'])
+
+    if st.button("Submit"):
+        if name and reg_no and uploaded_file:
+            # Save the uploaded file
+            file_path = os.path.join("submissions", uploaded_file.name)
+            with open(file_path, "wb") as f:
+                f.write(uploaded_file.getbuffer())
+
+            # Save student details to a CSV file
+            with open("student_submissions.csv", "a") as csv_file:
+                csv_file.write(f"{name},{reg_no},{file_path}\n")
+
+            st.success("Submission added successfully!")
+        else:
+            st.error("Please fill in all the fields and upload a file.")
+
 def class_lectures():
     st.header("What is Pandas?")
     st.write("Pandas is a Python library used for data manipulation and analysis. It provides easy-to-use data structures and functions, making it powerful for working with structured data.")
@@ -159,7 +187,7 @@ def main():
         st.write("Error loading dataset")
     # Sidebar tabs and hyperlinks
     st.sidebar.title('Unit-4: Quick Navigation')
-    tab = st.sidebar.radio('Go to', ['Contents', 'Class Lectures', 'Examples', 'Assignments', 'Practicals'])
+    tab = st.sidebar.radio('Go to', ['Contents', 'Class Lectures', 'Examples', 'Assignments', 'Practicals', 'Submissions'])
 
     if tab == 'Contents':
         st.subheader("File Handling in Python")
@@ -183,6 +211,7 @@ def main():
 
     elif tab == 'Practicals':
         practicals()
-
+    elif tab == 'Submissions':
+        submission()
 if __name__ == "__main__":
     main()
