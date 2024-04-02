@@ -1,4 +1,5 @@
 import streamlit as st
+import requests
 import pandas as pd
 def class_lectures():
     st.header("What is Pandas?")
@@ -148,9 +149,12 @@ def main():
     st.title("UNIT-4: Introduction to Pandas")
 
     # Load the dataset
-    file_path = ".\election_bonds_dataset.csv"
-    df = load_data(file_path)
-
+    file_path = "https://github.com/vijayarpu/fakers/blob/main/utilities/election_bonds_dataset.csv"
+    response = requests.get(file_path)
+    if response.status_code == 200:
+        df= pd.read_csv(response.content)
+    else:
+        st.write("Error loading dataset")
     # Sidebar tabs and hyperlinks
     st.sidebar.title('Unit-4: Quick Navigation')
     tab = st.sidebar.radio('Go to', ['Contents', 'Class Lectures', 'Examples', 'Assignments', 'Practicals'])
