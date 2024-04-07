@@ -7,7 +7,7 @@ import os
 import matplotlib.pyplot as plt
 import seaborn as sns
 def project():
-     # Load the data
+        # Load the data
     file_path = "https://raw.githubusercontent.com/coderheno/streamlit/main/utilities/data1.csv"
     response = requests.get(file_path)
     if response.status_code == 200:
@@ -26,19 +26,15 @@ def project():
     # Gender distribution
     st.subheader('Gender Distribution')
     gender_counts = df['Gender'].value_counts()
-    gender_chart = alt.Chart(df).mark_bar().encode(
-        x=alt.X('Gender', title='Gender'),
-        y=alt.Y('count()', title='Count'),
-    )
-    st.altair_chart(gender_chart, use_container_width=True)
+    st.write(gender_counts)
 
     # Gender-wise marking distribution
     st.subheader('Gender-wise Marking Distribution')
-    marking_chart = alt.Chart(df).mark_boxplot().encode(
-        x='Gender',
-        y='CIA1 (20)',
-    )
-    st.altair_chart(marking_chart, use_container_width=True)
+    sns.set_theme()
+    fig, ax = plt.subplots(figsize=(10, 6))
+    sns.boxplot(x='Gender', y='CIA1 (20)', data=df, ax=ax)
+    ax.set_title('Gender-wise Marking Distribution')
+    st.pyplot(fig)
 
     # Correlation between assignment and test scores
     st.subheader('Correlation between Assignment and Test Scores')
@@ -51,10 +47,12 @@ def project():
 
     # Marking distribution histogram
     st.subheader('Marking Distribution Histogram')
-    st.altair_chart(alt.Chart(df).mark_bar().encode(
-        x=alt.X('CIA1 (20)', bin=True),
-        y='count()',
-    ), use_container_width=True)
+    fig, ax = plt.subplots()
+    ax.hist(df['CIA1 (20)'], bins=20, edgecolor='black')
+    ax.set_xlabel('CIA1 Marks')
+    ax.set_ylabel('Count')
+    ax.set_title('Marking Distribution Histogram')
+    st.pyplot(fig)
     
 def topic2():
     st.subheader("Data Indexing and Selection with Pandas")
