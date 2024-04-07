@@ -1,3 +1,4 @@
+import altair as alt
 import io
 import streamlit as st
 import requests
@@ -6,7 +7,7 @@ import os
 import matplotlib.pyplot as plt
 import seaborn as sns
 def project():
-    # Load the data
+     # Load the data
     file_path = "https://raw.githubusercontent.com/coderheno/streamlit/main/utilities/data1.csv"
     response = requests.get(file_path)
     if response.status_code == 200:
@@ -17,40 +18,43 @@ def project():
 
     # Title
     st.title('Gender Performance Analysis')
+    
     # Data preview
     st.subheader('Data Preview')
     st.write(df.head())
+
     # Gender distribution
     st.subheader('Gender Distribution')
     gender_counts = df['Gender'].value_counts()
-    fig, ax = plt.subplots()
-    ax.pie(gender_counts, labels=gender_counts.index, autopct='%1.1f%%')
-    ax.axis('equal')
-    ax.set_title('Gender Distribution')
-    st.pyplot(fig)
+    gender_chart = alt.Chart(df).mark_bar().encode(
+        x=alt.X('Gender', title='Gender'),
+        y=alt.Y('count()', title='Count'),
+    )
+    st.altair_chart(gender_chart, use_container_width=True)
+
     # Gender-wise marking distribution
     st.subheader('Gender-wise Marking Distribution')
-    fig, ax = plt.subplots(figsize=(10, 6))
-    sns.boxplot(x='Gender', y='CIA1 (20)', data=df, ax=ax)
-    ax.set_title('Gender-wise Marking Distribution')
-    st.pyplot(fig)
+    marking_chart = alt.Chart(df).mark_boxplot().encode(
+        x='Gender',
+        y='CIA1 (20)',
+    )
+    st.altair_chart(marking_chart, use_container_width=True)
+
     # Correlation between assignment and test scores
     st.subheader('Correlation between Assignment and Test Scores')
     corr = df['Assignment (10)'].corr(df['Test (10)'])
     st.write(f'The correlation between assignment and test scores is: {corr:.2f}')
+
     # Marking chart
     st.subheader('Marking Chart')
-    marking_chart = df[['Student Name', 'Gender', 'Assignment (10)', 'Test (10)', 'CIA1 (20)']].sort_values(by='CIA1 (20)', ascending=False)
-    st.write(marking_chart)
+    st.write(df[['Student Name', 'Gender', 'Assignment (10)', 'Test (10)', 'CIA1 (20)']].sort_values(by='CIA1 (20)', ascending=False))
 
     # Marking distribution histogram
     st.subheader('Marking Distribution Histogram')
-    fig, ax = plt.subplots()
-    ax.hist(df['CIA1 (20)'], bins=20, edgecolor='black')
-    ax.set_xlabel('CIA1 Marks')
-    ax.set_ylabel('Count')
-    ax.set_title('Marking Distribution Histogram')
-    st.pyplot(fig)
+    st.altair_chart(alt.Chart(df).mark_bar().encode(
+        x=alt.X('CIA1 (20)', bin=True),
+        y='count()',
+    ), use_container_width=True)
     
 def topic2():
     st.subheader("Data Indexing and Selection with Pandas")
