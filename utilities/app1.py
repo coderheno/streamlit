@@ -4,7 +4,7 @@ import streamlit as st
 import requests
 import pandas as pd
 import os
-import matplotlib.pyplot as plt
+
 import seaborn as sns
 def project():
     pass
