@@ -4,7 +4,6 @@ import streamlit as st
 import requests
 import pandas as pd
 import os
-import matplotlib.pyplot as plt
 import seaborn as sns
 def project():
         # Load the data
@@ -31,7 +30,7 @@ def project():
     # Gender-wise marking distribution
     st.subheader('Gender-wise Marking Distribution')
     sns.set_theme()
-    fig, ax = plt.subplots(figsize=(10, 6))
+    fig, ax = alt.subplots(figsize=(10, 6))
     sns.boxplot(x='Gender', y='CIA1 (20)', data=df, ax=ax)
     ax.set_title('Gender-wise Marking Distribution')
     st.pyplot(fig)
@@ -47,7 +46,7 @@ def project():
 
     # Marking distribution histogram
     st.subheader('Marking Distribution Histogram')
-    fig, ax = plt.subplots()
+    fig, ax = alt.subplots()
     ax.hist(df['CIA1 (20)'], bins=20, edgecolor='black')
     ax.set_xlabel('CIA1 Marks')
     ax.set_ylabel('Count')
