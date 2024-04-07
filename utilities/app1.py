@@ -1,11 +1,9 @@
-import altair as alt
 import io
 import streamlit as st
 import requests
 import pandas as pd
 import os
 
-import seaborn as sns
 def project():
     pass
 #         # Load the data
