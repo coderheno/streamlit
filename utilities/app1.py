@@ -1,57 +1,58 @@
 import io
+import matplotlib.pyplot as plt
 import streamlit as st
 import requests
 import pandas as pd
 import os
+import seaborn as sns
 
 def project():
-    pass
-#         # Load the data
-#     file_path = "https://raw.githubusercontent.com/coderheno/streamlit/main/utilities/data1.csv"
-#     response = requests.get(file_path)
-#     if response.status_code == 200:
-#         csv_content1 = io.BytesIO(response.content)
-#         df = pd.read_csv(csv_content1)
-#     else:
-#         st.write("Error loading dataset")
+        # Load the data
+    file_path = "https://raw.githubusercontent.com/coderheno/streamlit/main/utilities/data1.csv"
+    response = requests.get(file_path)
+    if response.status_code == 200:
+        csv_content1 = io.BytesIO(response.content)
+        df = pd.read_csv(csv_content1)
+    else:
+        st.write("Error loading dataset")
 
-#     # Title
-#     st.title('Gender Performance Analysis')
+    # Title
+    st.title('Gender Performance Analysis')
     
-#     # Data preview
-#     st.subheader('Data Preview')
-#     st.write(df.head())
+    # Data preview
+    st.subheader('Data Preview')
+    st.write(df.head())
 
-#     # Gender distribution
-#     st.subheader('Gender Distribution')
-#     gender_counts = df['Gender'].value_counts()
-#     st.write(gender_counts)
+    # Gender distribution
+    st.subheader('Gender Distribution')
+    gender_counts = df['Gender'].value_counts()
+    st.write(gender_counts)
 
-#     # Gender-wise marking distribution
-#     st.subheader('Gender-wise Marking Distribution')
-#     sns.set_theme()
-#     fig, ax = plt.subplots(figsize=(10, 6))
-#     sns.boxplot(x='Gender', y='CIA1 (20)', data=df, ax=ax)
-#     ax.set_title('Gender-wise Marking Distribution')
-#     st.pyplot(fig)
+    # Gender-wise marking distribution
+    st.subheader('Gender-wise Marking Distribution')
+    sns.set_theme()
+    fig, ax = plt.subplots(figsize=(10, 6))
+    sns.boxplot(x='Gender', y='CIA1 (20)', data=df, ax=ax)
+    ax.set_title('Gender-wise Marking Distribution')
+    st.pyplot(fig)
 
-#     # Correlation between assignment and test scores
-#     st.subheader('Correlation between Assignment and Test Scores')
-#     corr = df['Assignment (10)'].corr(df['Test (10)'])
-#     st.write(f'The correlation between assignment and test scores is: {corr:.2f}')
+    # Correlation between assignment and test scores
+    st.subheader('Correlation between Assignment and Test Scores')
+    corr = df['Assignment (10)'].corr(df['Test (10)'])
+    st.write(f'The correlation between assignment and test scores is: {corr:.2f}')
 
-#     # Marking chart
-#     st.subheader('Marking Chart')
-#     st.write(df[['Student Name', 'Gender', 'Assignment (10)', 'Test (10)', 'CIA1 (20)']].sort_values(by='CIA1 (20)', ascending=False))
+    # Marking chart
+    st.subheader('Marking Chart')
+    st.write(df[['Student Name', 'Gender', 'Assignment (10)', 'Test (10)', 'CIA1 (20)']].sort_values(by='CIA1 (20)', ascending=False))
 
-#     # Marking distribution histogram
-#     st.subheader('Marking Distribution Histogram')
-#     fig, ax = plt.subplots()
-#     ax.hist(df['CIA1 (20)'], bins=20, edgecolor='black')
-#     ax.set_xlabel('CIA1 Marks')
-#     ax.set_ylabel('Count')
-#     ax.set_title('Marking Distribution Histogram')
-#     st.pyplot(fig)
+    # Marking distribution histogram
+    st.subheader('Marking Distribution Histogram')
+    fig, ax = plt.subplots()
+    ax.hist(df['CIA1 (20)'], bins=20, edgecolor='black')
+    ax.set_xlabel('CIA1 Marks')
+    ax.set_ylabel('Count')
+    ax.set_title('Marking Distribution Histogram')
+    st.pyplot(fig)
     
 def topic2():
     st.subheader("Data Indexing and Selection with Pandas")
