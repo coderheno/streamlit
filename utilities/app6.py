@@ -1,21 +1,50 @@
 import streamlit as st
-import datetime
-import time
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
 
-# Function to display system time with changing seconds
-def display_system_time():
-    while True:
-        current_time = datetime.datetime.now().strftime("%H:%M:%S")
-        st.write("Current Time: ", current_time)
-        time.sleep(1)
-        st.empty()  # Clear the output to avoid stacking multiple time displays
+# Load the data
+data = pd.read_csv('data1.csv')
 
-# Main function to run the Streamlit app
-def main():
-    st.title("System Time Display")
-    st.write("This app displays the system time with changing seconds.")
+# Title
+st.title('Gender Performance Analysis')
 
-    display_system_time()  # Call the function to display system time
+# Data preview
+st.subheader('Data Preview')
+st.write(data.head())
 
-if __name__ == "__main__":
-    main()
+# Gender distribution
+st.subheader('Gender Distribution')
+gender_counts = data['Gender'].value_counts()
+fig, ax = plt.subplots()
+ax.pie(gender_counts, labels=gender_counts.index, autopct='%1.1f%%')
+ax.axis('equal')
+ax.set_title('Gender Distribution')
+st.pyplot(fig)
+
+# Gender-wise marking distribution
+st.subheader('Gender-wise Marking Distribution')
+fig, ax = plt.subplots(figsize=(10, 6))
+sns.boxplot(x='Gender', y='CIA1 (20)', data=data, ax=ax)
+ax.set_title('Gender-wise Marking Distribution')
+st.pyplot(fig)
+
+# Correlation between assignment and test scores
+st.subheader('Correlation between Assignment and Test Scores')
+corr = np.corrcoef(data['Assignment (10)'], data['Test (10)'])[0, 1]
+st.write(f'The correlation between assignment and test scores is: {corr:.2f}')
+
+# Marking chart
+st.subheader('Marking Chart')
+marking_chart = data[['Student Name', 'Gender', 'Assignment (10)', 'Test (10)', 'CIA1 (20)']].sort_values(by='CIA1 (20)', ascending=False)
+st.write(marking_chart)
+
+# Marking distribution histogram
+st.subheader('Marking Distribution Histogram')
+fig, ax = plt.subplots()
+ax.hist(data['CIA1 (20)'], bins=20, edgecolor='black')
+ax.set_xlabel('CIA1 Marks')
+ax.set_ylabel('Count')
+ax.set_title('Marking Distribution Histogram')
+st.pyplot(fig)
