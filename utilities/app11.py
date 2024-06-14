@@ -2,6 +2,64 @@ import pandas as pd
 import streamlit as st
 import os
 
+def case_study_recipe_management():
+    st.title("Case Study: Streamlining Recipe Management")
+
+    st.subheader("Background")
+    st.write("""
+    **Bake My Day**, a popular bakery known for its delicious and creative pastries, is struggling with recipe management. Their recipes are currently stored on handwritten cards and scattered notebooks, making it difficult for bakers to find specific recipes quickly and consistently. This chaos often leads to errors in ingredient measurements and baking times, impacting the quality and consistency of their baked goods.
+    """)
+    
+    st.write("""
+    **Challenges:**
+    - Handwritten recipes are time-consuming to locate and prone to damage or misplacement.
+    - Variations in handwriting and lack of standardized units can lead to inaccurate measurements and inconsistencies in baking results.
+    - New recipes developed by one baker are not readily accessible to others, hindering knowledge sharing and innovation.
+    - Estimating ingredient needs based on handwritten recipes is difficult, leading to potential overstocking or understocking of ingredients.
+    """)
+
+    st.write("""
+    **Proposed Solution:**
+    - Using dictionaries and lists to provide a structured and searchable way to store and access recipes, eliminating reliance on handwritten cards.
+    - Calculations can ensure consistent ingredient amounts, leading to more reliable baking results.
+    - All bakers can access and share recipes within the program, fostering knowledge exchange and recipe innovation.
+    - The system can calculate the total ingredient needs for a recipe batch, aiding in inventory planning and preventing stock shortages.
+    """)
+
+    st.subheader("Discussion Questions")
+    st.write("""
+    1. **What are some limitations of using simple data types for recipe management?**
+        - Simple data types such as strings and basic lists can lack the necessary structure and flexibility needed for comprehensive recipe management.
+        - They may not easily support complex queries or updates, and large amounts of data can become cumbersome to manage and prone to errors.
+    
+    2. **How could these limitations be addressed by incorporating libraries or more complex data structures?**
+        - Incorporating libraries such as pandas can allow for more sophisticated data manipulation and querying capabilities.
+        - Using more complex data structures like nested dictionaries or dataframes can provide better organization and accessibility for recipes, allowing for more efficient searches, updates, and calculations.
+    
+    3. **How can Bake My Day further leverage the system to automate other aspects of their operations?**
+        - Bake My Day can integrate inventory management by linking ingredient usage with stock levels to automate reordering processes.
+        - They can implement scheduling and task management for bakers, automating workflow and ensuring timely preparation of baked goods.
+        - Additionally, they can use the system to analyze sales data and customer preferences, optimizing recipe offerings and improving customer satisfaction.
+    """)
+
+def display_groups():
+    # Define the groups and mentors
+    groups = {
+        "Group 1": ["Dr RESMI K R", "Dr SARAVANAKUMAR K", "Dr Manasa", "Dr FABIOLA HAZEL POHRMEN", "Dr SAGAYA AURELIA P", "Dr SANDEEP J"],
+        "Group 2": ["Dr MOHANA PRIYA T", "Dr ROHINI V", "Dr Chanti", "Dr SREEJA C S", "Dr Amrutha K", "Dr KIRUBANAND V B", "Dr BEAULAH SOUNDARABAI P"],
+        "Group 3": ["Dr HUBERT", "Dr SARAVANAN K N", "Dr New begin", "Dr ASHOK IMMANUEL V", "Dr Sangeetha GOVINDA", "Dr NISMON RIO R"],
+        "Group 4": ["Dr Vijay", "Dr AROKIA PAUL RAJAN R", "Dr RAMAMURTHY B", "Dr VINEETHA KR", "Dr SMITHA VINOD", "Dr MANJUNATHA HIREMATH", "Dr SMERA C"]
+    }
+    
+    # Create a DataFrame for displaying in Streamlit
+    df = pd.DataFrame(groups.values(), index=groups.keys()).transpose()
+    
+    # Display the table using Streamlit
+    st.write("Groups and Mentors:")
+    st.table(df)
+
+
+
 def submission():
     st.title("Learner Submission Portal")
 
@@ -366,7 +424,7 @@ def main():
      
     # Sidebar tabs and hyperlinks
     st.sidebar.title('BCA263: Quick Navigation')
-    tab = st.sidebar.radio('Go to', ['Home', 'Groups', 'Activity-1', 'Activity-2', 'Submissions', 'LCA-Activities'])
+    tab = st.sidebar.radio('Go to', ['Home', 'Groups', 'Activity-1', 'Case Study-1', 'Case Study-2', 'Submissions', 'LCA-Activities'])
     if tab == 'Home':
         course_contents()
            
@@ -376,8 +434,10 @@ def main():
     elif tab == 'Activity-1':
         activity1()
 
-    elif tab == 'Activity-2':
+    elif tab == 'Case Study-1':
         activity2()
+    elif tab == 'Case Study-2':
+        case_study_recipe_management()
     elif tab == 'Groups':
         display_groups()
     elif tab == 'Submissions':
