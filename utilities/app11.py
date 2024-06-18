@@ -3,7 +3,6 @@ import streamlit as st
 import os
 import random
 
-# Function to display questions and collect answers
 def quiz():
     st.title("Basic Programming Knowledge Quiz")
 
