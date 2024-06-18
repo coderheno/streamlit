@@ -1,6 +1,53 @@
 import pandas as pd
 import streamlit as st
 import os
+import random
+
+# Function to display questions and collect answers
+def quiz():
+    st.title("Basic Programming Knowledge Quiz")
+
+    # Questions and choices
+    questions = [
+        ("In Java, which keyword is used to define a class?", "", "class"),
+        ("Which of the following is a valid way to declare a variable in C?", 
+         ["int 1variable;", "int variable1;", "int variable-1;", "int variable name;"], "int variable1;"),
+        ("What is the output of the following C++ code?\n```cpp\ncout << 2 + 3 * 4;\n```", "", "14"),
+        ("In C, which function is used to print output to the console?", 
+         ["printf()", "print()", "System.out.println()", "cout"], "printf()"),
+        ("What does the following Java code do?\n```java\nfor (int i = 0; i < 5; i++) {\n    System.out.println(i);\n}\n```", "", "Prints numbers 0 to 4"),
+        ("How do you create a function in C?", "", "return_type function_name(parameters) { // body }"),
+        ("What is the purpose of an `if` statement in programming?", "", "To make decisions based on conditions"),
+        ("How do you comment a line in C++?", "", "// This is a comment"),
+        ("What is the correct syntax to import a package in Java?", "", "import package_name;"),
+        ("What is the output of the following C code?\n```c\nint my_array[] = {1, 2, 3};\nprintf(\"%d\", my_array[1]);\n```", "", "2"),
+    ]
+
+    # Initialize score
+    score = 0
+
+    # Display questions and collect answers
+    for i, (question, options, correct_answer) in enumerate(questions):
+        st.write(f"Q{i+1}: {question}")
+        if options:
+            answer = st.radio("", options, key=f"q{i}")
+        else:
+            answer = st.text_input("", key=f"q{i}")
+
+        if answer.strip().lower() == correct_answer.strip().lower():
+            score += 1
+
+    # Display score and corresponding icon/smiley
+    st.write(f"Your score: {score}/{len(questions)}")
+
+    if score == len(questions):
+        st.success("Excellent! 🎉😃")
+    elif score >= len(questions) * 0.7:
+        st.success("Good job! 😊")
+    elif score >= len(questions) * 0.4:
+        st.warning("Fair effort! 🙂")
+    else:
+        st.error("Needs Improvement! 😕")
 
 def case_study_recipe_management():
     st.title("Case Study: Streamlining Recipe Management")
@@ -41,22 +88,6 @@ def case_study_recipe_management():
         - They can implement scheduling and task management for bakers, automating workflow and ensuring timely preparation of baked goods.
         - Additionally, they can use the system to analyze sales data and customer preferences, optimizing recipe offerings and improving customer satisfaction.
     """)
-
-def display_groups():
-    # Define the groups and mentors
-    groups = {
-        "Group 1": ["Dr RESMI K R", "Dr SARAVANAKUMAR K", "Dr Manasa", "Dr FABIOLA HAZEL POHRMEN", "Dr SAGAYA AURELIA P", "Dr SANDEEP J"],
-        "Group 2": ["Dr MOHANA PRIYA T", "Dr ROHINI V", "Dr Chanti", "Dr SREEJA C S", "Dr Amrutha K", "Dr KIRUBANAND V B", "Dr BEAULAH SOUNDARABAI P"],
-        "Group 3": ["Dr HUBERT", "Dr SARAVANAN K N", "Dr New begin", "Dr ASHOK IMMANUEL V", "Dr Sangeetha GOVINDA", "Dr NISMON RIO R"],
-        "Group 4": ["Dr Vijay", "Dr AROKIA PAUL RAJAN R", "Dr RAMAMURTHY B", "Dr VINEETHA KR", "Dr SMITHA VINOD", "Dr MANJUNATHA HIREMATH", "Dr SMERA C"]
-    }
-    
-    # Create a DataFrame for displaying in Streamlit
-    df = pd.DataFrame(groups.values(), index=groups.keys()).transpose()
-    
-    # Display the table using Streamlit
-    st.write("Groups and Mentors:")
-    st.table(df)
 
 
 
@@ -284,6 +315,135 @@ def lca_contents():
     #st.markdown("- Project Deployment Project Based learning")
     #st.markdown("- [Modules, Packages and Namespaces: Main module, built-in, creation of user defined modules](https://realpython.com/python-modules-packages/)")
 
+def display_hello_world_examples():
+    st.title("Hello, World! in Different Python Frameworks")
+
+    st.header("1. Tkinter Example")
+    st.write("Tkinter is the standard GUI library for Python. Below is the code to display 'Hello, World!' using Tkinter:")
+    tkinter_code = '''
+import tkinter as tk
+
+# Create the main window
+root = tk.Tk()
+root.title("Hello World App")
+
+# Create a label with the text "Hello, World!"
+label = tk.Label(root, text="Hello, World!")
+
+# Place the label in the main window
+label.pack()
+
+# Run the application
+root.mainloop()
+'''
+    st.code(tkinter_code, language='python')
+
+    st.header("2. Kivy Example")
+    st.write("Kivy is an open-source Python library for developing multitouch applications. Below is the code to display 'Hello, World!' using Kivy:")
+    kivy_code = '''
+from kivy.app import App
+from kivy.uix.label import Label
+
+class HelloWorldApp(App):
+    def build(self):
+        return Label(text='Hello, World!')
+
+if __name__ == '__main__':
+    HelloWorldApp().run()
+'''
+    st.code(kivy_code, language='python')
+
+    st.header("3. Streamlit Example")
+    st.write("Streamlit is an open-source app framework for creating and sharing data apps. Below is the code to display 'Hello, World!' using Streamlit:")
+    streamlit_code = '''
+import streamlit as st
+
+st.title("Hello, World!")
+st.write("This is a simple Streamlit app to display 'Hello, World!'.")
+'''
+    st.code(streamlit_code, language='python')
+
+    st.header("Comparison of Frameworks")
+    st.write("""
+    | Feature       | Tkinter                          | Kivy                                    | Streamlit                              |
+    |---------------|----------------------------------|-----------------------------------------|----------------------------------------|
+    | **Type**      | Desktop GUI                      | Multitouch applications (mobile/desktop)| Web applications (interactive UIs)     |
+    | **Ease of Use**| Easy to use for simple GUIs      | More complex, good for touch interfaces | Very easy, especially for data apps    |
+    | **Installation**| Included with Python            | Requires installation                   | Requires installation                  |
+    | **Learning Curve**| Low                            | Moderate                                | Very low                               |
+    | **Use Case**  | Simple desktop applications      | Mobile apps, multitouch interfaces      | Data apps, dashboards, web UIs         |
+    | **Community** | Large and established            | Growing                                 | Rapidly growing                        |
+    """)
+
+    st.write("### Advantages of Each Framework")
+    st.subheader("Tkinter")
+    st.write("- Simple and easy to use for basic desktop applications.")
+    st.write("- Included with Python, no additional installation required.")
+    st.write("- Large community and many resources available.")
+
+    st.subheader("Kivy")
+    st.write("- Suitable for developing multitouch applications.")
+    st.write("- Cross-platform: works on Windows, macOS, Linux, Android, and iOS.")
+    st.write("- Flexible and highly customizable.")
+
+    st.subheader("Streamlit")
+    st.write("- Extremely easy to create interactive web applications.")
+    st.write("- Ideal for data scientists and analysts to create data apps quickly.")
+    st.write("- Minimal boilerplate code; write Python scripts as usual.")
+
+# Function to display questions and collect answers
+def quiz():
+    st.title("Basic Programming Knowledge Quiz")
+
+    # Questions and choices
+    questions = [
+        ("In Java, which keyword is used to define a class?", 
+         ["a) function", "b) class", "c) object", "d) public"], "b) class"),
+        ("Which of the following is a valid way to declare a variable in C?", 
+         ["a) int 1variable;", "b) int variable1;", "c) int variable-1;", "d) int variable name;"], "b) int variable1;"),
+        ("What is the output of the following C++ code?\n```cpp\ncout << 2 + 3 * 4;\n```", 
+         ["a) 20", "b) 14", "c) 6", "d) 8"], "b) 14"),
+        ("In C, which function is used to print output to the console?", 
+         ["a) printf()", "b) print()", "c) System.out.println()", "d) cout"], "a) printf()"),
+        ("What does the following Java code do?\n```java\nfor (int i = 0; i < 5; i++) {\n    System.out.println(i);\n}\n```", 
+         ["a) Prints numbers 1 to 5", "b) Prints numbers 0 to 4", "c) Prints numbers 5 to 9", "d) Prints numbers 0 to 3"], "b) Prints numbers 0 to 4"),
+        ("How do you create a function in C?", 
+         ["a) function myFunction() { }", "b) void myFunction() { }", "c) def myFunction() { }", "d) function myFunction();"], "b) void myFunction() { }"),
+        ("What is the purpose of an `if` statement in programming?", 
+         ["a) To loop through code", "b) To handle errors", "c) To make decisions based on conditions", "d) To define variables"], "c) To make decisions based on conditions"),
+        ("How do you comment a line in C++?", 
+         ["a) /* This is a comment */", "b) // This is a comment", "c) <!-- This is a comment -->", "d) # This is a comment"], "b) // This is a comment"),
+        ("What is the correct syntax to import a package in Java?", 
+         ["a) include <package>", "b) import package_name;", "c) using package_name;", "d) import \"package_name\""], "b) import package_name;"),
+        ("What is the output of the following C code?\n```c\nint my_array[] = {1, 2, 3};\nprintf(\"%d\", my_array[1]);\n```", 
+         ["a) 1", "b) 2", "c) 3", "d) undefined"], "b) 2"),
+    ]
+
+    # Initialize score
+    score = 0
+
+    # Display questions and collect answers
+    for i, (question, options, correct_answer) in enumerate(questions):
+        st.write(f"Q{i+1}: {question}")
+        answer = st.radio("", options, key=f"q{i}")
+
+        if answer.strip() == correct_answer.strip():
+            score += 1
+
+    # Display score and corresponding icon/smiley
+    st.write(f"Your score: {score}/{len(questions)}")
+
+    if score == len(questions):
+        st.success("Excellent! 🎉😃")
+    elif score >= len(questions) * 0.7:
+        st.success("Good job! 😃😊")
+    elif score >= len(questions) * 0.4:
+        st.warning("Fair effort! 😊🙂")
+    else:
+        st.error("Better Luck next time! 🙂😕")
+
+
+
 def course_contents():
     st.title("BCA263: Introduction to Python")
     st.write("""
@@ -349,22 +509,28 @@ def activity2():
 
 
 def display_groups():
-    # Define the groups and mentors
-    groups = {
-        "Group 1": ["Dr RESMI K R", "Dr SARAVANAKUMAR K", "Dr Manasa", "Dr FABIOLA HAZEL POHRMEN", "Dr SAGAYA AURELIA P", "Dr SANDEEP J", "Member-6"],
-        "Group 2": ["Dr MOHANA PRIYA T", "Dr ROHINI V", "Dr Chanti", "Dr SREEJA C S", "Dr Amrutha K", "Dr KIRUBANAND V B", "Dr BEAULAH SOUNDARABAI P"],
-        "Group 3": ["Dr HUBERT", "Dr SARAVANAN K N", "Dr New begin", "Dr ASHOK IMMANUEL V", "Dr Sangeetha GOVINDA", "Dr NISMON RIO R", "Member-6"],
-        "Group 4": ["Dr Vijay", "Dr AROKIA PAUL RAJAN R", "Dr RAMAMURTHY B", "Dr VINEETHA KR", "Dr SMITHA VINOD", "Dr MANJUNATHA HIREMATH", "Dr SMERA C"]
-    }
+    # Input for names and number of groups
+    names_input = st.text_input("Enter names separated by commas")
+    num_groups = st.number_input("Enter number of groups", min_value=1, step=1)
+    
+    # Split the names and shuffle them randomly
+    names = [name.strip() for name in names_input.split(",") if name.strip()]
+    random.shuffle(names)
+    
+    # Initialize the groups dictionary
+    groups = {f"Group {i+1}": [] for i in range(num_groups)}
+    
+    # Assign names to groups randomly
+    for i, name in enumerate(names):
+        group_key = f"Group {(i % num_groups) + 1}"
+        groups[group_key].append(name)
     
     # Create a DataFrame for displaying in Streamlit
     df = pd.DataFrame(groups.values(), index=groups.keys()).transpose()
     
     # Display the table using Streamlit
-    st.write("Groups and Mentors:")
+    st.write("Groups and Members:")
     st.table(df)
-
-
 
 def activity1():
     st.title("Learner-Centric Approach Activity: Creating a Mind Map on Python Data Structures")
@@ -418,13 +584,47 @@ def activity1():
     st.write("- Learners will be assessed based on the understanding of the data structure and its applications through their presentations and reflections.")
 
     st.write("Outcome of this activity: It engages learners in active learning, encourages collaboration, and helps them see the practical applications of Python data structures in various fields.")
+def display_instructions():
+  """Displays instructions for all three activities"""
+  st.header("Instructions")
+  # Activity 1
+  st.subheader("Activity 1: Python vs. Other Programming Languages(Group Discussion)")
+  st.write("Form groups of five and discuss the features and advantages of Python compared to other Programming Languages.")
+  st.write("Consider these aspects during your discussion:")
+  st.write("* Software Development capabilities")
+  st.write("* Libraries and tools")
+  st.write("* Coding Standards")
+  st.write("* Industry usage")
+  st.write("* User interface and workflow")
 
+  # Activity 2
+  st.subheader("Activity 2: Project Domain- Brainstorming (Group of 2)")
+  st.write("Form groups of 2 members and choose an area or domain of Python Application and that interests you, such as:")
+  st.write("* Media and Entertainment")
+  st.write("* Healthcare and Bioinformatics")
+  st.write("* Web Scraping and Data Mining")
+  st.write("* Desktop GUI Applications")
+  st.write("(This list is not exhaustive, feel free to explore other areas!)")
+  st.write("Brainstorm and develop a project idea within your chosen domain. Define the following for your project:")
+  st.write("* Domain: The specific area your project focuses on (e.g., Health Analytics App)")
+  st.write("* Title: A catchy and descriptive name for your project")
+  st.write("* Scope: A clear outline of what your project will encompass (consider its size and complexity)")
+  st.write("* Objectives: The specific goals you aim to achieve with your project")
+  st.write("* Automation: How your project could potentially incorporate unique automation elements")
+  st.write("**Remember:**")
+  st.write("* Ensure your project has a clear connection to automation process.")
+  st.write("* Be creative and explore the possibilities of having unique automation within your chosen domain.")
+  st.write("* Prepare to present your project idea to the class.")
+  st.write("**Submission:**")
+  st.write("Upload your project details (Domain, Title, Scope, Objectives, Unique Automation) through the designated channel:")
+  st.write("[Google Classroom](https://classroom.google.com/c/Njk2MzEyODQ4ODI2?cjc=o3sug4y)") 
+  st.write("**GCR code:** o3sug4y")
 def main():
     
      
     # Sidebar tabs and hyperlinks
     st.sidebar.title('BCA263: Quick Navigation')
-    tab = st.sidebar.radio('Go to', ['Home', 'Groups', 'Activity-1', 'Case Study-1', 'Case Study-2', 'Submissions', 'LCA-Activities'])
+    tab = st.sidebar.radio('Go to', ['Home', 'Quiz','Groups', 'Activity-1', 'Program-1', 'LCA-Activities'])
     if tab == 'Home':
         course_contents()
            
@@ -432,12 +632,12 @@ def main():
         lca_contents()
 
     elif tab == 'Activity-1':
-        activity1()
+        display_instructions()
 
-    elif tab == 'Case Study-1':
-        activity2()
-    elif tab == 'Case Study-2':
-        case_study_recipe_management()
+    elif tab == 'Quiz':
+        quiz()
+    elif tab == 'Program-1':
+        display_hello_world_examples()
     elif tab == 'Groups':
         display_groups()
     elif tab == 'Submissions':
