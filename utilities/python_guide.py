@@ -146,7 +146,7 @@ st.success(f"The sum of {num1} and {num2} is: {result}")
 st.title("Python Programming Guide")
 
 st.sidebar.title("Week-2: Navigation")
-option = st.sidebar.radio("Go to", ('Python Fundamentals', 'Features of Python', 'Components of a Python Program', 'Understanding the Interpreter', 'Identifiers, Basic Types', 'Experiencial Learning: Program-2'))
+option = st.sidebar.radio("Go to", ('Python Fundamentals', 'Features of Python', 'Components of a Python Program', 'Understanding the Interpreter', 'Identifiers, Basic Types', 'Experiential Learning: Program-2'))
 
 if option == 'Python Fundamentals':
     python_fundamentals()
@@ -158,7 +158,7 @@ elif option == 'Understanding the Interpreter':
     understanding_the_interpreter()
 elif option == 'Identifiers, Basic Types':
     python_basics()
-elif option == 'Experiencial Learning: Program-2':
+elif option == 'Experiential Learning: Program-2':
     addition_basic_python()
     addition_with_tkinter()
     addition_with_streamlit()
