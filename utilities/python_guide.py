@@ -72,9 +72,6 @@ def python_basics():
         - **Dictionaries (`dict`):** Unordered, mutable collections of key-value pairs (e.g., `{'a': 1, 'b': 2}`).
         - **Sets (`set`):** Unordered collections of unique items (e.g., `{1, 2, 3}`).
     """)
-import streamlit as st
-import tkinter as tk
-from tkinter import messagebox
 
 def addition_basic_python():
     st.subheader("Simple Addition Program without GUI (Basic Python)")
