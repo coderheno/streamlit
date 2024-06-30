@@ -2,7 +2,7 @@ import streamlit as st
 
 # Set up the sidebar navigation
 st.sidebar.title("BCA581 - Project I")
-options = ["Home", "Project Instructions", "Project Guidelines", "Evaluation and Schedule"]
+options = ["Home", "Project Instructions", "Project Guidelines","Synopsis Guidelines", "Evaluation and Schedule"]
 choice = st.sidebar.radio("Go to", options)
 
 # Home Page
@@ -147,6 +147,87 @@ elif choice == "Evaluation and Schedule":
 
     st.write("Total (ESE): 100 Marks")
 
+elif choice == "Synopsis Guidelines":
+    st.title("GUIDELINES FOR SUBMITTING A SYNOPSIS")
+    
+    st.header("General Instructions:")
+    st.subheader("1. Title Page:")
+    st.markdown("""
+    - **Project Title:** Clearly mention the title of the project.
+    - **Team Members:** List all team members with their names and register numbers.
+      - **Example:**
+        - Joanna Varkey - 2141150
+        - Akash K Raj - 2141105
+        - Nevin Sebastian - 2141122
+    """)
+    
+    st.subheader("2. Abstract:")
+    st.markdown("""
+    - Provide a concise summary of the project, including its purpose, scope, and main objectives. The abstract should not exceed 250 words.
+    """)
+    
+    st.subheader("3. Objectives:")
+    st.markdown("""
+    - Clearly state the primary goals and objectives of the project. Each objective should be specific, measurable, achievable, relevant, and time-bound (SMART).
+    """)
+    
+    st.subheader("4. Existing Systems:")
+    st.markdown("""
+    - Describe the current systems or solutions related to the project topic. Include a brief overview of their functionalities and limitations.
+    """)
+    
+    st.subheader("5. Limitations of Existing Systems:")
+    st.markdown("""
+    - Identify and explain the drawbacks or challenges associated with the existing systems. Highlight the areas that need improvement.
+    """)
+    
+    st.subheader("6. Proposed Solution/Functionalities:")
+    st.markdown("""
+    - Outline the proposed solution and its functionalities. Provide a detailed description of how the project aims to address the limitations of the existing systems and meet the objectives.
+    """)
+    
+    st.subheader("7. Tools and Technologies:")
+    st.markdown("""
+    - List the tools, technologies, and programming languages proposed to be used in the project.
+      - **Example:**
+        - HTML, CSS, PHP
+        - JavaScript
+        - APIs
+        - MySQL
+        - Python
+    """)
+    
+    st.header("Formatting Guidelines:")
+    st.markdown("""
+    - **Font:** Times New Roman, 12-point size.
+    - **Spacing:** Double-spaced.
+    - **Margins:** 1-inch margins on all sides.
+    - **Page Numbering:** Bottom center of each page.
+    - **Headings:** Bold and appropriately sized for each section.
+    - **File Format:** Submit the synopsis in both .DOC and PDF format.
+    """)
+    
+    st.header("Submission Details:")
+    st.markdown("""
+    - **Deadline:** 1st July 2024
+    - **Submission Method:** GCR Submission
+    """)
+    
+    st.header("Evaluation Criteria:")
+    st.markdown("""
+    - **Clarity and Coherence:** The synopsis should be well-structured and clearly convey the project's goals and objectives.
+    - **Relevance:** The proposed solution should be relevant to the identified problem.
+    - **Feasibility:** The project plan should be realistic and achievable within the given timeframe and resources.
+    - **Innovation:** The project should offer innovative approaches or improvements over existing systems.
+    - **Technical Detailing:** The choice of tools and technologies should be justified and align with the project requirements.
+    """)
+    
+    st.header("Note:")
+    st.markdown("""
+    - **Plagiarism and usage of AI Tools:** Strictly prohibited. Ensure that all content is original or properly cited.
+    - **Guidance:** Seek guidance from your guides if you have any questions or need further clarification on the guidelines.
+    """)
+    
 # Project Guidelines Page
 else:
     st.title("Project Guidelines - Week 1")

@@ -2,51 +2,100 @@ import pandas as pd
 import streamlit as st
 import os
 import random
+import base64
+import io
+
+def display_groups():
+    # Input for names and number of groups
+    names_input = st.text_input("Enter names separated by commas")
+    num_groups = st.number_input("Enter number of groups", min_value=1, step=1)
+    
+    # Split the names and shuffle them randomly
+    names = [name.strip() for name in names_input.split(",") if name.strip()]
+    random.shuffle(names)
+    
+    # Initialize the groups dictionary
+    groups = {f"Group {i+1}": [] for i in range(num_groups)}
+    
+    # Assign names to groups randomly
+    for i, name in enumerate(names):
+        group_key = f"Group {(i % num_groups) + 1}"
+        groups[group_key].append(name)
+    
+    # Create a DataFrame for displaying in Streamlit
+    df = pd.DataFrame(groups.values(), index=groups.keys()).transpose()
+    
+    # Display the table using Streamlit
+    st.write("Groups and Members:")
+    st.table(df)
+    
+    # Save the groups to a CSV file
+    save_option = st.checkbox("Save groups to CSV file")
+    if save_option:
+        csv = df.to_csv(index=False)
+        b64 = base64.b64encode(csv.encode()).decode()
+        href = f'<a href="data:file/csv;base64,{b64}" download="groups.csv">Download CSV file</a>'
+        st.markdown(href, unsafe_allow_html=True)
+
+import streamlit as st
 
 def quiz():
-    st.title("Basic Programming Knowledge Quiz")
+    st.title("Blender Basics Quiz: Primitives and Viewports")
 
     # Questions and choices
     questions = [
-        ("In Java, which keyword is used to define a class?", "", "class"),
-        ("Which of the following is a valid way to declare a variable in C?", 
-         ["int 1variable;", "int variable1;", "int variable-1;", "int variable name;"], "int variable1;"),
-        ("What is the output of the following C++ code?\n```cpp\ncout << 2 + 3 * 4;\n```", "", "14"),
-        ("In C, which function is used to print output to the console?", 
-         ["printf()", "print()", "System.out.println()", "cout"], "printf()"),
-        ("What does the following Java code do?\n```java\nfor (int i = 0; i < 5; i++) {\n    System.out.println(i);\n}\n```", "", "Prints numbers 0 to 4"),
-        ("How do you create a function in C?", "", "return_type function_name(parameters) { // body }"),
-        ("What is the purpose of an `if` statement in programming?", "", "To make decisions based on conditions"),
-        ("How do you comment a line in C++?", "", "// This is a comment"),
-        ("What is the correct syntax to import a package in Java?", "", "import package_name;"),
-        ("What is the output of the following C code?\n```c\nint my_array[] = {1, 2, 3};\nprintf(\"%d\", my_array[1]);\n```", "", "2"),
+        ("In Blender, which shortcut is used to add a new primitive object?", 
+         ["Shift+A", "Ctrl+A", "Alt+A", "A"], "Shift+A"),
+        ("Which of the following is NOT a basic primitive object in Blender?", 
+         ["Cube", "Sphere", "Monkey", "Cone"], "Monkey"),
+        ("What is the default primitive object when you first open Blender?", 
+         ["Cube", "Plane", "Sphere", "Suzanne"], "Cube"),
+        ("Which viewport shading mode allows you to see the object with materials and textures applied?", 
+         ["Wireframe", "Solid", "Material Preview", "Rendered"], "Material Preview"),
+        ("What is the shortcut to switch to the top orthographic view in Blender?", 
+         ["Numpad 7", "Numpad 1", "Numpad 3", "Numpad 5"], "Numpad 7"),
+        ("How can you switch to the wireframe view in the 3D viewport?", 
+         ["Z", "Alt+Z", "Ctrl+Z", "Shift+Z"], "Z"),
+        ("Which panel in the Properties editor is used to add modifiers to an object?", 
+         ["Modifiers", "Object Properties", "Material Properties", "Scene Properties"], "Modifiers"),
+        ("What does pressing the period (.) key on the Numpad do in Blender?", 
+         ["Focuses on the selected object", "Adds a new object", "Renders the scene", "Opens preferences"], "Focuses on the selected object"),
+        ("How do you delete a selected object in Blender?", 
+         ["X", "Shift+X", "Alt+X", "Ctrl+X"], "X"),
+        ("Which tool allows you to move objects in Blender?", 
+         ["Grab Tool (G)", "Rotate Tool (R)", "Scale Tool (S)", "Extrude Tool (E)"], "Grab Tool (G)"),
     ]
 
-    # Initialize score
-    score = 0
+    # Dictionary to store the user's answers
+    user_answers = {}
 
     # Display questions and collect answers
     for i, (question, options, correct_answer) in enumerate(questions):
         st.write(f"Q{i+1}: {question}")
         if options:
-            answer = st.radio("", options, key=f"q{i}")
+            user_answers[f"q{i}"] = st.radio("", options, key=f"q{i}")
         else:
-            answer = st.text_input("", key=f"q{i}")
+            user_answers[f"q{i}"] = st.text_input("", key=f"q{i}")
 
-        if answer.strip().lower() == correct_answer.strip().lower():
-            score += 1
+    if st.button("View Score"):
+        score = 0
+        # Calculate score
+        for i, (question, options, correct_answer) in enumerate(questions):
+            if user_answers[f"q{i}"].strip().lower() == correct_answer.strip().lower():
+                score += 1
+        
+        # Display score and corresponding icon/smiley
+        st.write(f"Your score: {score}/{len(questions)}")
 
-    # Display score and corresponding icon/smiley
-    st.write(f"Your score: {score}/{len(questions)}")
+        if score == len(questions):
+            st.success("Excellent! 🎉😃")
+        elif score >= len(questions) * 0.7:
+            st.success("Good job! 😊")
+        elif score >= len(questions) * 0.4:
+            st.warning("Fair effort! 🙂")
+        else:
+            st.error("Needs Improvement! 😕")
 
-    if score == len(questions):
-        st.success("Excellent! 🎉😃")
-    elif score >= len(questions) * 0.7:
-        st.success("Good job! 😊")
-    elif score >= len(questions) * 0.4:
-        st.warning("Fair effort! 🙂")
-    else:
-        st.error("Needs Improvement! 😕")
 
 def case_study_recipe_management():
     st.title("Case Study: Streamlining Recipe Management")
@@ -389,60 +438,6 @@ st.write("This is a simple Streamlit app to display 'Hello, World!'.")
     st.write("- Extremely easy to create interactive web applications.")
     st.write("- Ideal for data scientists and analysts to create data apps quickly.")
     st.write("- Minimal boilerplate code; write Python scripts as usual.")
-
-# Function to display questions and collect answers
-def quiz():
-    st.title("Basic Programming Knowledge Quiz")
-
-    # Questions and choices
-    questions = [
-        ("In Java, which keyword is used to define a class?", 
-         ["a) function", "b) class", "c) object", "d) public"], "b) class"),
-        ("Which of the following is a valid way to declare a variable in C?", 
-         ["a) int 1variable;", "b) int variable1;", "c) int variable-1;", "d) int variable name;"], "b) int variable1;"),
-        ("What is the output of the following C++ code?\n```cpp\ncout << 2 + 3 * 4;\n```", 
-         ["a) 20", "b) 14", "c) 6", "d) 8"], "b) 14"),
-        ("In C, which function is used to print output to the console?", 
-         ["a) printf()", "b) print()", "c) System.out.println()", "d) cout"], "a) printf()"),
-        ("What does the following Java code do?\n```java\nfor (int i = 0; i < 5; i++) {\n    System.out.println(i);\n}\n```", 
-         ["a) Prints numbers 1 to 5", "b) Prints numbers 0 to 4", "c) Prints numbers 5 to 9", "d) Prints numbers 0 to 3"], "b) Prints numbers 0 to 4"),
-        ("How do you create a function in C?", 
-         ["a) function myFunction() { }", "b) void myFunction() { }", "c) def myFunction() { }", "d) function myFunction();"], "b) void myFunction() { }"),
-        ("What is the purpose of an `if` statement in programming?", 
-         ["a) To loop through code", "b) To handle errors", "c) To make decisions based on conditions", "d) To define variables"], "c) To make decisions based on conditions"),
-        ("How do you comment a line in C++?", 
-         ["a) /* This is a comment */", "b) // This is a comment", "c) <!-- This is a comment -->", "d) # This is a comment"], "b) // This is a comment"),
-        ("What is the correct syntax to import a package in Java?", 
-         ["a) include <package>", "b) import package_name;", "c) using package_name;", "d) import \"package_name\""], "b) import package_name;"),
-        ("What is the output of the following C code?\n```c\nint my_array[] = {1, 2, 3};\nprintf(\"%d\", my_array[1]);\n```", 
-         ["a) 1", "b) 2", "c) 3", "d) undefined"], "b) 2"),
-    ]
-
-    # Initialize score
-    score = 0
-
-    # Display questions and collect answers
-    for i, (question, options, correct_answer) in enumerate(questions):
-        st.write(f"Q{i+1}: {question}")
-        answer = st.radio("", options, key=f"q{i}")
-
-        if answer.strip() == correct_answer.strip():
-            score += 1
-
-    # Display score and corresponding icon/smiley
-    st.write(f"Your score: {score}/{len(questions)}")
-
-    if score == len(questions):
-        st.success("Excellent! 🎉😃")
-    elif score >= len(questions) * 0.7:
-        st.success("Good job! 😃😊")
-    elif score >= len(questions) * 0.4:
-        st.warning("Fair effort! 😊🙂")
-    else:
-        st.error("Better Luck next time! 🙂😕")
-
-
-
 def course_contents():
     st.title("BCA263: Introduction to Python")
     st.write("""
@@ -506,30 +501,6 @@ def activity2():
     st.write("- Needs Improvement: 30-49% marks")
     st.write("- Unsatisfactory: 0-29% marks")
 
-
-def display_groups():
-    # Input for names and number of groups
-    names_input = st.text_input("Enter names separated by commas")
-    num_groups = st.number_input("Enter number of groups", min_value=1, step=1)
-    
-    # Split the names and shuffle them randomly
-    names = [name.strip() for name in names_input.split(",") if name.strip()]
-    random.shuffle(names)
-    
-    # Initialize the groups dictionary
-    groups = {f"Group {i+1}": [] for i in range(num_groups)}
-    
-    # Assign names to groups randomly
-    for i, name in enumerate(names):
-        group_key = f"Group {(i % num_groups) + 1}"
-        groups[group_key].append(name)
-    
-    # Create a DataFrame for displaying in Streamlit
-    df = pd.DataFrame(groups.values(), index=groups.keys()).transpose()
-    
-    # Display the table using Streamlit
-    st.write("Groups and Members:")
-    st.table(df)
 
 def activity1():
     st.title("Learner-Centric Approach Activity: Creating a Mind Map on Python Data Structures")

@@ -1,24 +1,41 @@
 import pandas as pd
 import streamlit as st
 import os
+import random
+import io
+import base64
 
 def display_groups():
-    # Define the groups and mentors
-    groups = {
-        "Group 1": ["Dr RESMI K R", "Dr SARAVANAKUMAR K", "Dr Manasa", "Dr FABIOLA HAZEL POHRMEN", "Dr SAGAYA AURELIA P", "Dr SANDEEP J"],
-        "Group 2": ["Dr MOHANA PRIYA T", "Dr ROHINI V", "Dr Chanti", "Dr SREEJA C S", "Dr Amrutha K", "Dr KIRUBANAND V B", "Dr BEAULAH SOUNDARABAI P"],
-        "Group 3": ["Dr HUBERT", "Dr SARAVANAN K N", "Dr New begin", "Dr ASHOK IMMANUEL V", "Dr Sangeetha GOVINDA", "Dr NISMON RIO R"],
-        "Group 4": ["Dr Vijay", "Dr AROKIA PAUL RAJAN R", "Dr RAMAMURTHY B", "Dr VINEETHA KR", "Dr SMITHA VINOD", "Dr MANJUNATHA HIREMATH", "Dr SMERA C"]
-    }
+    # Input for names and number of groups
+    names_input = st.text_input("Enter names separated by commas")
+    num_groups = st.number_input("Enter number of groups", min_value=1, step=1)
+    
+    # Split the names and shuffle them randomly
+    names = [name.strip() for name in names_input.split(",") if name.strip()]
+    random.shuffle(names)
+    
+    # Initialize the groups dictionary
+    groups = {f"Group {i+1}": [] for i in range(num_groups)}
+    
+    # Assign names to groups randomly
+    for i, name in enumerate(names):
+        group_key = f"Group {(i % num_groups) + 1}"
+        groups[group_key].append(name)
     
     # Create a DataFrame for displaying in Streamlit
     df = pd.DataFrame(groups.values(), index=groups.keys()).transpose()
     
     # Display the table using Streamlit
-    st.write("Groups and Mentors:")
+    st.write("Groups and Members:")
     st.table(df)
-
-
+    
+    # Save the groups to a CSV file
+    save_option = st.checkbox("Save groups to CSV file")
+    if save_option:
+        csv = df.to_csv(index=False)
+        b64 = base64.b64encode(csv.encode()).decode()
+        href = f'<a href="data:file/csv;base64,{b64}" download="groups.csv">Download CSV file</a>'
+        st.markdown(href, unsafe_allow_html=True)
 
 def submission():
     st.title("Learner Submission Portal")
@@ -338,8 +355,6 @@ def assessments():
     st.write("- **Deadline:** Week 12 (2-7 Sep)")
     st.write("- **Maximum marks:** 20 Marks")
     st.write("- **General Instructions:** Late submission will not be entertained.")
-import streamlit as st
-
 def display_instructions():
   """Displays instructions for all three activities"""
   st.header("Instructions")
@@ -383,6 +398,58 @@ def display_instructions():
   st.write("Upload your project details (Domain, Title, Scope, Objectives, AR/VR Integration) through the designated channel:")
   st.write("[Google Classroom](https://classroom.google.com/c/Njk2MTg4ODk1NzQx?cjc=lj2dywt)") 
   st.write("**GCR code:** lj2dywt")
+def quiz():
+    st.title("Blender Basics Quiz: Primitives and Viewports")
+
+    # Questions and choices
+    questions = [
+        ("In Blender, which shortcut is used to add a new primitive object?", 
+         ["Shift+A", "Ctrl+A", "Alt+A", "A"], "Shift+A"),
+        ("Which of the following is NOT a basic primitive object in Blender?", 
+         ["Cube", "Sphere", "Monkey", "Cone"], "Monkey"),
+        ("What is the default primitive object when you first open Blender?", 
+         ["Cube", "Plane", "Sphere", "Suzanne"], "Cube"),
+        ("Which viewport shading mode allows you to see the object with materials and textures applied?", 
+         ["Wireframe", "Solid", "Material Preview", "Rendered"], "Material Preview"),
+        ("What is the shortcut to switch to the top orthographic view in Blender?", 
+         ["Numpad 7", "Numpad 1", "Numpad 3", "Numpad 5"], "Numpad 7"),
+        ("How can you switch to the wireframe view in the 3D viewport?", 
+         ["Z", "Alt+Z", "Ctrl+Z", "Shift+Z"], "Z"),
+        ("Which panel in the Properties editor is used to add modifiers to an object?", 
+         ["Modifiers", "Object Properties", "Material Properties", "Scene Properties"], "Modifiers"),
+        ("What does pressing the period (.) key on the Numpad do in Blender?", 
+         ["Focuses on the selected object", "Adds a new object", "Renders the scene", "Opens preferences"], "Focuses on the selected object"),
+        ("How do you delete a selected object in Blender?", 
+         ["X", "Shift+X", "Alt+X", "Ctrl+X"], "X"),
+        ("Which tool allows you to move objects in Blender?", 
+         ["Grab Tool (G)", "Rotate Tool (R)", "Scale Tool (S)", "Extrude Tool (E)"], "Grab Tool (G)"),
+    ]
+
+    # Initialize score
+    score = 0
+
+    # Display questions and collect answers
+    for i, (question, options, correct_answer) in enumerate(questions):
+        st.write(f"Q{i+1}: {question}")
+        if options:
+            answer = st.radio("", options, key=f"q{i}")
+        else:
+            answer = st.text_input("", key=f"q{i}")
+
+        if answer.strip().lower() == correct_answer.strip().lower():
+            score += 1
+
+    # Display score and corresponding icon/smiley
+    st.write(f"Your score: {score}/{len(questions)}")
+
+    if score == len(questions):
+        st.success("Excellent! 🎉😃")
+    elif score >= len(questions) * 0.7:
+        st.success("Good job! 😊")
+    elif score >= len(questions) * 0.4:
+        st.warning("Fair effort! 🙂")
+    else:
+        st.error("Needs Improvement! 😕")
 
 def main():
  
