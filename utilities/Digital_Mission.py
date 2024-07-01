@@ -235,6 +235,11 @@ def display_links():
     
     st.subheader("Class Activities/ Labs")
     st.markdown("[Cloud  Literacy - Activities](https://drive.google.com/drive/folders/1JySsRUX_EkqerHvP2-zShHusKetK9unW?usp=drive_link)")
+    st.subheader("Cybersecurity Essentials")
+    st.markdown("[Cybersecurity Mindfulness](https://docs.google.com/presentation/d/1nvX2MeZu7mMc5Vvb6G-ePR5oM7JD-Sbs/edit?usp=drive_link&ouid=105423989768943296319&rtpof=true&sd=true)")
+    
+    st.subheader("Cybersecurity Lab")
+    st.markdown("[Lab Program-1](https://docs.google.com/document/d/1KjdFik4_cTA0yobxzyJ03yQ0UZErB8WC/edit?usp=drive_link&ouid=105423989768943296319&rtpof=true&sd=true)")
 
 
 
