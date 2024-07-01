@@ -6,11 +6,11 @@ def main():
     tabs = st.tabs([
         "Overview",
         "Courses",
-        "Train the Trainers",
         "Feedback & Plans",
         "CSA Activities",
         "Class Structure", 
-        "Trainers Schedule"
+        "Trainers Schedule",
+        "Useful Links"
     ])
 
     with tabs[0]:
