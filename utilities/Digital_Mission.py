@@ -7,7 +7,7 @@ def main():
         "Overview",
         "Courses",
         "Feedback & Plans",
-        "CSA Activities",
+        "Social Activities",
         "Class Structure", 
         "Trainers Schedule",
         "Useful Links"
@@ -227,6 +227,15 @@ def display_links():
     
     st.subheader("Course contents (New)")
     st.markdown("[Course contents (New)](https://drive.google.com/file/d/1Vy4MacXOsR75xC9kOxfZU2R3JcGxKI4T/view?usp=drive_link)")
+    st.subheader("Day-1 Orientation Slide")
+    st.markdown("[Orientation Slides](https://docs.google.com/presentation/d/1hNDKo4M6nXC1OwZJD7fspOWc1S6DPE2m/edit?usp=drive_link&ouid=105423989768943296319&rtpof=true&sd=true)")
+    
+    st.subheader("Cloud Literacy- Materials")
+    st.markdown("[Unit-1](https://docs.google.com/presentation/d/1oVTTE40gptVj6aGuTBEVMqlvmCX7i0MD/edit?usp=drive_link&ouid=105423989768943296319&rtpof=true&sd=true)")
+    
+    st.subheader("Class Activities/ Labs")
+    st.markdown("[Cloud  Literacy - Activities](https://drive.google.com/drive/folders/1JySsRUX_EkqerHvP2-zShHusKetK9unW?usp=drive_link)")
+
 
 
     
