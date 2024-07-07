@@ -67,7 +67,7 @@ elif selected == "BMI Calculator (Streamlit)":
     ### Steps to Create a Simple BMI Calculator in Streamlit
     1. **Set Up the Environment**:
         - Ensure you have Python installed on your computer.
-        - Install Streamlit if it's not already installed (it usually not comes with Python).
+        - Install Streamlit if it's not already installed.
     2. **Add Streamlit Library**:
         ```python
         import streamlit as st
@@ -79,15 +79,13 @@ elif selected == "BMI Calculator (Streamlit)":
         ```
     4. **Add a Button to Trigger BMI Calculation**:
         ```python
-        height_m = height / 100  # Convert height to meters
-        bmi = weight / (height_m ** 2)
+        if st.button("Calculate BMI"):
+            height_m = height / 100  # Convert height to meters
+            bmi = weight / (height_m ** 2)
+            st.write(f"BMI: {bmi:.2f}")
         ```
-    5. **Display the Result**:
-        ```python
-          st.write(f"BMI: {bmi:.2f}")
-        ```
-    6. **Run the Application**:
-        ```python
+    5. **Run the Application**:
+        ```bash
         streamlit run app25.py
         ```
     """)
@@ -106,7 +104,7 @@ elif selected == "BMI Calculator (Streamlit)":
 elif selected == "Lecture":
     st.title("Explanations")
 
-    st.header("Operators, Precedence and Associativity")
+    st.header("Operators, Precedence, and Associativity")
     st.write("""
     **Operators**: Operators are symbols that perform operations on variables and values.
     
@@ -209,5 +207,7 @@ elif selected == "Lecture":
     print(f"Hello, {name}. You are {age} years old.")
     ```
     """)
+
 elif selected == "EL- Voice Login":
-   pass
+    st.title("EL- Voice Login")
+    st.write("This section will be implemented later.")
