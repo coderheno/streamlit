@@ -1,12 +1,93 @@
 import streamlit as st
+def display_authentication_methods():
+    st.title("Login Authentication Methods")
+
+    st.header("1. Username and Password")
+    st.write("""
+    **Description:** The most traditional and widely used method. Users provide a unique username and a password to gain access.
+    **Security Level:** Moderate, but vulnerable to various attacks like phishing, brute force, and credential stuffing.
+    """)
+
+    st.header("2. Multi-Factor Authentication (MFA)")
+    st.write("""
+    **Description:** Requires two or more verification methods, typically combining something the user knows (password) with something the user has (smartphone, hardware token) or something the user is (biometric).
+    **Security Level:** High, significantly reduces the risk of unauthorized access.
+    """)
+
+    st.header("3. Biometric Authentication")
+    st.write("""
+    **Fingerprint:** Uses the unique patterns on a user's fingertip.
+    **Face Recognition:** Uses the unique features of a user's face.
+    **Voice Recognition:** Uses the unique characteristics of a user's voice.
+    **Iris/Retina Scanning:** Uses the unique patterns in a user's iris or retina.
+    **Security Level:** High, difficult to replicate, but can be affected by changes in physical characteristics or environmental conditions.
+    """)
+
+    st.header("4. Two-Factor Authentication (2FA)")
+    st.write("""
+    **Description:** A subset of MFA, typically involves a password and a second factor like a one-time code sent to a mobile device.
+    **Security Level:** High, but slightly less secure than full MFA.
+    """)
+
+    st.header("5. Token-Based Authentication")
+    st.write("""
+    **Hardware Tokens:** Physical devices that generate a one-time code.
+    **Software Tokens:** Apps that generate time-based one-time passwords (TOTP) or other codes.
+    **Security Level:** High, as it requires possession of the token.
+    """)
+
+    st.header("6. Smart Card Authentication")
+    st.write("""
+    **Description:** Users authenticate by inserting a smart card into a reader and entering a PIN.
+    **Security Level:** High, as it combines something the user has (smart card) with something the user knows (PIN).
+    """)
+
+    st.header("7. Single Sign-On (SSO)")
+    st.write("""
+    **Description:** Allows users to log in once and gain access to multiple systems without being prompted to log in again.
+    **Security Level:** Varies, but can be very secure when combined with MFA.
+    """)
+
+    st.header("8. OAuth/OpenID Connect")
+    st.write("""
+    **Description:** Protocols that allow users to authenticate using their existing accounts from services like Google, Facebook, or Microsoft.
+    **Security Level:** High, as it leverages the security of major providers.
+    """)
+
+    st.header("9. Passwordless Authentication")
+    st.write("""
+    **Email or SMS Links:** Sends a one-time login link to the user’s email or phone.
+    **Push Notifications:** Sends a notification to a trusted device for approval.
+    **Security Level:** High, as it eliminates the need for passwords, reducing the risk of password-related attacks.
+    """)
+
+    st.header("10. Behavioral Biometrics")
+    st.write("""
+    **Description:** Analyzes user behavior patterns, such as typing speed, mouse movements, and other interactions.
+    **Security Level:** High, difficult to replicate but may require continuous monitoring.
+    """)
+
+    st.header("11. Knowledge-Based Authentication (KBA)")
+    st.write("""
+    **Static KBA:** Questions with pre-set answers, such as mother’s maiden name.
+    **Dynamic KBA:** Questions generated from public or private data sources.
+    **Security Level:** Low to Moderate, vulnerable to social engineering and data breaches.
+    """)
+
+    st.header("Activity: Domain-Based Authentication")
+    st.write("""
+    **Description:** Authentication that is restricted to users within a specific domain (e.g., company or organization domain). Users log in with their domain credentials.
+    **Security Level:** High, as it leverages the organization's authentication policies and infrastructure.
+    """)
+
 
 # Create the option menu for navigation
 tabs = st.tabs([
         "Lecture - Notes",
-        "BMI Calculator (Tkinter)",
-        "BMI Calculator (Streamlit)",
-        "Domain-based Login: Activity",
-        "Voice-based Login: Experimental Learning", 
+        "BMI Tkinter App",
+        "BMI Streamlit APP",
+        "Login Types: Activity",
+        "Voice-based Login: EL", 
         "Useful Links"
     ])
 # BMI Calculator using Tkinter (Explanation Only)
@@ -211,5 +292,91 @@ with tabs[0]:
     """)
 
 with tabs[3]:
-    st.title("EL- Voice Login")
-    st.write("This section will be implemented later.")
+    st.title("Voice-Based Login App - EL")
+
+    # Explanation of the app
+    st.subheader("Steps and Explanation:")
+    st.markdown("""
+    ### Steps and Explanation
+
+    1. **Import Libraries:**
+        - `streamlit` for creating the web app interface.
+        - `speech_recognition` for recognizing speech from the microphone.
+
+    2. **Define `recognize_speech_from_mic` Function:**
+        - This function captures audio from the microphone and transcribes it into text using Google's Web Speech API.
+        - **Parameters:**
+          - `recognizer`: An instance of `sr.Recognizer`.
+          - `microphone`: An instance of `sr.Microphone`.
+        - **Functionality:**
+          - Checks if the provided recognizer and microphone are valid instances.
+          - Adjusts the recognizer for ambient noise and records audio.
+          - Tries to transcribe the recorded audio using Google’s Web Speech API.
+          - Handles errors if the API is unavailable or if the speech is not recognized.
+
+    3. **Streamlit App Interface:**
+        - The app title and instructions are displayed.
+        - A button is provided for the user to press and start the recording process.
+        - The recorded audio is processed and compared with a predefined passphrase to determine if the login is successful.
+
+    ### Program Code
+    ```python
+    import streamlit as st
+    import speech_recognition as sr
+
+    def recognize_speech_from_mic(recognizer, microphone):
+        \"\"\"Transcribe speech from recorded from `microphone`.\"\"\"
+        if not isinstance(recognizer, sr.Recognizer):
+            raise TypeError("`recognizer` must be `sr.Recognizer` instance")
+
+        if not isinstance(microphone, sr.Microphone):
+            raise TypeError("`microphone` must be `sr.Microphone` instance")
+
+        # Adjust the recognizer sensitivity to ambient noise and record audio
+        with microphone as source:
+            recognizer.adjust_for_ambient_noise(source)
+            audio = recognizer.listen(source)
+
+        response = {
+            "success": True,
+            "error": None,
+            "transcription": None
+        }
+
+        try:
+            response["transcription"] = recognizer.recognize_google(audio)
+        except sr.RequestError:
+            response["success"] = False
+            response["error"] = "API unavailable"
+        except sr.UnknownValueError:
+            response["error"] = "Unable to recognize speech"
+
+        return response
+
+    # Streamlit app
+    st.title("Voice-Based Login")
+
+    st.write("Press the button and say your passphrase.")
+
+    if st.button("Record"):
+        recognizer = sr.Recognizer()
+        microphone = sr.Microphone()
+
+        with st.spinner("Listening..."):
+            response = recognize_speech_from_mic(recognizer, microphone)
+
+        if response["error"]:
+            st.error("ERROR: {}".format(response["error"]))
+        else:
+            st.write("You said: {}".format(response["transcription"]))
+
+            # Example authentication (replace with your actual logic)
+            if response["transcription"].lower() == "hello world":
+                st.success("Login successful!")
+            else:
+                st.error("Login failed. Try again.")
+    ```
+    """)
+
+with tabs[4]:
+    display_authentication_methods()
