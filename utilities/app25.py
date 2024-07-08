@@ -1,14 +1,16 @@
 import streamlit as st
-from streamlit_option_menu import option_menu
 
 # Create the option menu for navigation
-with st.sidebar:
-    selected = option_menu("Menu", ["BMI Calculator (Tkinter)", "BMI Calculator (Streamlit)", "Lecture", "EL- Voice Login"],
-                           icons=["calculator", "calculator", "book", "book"],
-                           default_index=0)
-
+tabs = st.tabs([
+        "Lecture - Notes",
+        "BMI Calculator (Tkinter)",
+        "BMI Calculator (Streamlit)",
+        "Domain-based Login: Activity",
+        "Voice-based Login: Experimental Learning", 
+        "Useful Links"
+    ])
 # BMI Calculator using Tkinter (Explanation Only)
-if selected == "BMI Calculator (Tkinter)":
+with tabs[1]:
     st.title("BMI Calculator using Tkinter")
 
     st.write("""
@@ -61,7 +63,7 @@ if selected == "BMI Calculator (Tkinter)":
     """)
 
 # BMI Calculator using Streamlit
-elif selected == "BMI Calculator (Streamlit)":
+with tabs[2]:
     st.title("BMI Calculator using Streamlit")
     st.write("""
     ### Steps to Create a Simple BMI Calculator in Streamlit
@@ -101,7 +103,7 @@ elif selected == "BMI Calculator (Streamlit)":
         st.write(f"BMI: {bmi:.2f}")
 
 # Explanations of Programming Concepts
-elif selected == "Lecture":
+with tabs[0]:
     st.title("Explanations")
 
     st.header("Operators, Precedence, and Associativity")
@@ -208,6 +210,6 @@ elif selected == "Lecture":
     ```
     """)
 
-elif selected == "EL- Voice Login":
+with tabs[3]:
     st.title("EL- Voice Login")
     st.write("This section will be implemented later.")
