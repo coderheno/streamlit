@@ -289,11 +289,9 @@ with tabs[0]:
     ```
     """)
 
-with tabs[3]:
+with tabs[4]:
     st.title("Voice-Based Login App - EL")
 
-    # Explanation of the app
-    st.subheader("Steps and Explanation:")
     st.markdown("""
     ### Steps and Explanation
 
@@ -376,5 +374,5 @@ with tabs[3]:
     ```
     """)
 
-with tabs[4]:
+with tabs[3]:
     display_authentication_methods()
