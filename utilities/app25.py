@@ -185,8 +185,6 @@ with tabs[2]:
 
 # Explanations of Programming Concepts
 with tabs[0]:
-    st.title("Explanations")
-
     st.header("Operators, Precedence, and Associativity")
     st.write("""
     **Operators**: Operators are symbols that perform operations on variables and values.
