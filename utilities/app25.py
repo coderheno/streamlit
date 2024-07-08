@@ -1,7 +1,6 @@
 import streamlit as st
 def display_authentication_methods():
     st.title("Login Authentication Methods")
-
     st.header("1. Username and Password")
     st.write("""
     **Description:** The most traditional and widely used method. Users provide a unique username and a password to gain access.
