@@ -374,5 +374,5 @@ with tabs[4]:
     ```
     """)
 
-with tabs[3]:
+with tabs[3]: 
     display_authentication_methods()
