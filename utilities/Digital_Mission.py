@@ -30,11 +30,11 @@ def main():
         class_structure_tab()
 
     with tabs[5]:
-        time_tab()
+        faculty()
     with tabs[6]:
         display_links()
     
-        
+       
 def overview_tab():
     st.header("Program Overview")
     st.write("Mission: CHRIST is a nurturing ground for an individual's holistic development to make effective contribution to the society in a dynamic environment")
@@ -211,11 +211,6 @@ data = data_commerce + data_international_studies + data_psychology + data_educa
 df = pd.DataFrame(data)
 
 # Create a function to generate the timetable for a specific trainer
-def generate_timetable(trainer_name):
-    timetable = df[(df["Trainer-1"].str.contains(trainer_name)) | (df["Trainer-2"].str.contains(trainer_name))]
-    return timetable
-
-
 def display_links():
     st.header("Useful Links")
     
@@ -245,23 +240,55 @@ def display_links():
 
     
 
-# Streamlit interface
-def time_tab():
-    st.title("Faculty Wise Timetable Generator")
+def faculty():
+    st.title("Faculty-wise Schedule")
 
-    trainer_name = st.text_input("Enter the trainer's name:", "Gadhiya Shreya (MSc CSA)")
-    
-    if trainer_name:
-        timetable = generate_timetable(trainer_name)
-        st.write(f"Timetable for {trainer_name}:")
-        st.table(timetable)
-    else:
-        st.write("Please enter a trainer's name to generate the timetable.")
+    # Define the schedule data
+    schedules = [
+        {"Department": "Commerce", "Module": "Enterprise", "SNo": 1, "Class": "III BCom FI A", "Room No": "4506, 5TH FLOOR, BLOCK IV", "Schedule": ["Monday 10:30 AM to 11:30 AM", "Thursday 11:30 AM to 12:30 PM"], "Trainer-1": "Gadhiya Shreya", "Trainer-1 Contact": "+91 94284 06333", "Trainer-2": "Shravan K", "Trainer-2 Contact": "+91 88618 12279"},
+        {"Department": "Commerce", "Module": "Enterprise", "SNo": 2, "Class": "III BCom FI B", "Room No": "4507, 5TH FLOOR, BLOCK IV", "Schedule": ["Tuesday 10:30 AM to 11:30 AM", "Friday 10:30 AM to 11:30 AM"], "Trainer-1": "Shravan K", "Trainer-1 Contact": "+91 88618 12279", "Trainer-2": "Gadhiya Shreya", "Trainer-2 Contact": "+91 94284 06333"},
+        {"Department": "Commerce", "Module": "Enterprise", "SNo": 3, "Class": "III BCOM A", "Room No": "4607, 6TH FLOOR, BLOCK IV", "Schedule": ["Wednesday 8:00 AM to 9:00 AM", "Thursday 9:30 AM to 10:30 AM"], "Trainer-1": "Gadhiya Shreya", "Trainer-1 Contact": "+91 94284 06333", "Trainer-2": "Gagan Patil", "Trainer-2 Contact": "+91 74989 84135"},
+        {"Department": "Commerce", "Module": "Enterprise", "SNo": 4, "Class": "III BCOM B", "Room No": "4608, 6TH FLOOR, BLOCK IV", "Schedule": ["Tuesday 8:00 AM to 9:00 AM", "Wednesday 8:00 AM to 9:00 AM"], "Trainer-1": "Kiran Kumar", "Trainer-1 Contact": "+91 70226 41150", "Trainer-2": "Shalini Sosa", "Trainer-2 Contact": "+91 8590653401"},
+        {"Department": "Commerce", "Module": "Enterprise", "SNo": 5, "Class": "III BCOM C", "Room No": "4609, 6TH FLOOR, BLOCK IV", "Schedule": ["Tuesday 9:30 AM to 10:30 AM", "Friday 10:30 AM to 11:30 AM"], "Trainer-1": "Radhika", "Trainer-1 Contact": "+91 82815 45644", "Trainer-2": "Meenu Hani", "Trainer-2 Contact": ""},
+        {"Department": "Commerce", "Module": "Enterprise", "SNo": 6, "Class": "III BCOM D", "Room No": "4610, 6TH FLOOR, BLOCK IV", "Schedule": ["Monday 11:30 AM to 12:30 AM", "Wednesday 8:00 AM to 9:00 AM"], "Trainer-1": "Aswin T Sidharthan", "Trainer-1 Contact": "+91 86061 26639", "Trainer-2": "Ratna Shiva", "Trainer-2 Contact": "+91 70612 66658"},
+        {"Department": "Commerce", "Module": "Enterprise", "SNo": 7, "Class": "III BCOM F", "Room No": "726, 2ND FLOOR, BLOCK II", "Schedule": ["Tuesday 8:00 AM to 9:00 AM", "Thursday 8:00 AM to 9:00 AM"], "Trainer-1": "Gadhiya Shreya", "Trainer-1 Contact": "+91 94284 06333", "Trainer-2": "Priyadarsh P", "Trainer-2 Contact": "+91 79945 93685"},
+        {"Department": "Commerce", "Module": "Enterprise", "SNo": 8, "Class": "III BCOM AT", "Room No": "4602, 6TH FLOOR, BLOCK IV", "Schedule": ["Wednesday 9:30 AM to 10:30 AM", "Thursday 11:30 AM to 12:30 PM"], "Trainer-1": "Anjana", "Trainer-1 Contact": "+91 83018 73780", "Trainer-2": "Nirupama L", "Trainer-2 Contact": "+91 78923 45943"},
+        {"Department": "Commerce", "Module": "Enterprise", "SNo": 9, "Class": "III BCOM AFA", "Room No": "4604, 6TH FLOOR, BLOCK IV", "Schedule": ["Wednesday 9:30 AM to 10:30 AM", "Thursday 11:30 AM to 12:30 PM"], "Trainer-1": "Aswin T Sidharthan", "Trainer-1 Contact": "+91 86061 26639", "Trainer-2": "Aleena", "Trainer-2 Contact": "+91 82818 36345"},
+        {"Department": "Commerce", "Module": "Enterprise", "SNo": 10, "Class": "III SEM BCOM SFH", "Room No": "4412, 4TH FLOOR, BLOCK IV", "Schedule": ["Thursday 11:30 AM to 12:30 PM", "Friday 10:30 AM to 11:30 AM"], "Trainer-1": "Sushmitha R", "Trainer-1 Contact": "+91 80981 46022", "Trainer-2": "Sumaya Kareem", "Trainer-2 Contact": "+91 6362 447 213"},
+        {"Department": "International Studies", "Module": "Essentials", "SNo": 1, "Class": "1 BAHP", "Room No": "523, Block 2, Ground floor", "Schedule": ["Tuesday 1:30 to 3:30 PM", "Friday 2:30 to 3:30 PM"], "Trainer-1": "Kavaskar", "Trainer-1 Contact": "+91 93847 65759", "Trainer-2": "Likitha Yadav G", "Trainer-2 Contact": "+91 93532 34434"},
+        {"Department": "International Studies", "Module": "Essentials", "SNo": 2, "Class": "5 HEP", "Room No": "712, Block II, 2nd Floor", "Schedule": ["Thursday 2:30 to 3:30 PM"], "Trainer-1": "Kalpana N", "Trainer-1 Contact": "+91 90362 22581", "Trainer-2": "Brito Jaison", "Trainer-2 Contact": "+91 6238 260 864"},
+        {"Department": "International Studies", "Module": "Essentials", "SNo": 3, "Class": "3BAHP", "Room No": "724, Block 2, 2nd floor", "Schedule": ["Tuesday 10:30 to 12:30 PM"], "Trainer-1": "Sushmitha R", "Trainer-1 Contact": "+91 80981 46022", "Trainer-2": "Nirupama L", "Trainer-2 Contact": "+91 78923 45943"},
+        {"Department": "International Studies", "Module": "Essentials", "SNo": 4, "Class": "1MAIS", "Room No": "613, Central block 6th floor", "Schedule": ["Wednesday 2:30 to 3:30 PM"], "Trainer-1": "Aswin T", "Trainer-1 Contact": "+91 86061 26639", "Trainer-2": "Nayana K Benny", "Trainer-2 Contact": "+91 82178 46549"},
+        {"Department": "International Studies", "Module": "Essentials", "SNo": 5, "Class": "3MAIS", "Room No": "612, Central block 6th floor", "Schedule": ["Tuesday 11:30 to 12:30 PM", "Friday 10:30 to 11:30 AM"], "Trainer-1": "Sujana", "Trainer-1 Contact": "+91 90007 90809", "Trainer-2": "Aswin T Sidharthan", "Trainer-2 Contact": "+91 86061 26639"},
+        {"Department": "Psychology - Central Campus", "Module": "Essentials", "SNo": 1, "Class": "1BA PENG", "Room No": "524, Ground Floor, Block 2", "Schedule": ["Monday 11:30-12:30", "Tuesday 2:30-3:30"], "Trainer-1": "Gadhiya Shreya", "Trainer-1 Contact": "+91 94284 06333", "Trainer-2": "Sumaya Kareem", "Trainer-2 Contact": "+91 6362 447 213"},
+        {"Department": "Psychology - Central Campus", "Module": "Essentials", "SNo": 2, "Class": "1BA PECO", "Room No": "527, Ground Floor, Block 2", "Schedule": ["Monday 2:30-3:30 PM", "Tuesday 2:30-3:30"], "Trainer-1": "Arunoth Symen", "Trainer-1 Contact": "+91 91504 18081", "Trainer-2": "Shreyans Jain", "Trainer-2 Contact": ""},
+        {"Department": "Psychology - Central Campus", "Module": "Essentials", "SNo": 3, "Class": "3PENG", "Room No": "605, Ground Floor, Block 2", "Schedule": ["Monday 10:30 - 11:30", "Tuesday 10:30-11:30"], "Trainer-1": "Jessica Shirley", "Trainer-1 Contact": "", "Trainer-2": "Aswin T Sidharthan", "Trainer-2 Contact": ""},
+        {"Department": "Psychology - Central Campus", "Module": "Essentials", "SNo": 4, "Class": "3PECO", "Room No": "505, Ground Floor, Block 2", "Schedule": ["Tuesday 10:30 - 11:30 AM", "Wednesday 10:30 - 11:30"], "Trainer-1": "Meenu Hani", "Trainer-1 Contact": "", "Trainer-2": "Sumaya Kareem", "Trainer-2 Contact": ""},
+        {"Department": "Education - Central Campus", "Module": "Essentials", "SNo": 1, "Class": "3BEd A", "Room No": "734, Block 2, 3rd Floor", "Schedule": ["Saturday 8 to 10 AM"], "Trainer-1": "NEHA SINGH", "Trainer-1 Contact": "neha.singh@res.christuniversity.in", "Trainer-2": "ANUPAMA B NAGARALE", "Trainer-2 Contact": "anupama.nagarale@christuniversity.in"},
+        {"Department": "Education - Central Campus", "Module": "Essentials", "SNo": 2, "Class": "3BEd B", "Room No": "732, Block 2, 3rd Floor", "Schedule": ["Saturday 8 to 10 AM"], "Trainer-1": "NEHA SINGH", "Trainer-1 Contact": "neha.singh@res.christuniversity.in", "Trainer-2": "ANUPAMA B NAGARALE", "Trainer-2 Contact": "anupama.nagarale@christuniversity.in"}
+    ]
 
-    st.title("Trainers Contact Details")
-    contact_df = pd.DataFrame(trainers_contact)
-    st.table(contact_df)
+    # Group the schedules by Trainer-1 and Trainer-2
+    faculty_schedule = {}
+    for schedule in schedules:
+        for trainer in ["Trainer-1", "Trainer-2"]:
+            trainer_name = schedule[trainer]
+            contact = schedule[f"{trainer} Contact"]
+            if trainer_name not in faculty_schedule:
+                faculty_schedule[trainer_name] = {"Contact": contact, "Schedules": []}
+            faculty_schedule[trainer_name]["Schedules"].append(schedule)
 
+    # Display the schedules faculty-wise
+    for faculty, info in faculty_schedule.items():
+        st.subheader(f"{faculty} ({info['Contact']})")
+        for schedule in info["Schedules"]:
+            st.write(f"**Class:** {schedule['Class']}")
+            st.write(f"**Room No:** {schedule['Room No']}")
+            st.write(f"**Schedule:**")
+            for time in schedule["Schedule"]:
+                st.write(f"- {time}")
+            st.write(f"**Module:** {schedule['Module']} ({schedule['Department']} Department)")
+            st.write("---")
 
 
 if __name__ == "__main__":
