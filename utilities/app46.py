@@ -333,7 +333,7 @@ def compare_lists_and_arrays():
     ```
     """)
 
-    st.write("Let me know if you'd like me to elaborate on any of these points!")
+    
 
 
 if __name__ == "__main__":
