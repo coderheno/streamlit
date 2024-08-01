@@ -14,7 +14,7 @@ def main():
 
     # Introduction Tab
     with tabs[0]:
-        st.header("Introduction to Python Data Types and Data Structures")
+        st.title("Introduction to Python Data Types and Data Structures")
         st.write("""
             Python has various data types and data structures that are essential for programming. 
             Understanding these is crucial for efficient coding and data manipulation. This section covers:
@@ -22,6 +22,7 @@ def main():
             - Data structures: list, tuple, set, dict
             - Their usage and operations
         """)
+        compare_lists_and_arrays()
 
     # Lists: Accessing Elements Tab
     with tabs[1]:
@@ -163,7 +164,7 @@ def main():
                 my_list.remove(30)  # [40, 20]
             ```
         """)
-
+   
     # Activities Tab
     with tabs[4]:
         st.header("Activities")
@@ -207,6 +208,133 @@ def main():
                - Record key ideas and applications.
                - Highlight unique uses of lists discovered during the session.
         """)
+
+
+def compare_lists_and_arrays():
+    st.header("Comparison: Python Lists vs C Arrays")
+
+    st.write("""
+    Python lists and C arrays are both data structures used to store collections of elements, but they have some key differences:
+    """)
+
+    # Declaration
+    st.subheader("1. Declaration")
+    st.write("""
+    - **Python lists:** No explicit declaration needed. Create a list by assigning a value to a variable, e.g., `my_list = [1, 2, 3]`.
+    - **C arrays:** Must be explicitly declared with a fixed size, e.g., `int my_array[3] = {1, 2, 3};`.
+    """)
+
+    # Size
+    st.subheader("2. Size")
+    st.write("""
+    - **Python lists:** Dynamic size, can grow or shrink as elements are added or removed.
+    - **C arrays:** Fixed size, determined at compile time.
+    """)
+
+    # Data Type
+    st.subheader("3. Data Type")
+    st.write("""
+    - **Python lists:** Can store elements of any data type, including mixed types.
+    - **C arrays:** Elements must be of the same data type.
+    """)
+
+    # Memory Allocation
+    st.subheader("4. Memory Allocation")
+    st.write("""
+    - **Python lists:** Memory is managed automatically by Python's memory manager.
+    - **C arrays:** Memory is manually managed by the programmer using pointers.
+    """)
+
+    # Indexing
+    st.subheader("5. Indexing")
+    st.write("""
+    - **Python lists:** Support indexing, slicing, and negative indexing.
+    - **C arrays:** Support indexing, but no slicing or negative indexing.
+    """)
+
+    # Operations
+    st.subheader("6. Operations")
+    st.write("""
+    - **Python lists:** Support various methods like append, insert, remove, sort, etc.
+    - **C arrays:** No built-in methods; operations must be implemented manually.
+    """)
+
+    st.subheader("Examples of Python List Operations")
+    st.write("""
+    **1. Adding Elements:**
+    ```python
+    my_list = [1, 2, 3]
+    my_list.append(4)  # Adds 4 to the end of the list
+    print(my_list)  # Output: [1, 2, 3, 4]
+    ```
+
+    **2. Inserting Elements:**
+    ```python
+    my_list = [1, 2, 3]
+    my_list.insert(1, 'a')  # Inserts 'a' at index 1
+    print(my_list)  # Output: [1, 'a', 2, 3]
+    ```
+
+    **3. Removing Elements:**
+    ```python
+    my_list = [1, 2, 3, 4, 2]
+    my_list.remove(2)  # Removes the first occurrence of 2
+    print(my_list)  # Output: [1, 3, 4, 2]
+    ```
+
+    **4. Popping Elements:**
+    ```python
+    my_list = [1, 2, 3, 4]
+    popped_element = my_list.pop(2)  # Removes and returns the element at index 2
+    print(popped_element)  # Output: 3
+    print(my_list)  # Output: [1, 2, 4]
+    ```
+
+    **5. Slicing Lists:**
+    ```python
+    my_list = [1, 2, 3, 4, 5]
+    sliced_list = my_list[1:4]  # Extracts elements from index 1 to 3 (4 is not included)
+    print(sliced_list)  # Output: [2, 3, 4]
+    ```
+
+    **6. Reversing a List:**
+    ```python
+    my_list = [1, 2, 3, 4, 5]
+    my_list.reverse()  # Reverses the list in place
+    print(my_list)  # Output: [5, 4, 3, 2, 1]
+    ```
+
+    **7. Sorting a List:**
+    ```python
+    my_list = [3, 1, 4, 2, 5]
+    my_list.sort()  # Sorts the list in ascending order
+    print(my_list)  # Output: [1, 2, 3, 4, 5]
+    ```
+
+    **8. List Comprehensions:**
+    ```python
+    my_list = [1, 2, 3, 4, 5]
+    squared_list = [x**2 for x in my_list]  # Creates a new list with the squares of each element
+    print(squared_list)  # Output: [1, 4, 9, 16, 25]
+    ```
+
+    **9. Clearing a List:**
+    ```python
+    my_list = [1, 2, 3, 4]
+    my_list.clear()  # Removes all elements from the list
+    print(my_list)  # Output: []
+    ```
+
+    **10. Checking for Element Existence:**
+    ```python
+    my_list = [1, 2, 3, 4, 5]
+    print(3 in my_list)  # Output: True
+    print(6 in my_list)  # Output: False
+    ```
+    """)
+
+    st.write("Let me know if you'd like me to elaborate on any of these points!")
+
 
 if __name__ == "__main__":
     main()
