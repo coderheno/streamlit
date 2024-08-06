@@ -24,7 +24,7 @@ funny_tasks = [
     "Do a trending dance",
     "Speak in a made-up language",
     "Tell a joke about yourself",
-    "2 Truths and 1 Lie about you",
+    "2 Truth and 1 Lie about you",
     "Do a silly impression of a famous person",
     "Do a magic trick",
     "Tell a funny sorry to your friend",
