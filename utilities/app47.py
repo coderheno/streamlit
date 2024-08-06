@@ -35,6 +35,7 @@ funny_tasks = [
     "Truth or Dare"
 ]
 
+
 def tuple_ict_tool():
     st.title("Unit-2: Learning Tuples in Python")
 
