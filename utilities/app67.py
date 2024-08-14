@@ -3,8 +3,19 @@ import streamlit as st
 # Set the page configuration
 st.set_page_config(page_title="Python Learning Hub", layout="wide")
 
-# Add the university logo as a header
-st.image("logo.jpg",  width=400)
+# Google Drive direct image URL
+logo_url = "https://drive.google.com/file/d/1iSj9G3-AGDTqhX2QE4UuBOM-jnsueK6n"
+
+# Display the logo centered with a specific width
+st.markdown(
+    f"""
+    <div style="text-align: center;">
+        <img src="{logo_url}" alt="University Logo" width="350">
+    </div>
+    """,
+    unsafe_allow_html=True
+)
+
 
 # Create the tabs
 tab1, tab2, tab3, tab4, tab5 = st.tabs(["Recap", "Lecture Notes", "Lab Exercises", "Activities", "List vs Tuple vs Set"])
