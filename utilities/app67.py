@@ -3,6 +3,9 @@ import streamlit as st
 # Set the page configuration
 st.set_page_config(page_title="Python Learning Hub", layout="wide")
 
+# Add the university logo as a header
+st.image("logo.jpg",  width=400)
+
 # Create the tabs
 tab1, tab2, tab3, tab4, tab5 = st.tabs(["Recap", "Lecture Notes", "Lab Exercises", "Activities", "List vs Tuple vs Set"])
 
@@ -209,126 +212,63 @@ with tab4:
     **Guidelines**:
     - **Think**: Each student considers the problem independently for 5 minutes.
     - **Pair**: Students pair up with a classmate and discuss their solutions for 10 minutes.
-    - **Share**: Pairs present their combined solution to the class.
+    - **Share**: Pairs share their solutions with the class in a brief presentation.
     
     **Task**:
-    - Problem: "Given two dictionaries, combine them into one, handling overlapping keys by summing their values."
-    - Expected Outcome: A combined dictionary with correctly summed values for overlapping keys.
+    - Discuss the advantages and disadvantages of using sets over lists in Python. Present your findings to the class.
     """)
+
+# Tab 5: List vs Tuple vs Set
 with tab5:
-    st.header("Comprehensive Comparison: List vs Tuple vs Set")
+    st.header("List vs Tuple vs Set - A Quick Comparison")
     
-    st.subheader("Overview")
+    st.subheader("List")
     st.write("""
-    Python offers three common data structures: **Lists**, **Tuples**, and **Sets**. Each has its unique properties, use cases, and behaviors. Understanding the differences and similarities can help you choose the right structure for your tasks.
-    """)
-
-    st.subheader("1. Types and Definitions")
-    st.write("""
-    - **List**: An ordered, mutable collection of elements.
-    - **Tuple**: An ordered, immutable collection of elements.
-    - **Set**: An unordered, mutable collection of unique elements.
-    """)
-
-    st.subheader("2. Common Use Cases")
-    st.write("""
-    - **List**: Best when you need an ordered collection that you can modify. Commonly used for storing sequences, such as a list of items.
-    - **Tuple**: Best for storing fixed collections of items that should not be changed. Often used for records or fixed data.
-    - **Set**: Best for membership tests and eliminating duplicates. Ideal for storing unique items and performing set operations.
-    """)
-
-    st.subheader("3. Examples")
-    st.write("""
-    **List Example**:
+    **Definition**: Ordered, mutable collection of elements.
+    
+    **Example**: 
     ```python
-    my_list = [1, 2, 3, 4, 5]
-    my_list.append(6)
-    print(my_list)  # Output: [1, 2, 3, 4, 5, 6]
+    my_list = [1, 2, 3, 4]
     ```
+    
+    **Key Features**:
+    - **Mutable**: Can be modified after creation.
+    - **Ordered**: Elements maintain the order of insertion.
+    - **Indexing**: Supports indexing and slicing.
+    
+    **Use Case**: Ideal for storing collections of items that may need to be changed or reordered.
+    """)
 
-    **Tuple Example**:
+    st.subheader("Tuple")
+    st.write("""
+    **Definition**: Ordered, immutable collection of elements.
+    
+    **Example**:
     ```python
-    my_tuple = (1, 2, 3, 4, 5)
-    print(my_tuple)  # Output: (1, 2, 3, 4, 5)
+    my_tuple = (1, 2, 3, 4)
     ```
+    
+    **Key Features**:
+    - **Immutable**: Cannot be modified after creation.
+    - **Ordered**: Elements maintain the order of insertion.
+    - **Indexing**: Supports indexing and slicing.
+    
+    **Use Case**: Best for storing data that should not be changed, such as constants.
+    """)
 
-    **Set Example**:
+    st.subheader("Set")
+    st.write("""
+    **Definition**: Unordered collection of unique elements.
+    
+    **Example**:
     ```python
-    my_set = {1, 2, 3, 4, 5}
-    my_set.add(6)
-    print(my_set)  # Output: {1, 2, 3, 4, 5, 6}
+    my_set = {1, 2, 3, 4}
     ```
+    
+    **Key Features**:
+    - **Mutable**: Can be modified after creation.
+    - **Unordered**: No guaranteed order of elements.
+    - **No Duplicates**: Automatically removes duplicate elements.
+    
+    **Use Case**: Ideal for storing items where uniqueness is a priority.
     """)
-
-    st.subheader("4. Key Properties")
-    st.write("""
-    - **List**:
-        - **Order**: Maintains the order of elements.
-        - **Mutability**: Elements can be changed, added, or removed.
-        - **Duplicates**: Allows duplicate elements.
-    - **Tuple**:
-        - **Order**: Maintains the order of elements.
-        - **Mutability**: Immutable; elements cannot be changed after creation.
-        - **Duplicates**: Allows duplicate elements.
-    - **Set**:
-        - **Order**: Does not maintain any order of elements.
-        - **Mutability**: Mutable; elements can be added or removed, but no duplicates are allowed.
-        - **Duplicates**: Does not allow duplicate elements.
-    """)
-
-    st.subheader("5. Common Functions and Methods")
-    st.write("""
-    **List Functions and Methods**:
-    - `append()`: Adds an element to the end.
-        ```python
-        my_list.append(7)
-        ```
-    - `remove()`: Removes the first occurrence of a specified value.
-        ```python
-        my_list.remove(3)
-        ```
-    - `sort()`: Sorts the list in place.
-        ```python
-        my_list.sort()
-        ```
-
-    **Tuple Functions and Methods**:
-    - `count()`: Returns the number of occurrences of a specified value.
-        ```python
-        my_tuple.count(3)
-        ```
-    - `index()`: Returns the index of the first occurrence of a specified value.
-        ```python
-        my_tuple.index(4)
-        ```
-
-    **Set Functions and Methods**:
-    - `add()`: Adds an element to the set.
-        ```python
-        my_set.add(7)
-        ```
-    - `remove()`: Removes a specified element from the set.
-        ```python
-        my_set.remove(2)
-        ```
-    - `union()`: Returns a new set with elements from both sets.
-        ```python
-        another_set = {8, 9}
-        union_set = my_set.union(another_set)
-        ```
-    """)
-
-    st.subheader("6. Performance Considerations")
-    st.write("""
-    - **Lists**: Accessing elements by index is O(1). Insertion and deletion (at the end) are O(1); inserting or deleting in the middle is O(n).
-    - **Tuples**: Similar to lists, but since they are immutable, they can be more memory-efficient.
-    - **Sets**: Membership tests are O(1) on average, making sets efficient for lookups.
-    """)
-
-    st.subheader("7. Conclusion")
-    st.write("""
-    - Use **Lists** when you need a versatile, ordered collection that can grow and shrink.
-    - Use **Tuples** for data that should not change and where order matters.
-    - Use **Sets** for unique collections where order is not important, and you need fast membership tests.
-    """)
-
