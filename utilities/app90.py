@@ -12,12 +12,19 @@ def display_groups():
     names = [name.strip() for name in names_input.split(",") if name.strip()]
     random.shuffle(names)
     
+    # Funny food names for groups
+    food_names = [
+        "Biriyani", "Tandori", "Samosas", "Pizza", "Sushi",
+        "Burgers", "Chicken Tikka", "Frenc fries", "Noodles", "Curd rice"
+    ]
+    random.shuffle(food_names)
+    
     # Initialize the groups dictionary
-    groups = {f"Group {i+1}": [] for i in range(num_groups)}
+    groups = {f"{food_names[i % len(food_names)]} (Group {i+1})": [] for i in range(num_groups)}
     
     # Assign names to groups randomly
     for i, name in enumerate(names):
-        group_key = f"Group {(i % num_groups) + 1}"
+        group_key = f"{food_names[i % len(food_names)]} (Group {(i % num_groups) + 1})"
         groups[group_key].append(name)
     
     # Create a DataFrame for displaying in Streamlit
@@ -26,6 +33,10 @@ def display_groups():
     # Display the table using Streamlit
     st.write("Groups and Members:")
     st.table(df)
+    
+    # Shout out for each group
+    for group in groups:
+        st.success(f"Shout out to the {group}!")
     
     # Save the groups to a CSV file
     save_option = st.checkbox("Save groups to CSV file")
@@ -164,14 +175,44 @@ def main():
         st.header("Live Activities and Group Exercise")
         st.write("Let's get hands-on with some activities!")
         
-        st.subheader("Random Group Generator")
-        st.write("Use this tool to generate random groups for collaborative activities.")
+        st.subheader("Step 1: Group Formation and Shout Out")
+        st.write("Form groups with funny food names and give a shout out to each group.")
 
         # Call the group generator function
         display_groups()
 
-        st.subheader("Live Coding Session")
-        st.write("We'll code together to create a basic Streamlit app, explore GitHub Desktop integration, and deploy our app live.")
-        
+        st.subheader("Step 2: Live Demo on App Deployment")
+        st.write("""
+        - **Live demo:** We will go through the entire process of deploying a Streamlit app.
+        - **Tools:** We'll use Visual Studio Code (VSCode) with Python, Streamlit, and GitHub for version control and collaboration.
+        - **Authorization:** Authorize your GitHub account using GitHub Desktop.
+        - **Deployment:** Finally, deploy the app using Streamlit Sharing.
+        """)
+
+        st.subheader("Step 3: Install the Required Tools")
+        st.write("""
+        - **Step 3.1:** Install [Visual Studio Code](https://code.visualstudio.com/).
+        - **Step 3.2:** Install Python (if not already installed).
+        - **Step 3.3:** Install Streamlit using the command `pip install streamlit`.
+        """)
+
+        st.subheader("Step 4: Create GitHub Accounts and Collaborate")
+        st.write("""
+        - **Step 4.1:** Create GitHub accounts if you don’t have one.
+        - **Step 4.2:** Set up repositories and collaborate with others on a shared project.
+        """)
+
+        st.subheader("Step 5: Install GitHub Desktop and Authorize")
+        st.write("""
+        - **Step 5.1:** Download and install [GitHub Desktop](https://desktop.github.com/).
+        - **Step 5.2:** Authorize your account and start using it for version control.
+        """)
+
+        st.subheader("Step 6: Deploying to Streamlit Sharing")
+        st.write("""
+        - **Step 6.1:** Push your code to GitHub.
+        - **Step 6.2:** Deploy your app using [Streamlit Sharing](https://share.streamlit.io/).
+        """)
+
 if __name__ == "__main__":
     main()
