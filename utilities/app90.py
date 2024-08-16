@@ -78,6 +78,7 @@ def main():
         **Trainer:** Vijay, Computer Science Professor with 15 years of teaching experience, expert in Streamlit, Python, and web development.
         - **Phone:** +91 9677188654
         - **Email:** phdvij@gmail.com
+        - **Linked
         - **Specializations:** Streamlit, Python, Web Development, Educational Technology, and Disaster Management.
         """)
 
