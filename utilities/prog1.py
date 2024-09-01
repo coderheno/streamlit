@@ -95,6 +95,7 @@ def attendance_tab():
         else:
             st.warning("No attendance data found. Please enter attendance to generate logs.")
 
+
 # Main Application
 def main():
     st.sidebar.title("Navigation")
