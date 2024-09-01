@@ -1,16 +1,55 @@
 import streamlit as st
 import pandas as pd
-def main():
-    st.title("Digital Mission 2024 Program")
 
+# Helper function to generate the attendance slip
+def generate_attendance_slip(attendance_type, date, teacher_code, class_name, time, subject_name, start_reg_no, absentees_list):
+    slip = f"""
+    Attendance Type: {attendance_type}
+    Date: {date}
+    Teacher's Code: {teacher_code}
+    Class: {class_name}
+    Time: {time}
+    Subject Name: {subject_name}
+    Starting Register Number: {start_reg_no}
+    Absentees List: {absentees_list}
+    """
+    return slip
+
+# Main Application
+def main():
+    st.sidebar.title("Navigation")
+    tab = st.sidebar.radio("Go to", [
+        "Digital Mission 2024 Program", 
+        "Newly Added Courses and Syllabus", 
+        "AI Essentials Material- Unit I (Theory)", 
+        "AI Essentials Material- Unit I (Practical)",
+        "Attendance",
+        "Useful Links"
+    ])
+
+    if tab == "Digital Mission 2024 Program":
+        digital_mission_2024_program()
+    elif tab == "Newly Added Courses and Syllabus":
+        newly_added_courses_tab()
+    elif tab == "AI Essentials Material- Unit I (Theory)":
+        ai_essentials_material_tab()
+    elif tab == "AI Essentials Material- Unit I (Practical)":
+         ai_essentials_practical_tab()
+    elif tab == "Attendance":
+        attendance_tab()
+    elif tab == "Useful Links":
+        display_links()
+
+# Function definitions
+def digital_mission_2024_program():
+    st.title("Digital Mission 2024 Program")
     tabs = st.tabs([
         "Overview",
         "Courses",
         "Feedback & Plans",
         "Social Activities",
         "Class Structure", 
-        "Trainers Schedule",
-        "Useful Links"
+        "Trainers Schedule"
     ])
 
     with tabs[0]:
@@ -18,23 +57,15 @@ def main():
         train_the_trainers_tab()
     with tabs[1]:
         courses_tab()
-        
-
     with tabs[2]:
         feedback_and_plans_tab()
-
     with tabs[3]:
         csa_activities_tab()
-
     with tabs[4]:
         class_structure_tab()
-
     with tabs[5]:
         faculty()
-    with tabs[6]:
-        display_links()
-    
-       
+
 def overview_tab():
     st.header("Program Overview")
     st.write("Mission: CHRIST is a nurturing ground for an individual's holistic development to make effective contribution to the society in a dynamic environment")
@@ -135,161 +166,283 @@ def class_structure_tab():
     for guideline in guidelines:
         st.write(f"- {guideline}")
 
-
-# Data for the schedule
-data_commerce = [
-    {"Class": "III BCom FI A", "Room No": "4506, 5TH FLOOR, BLOCK IV", "Schedule": "Monday 10:30 AM to 11:30 AM", "Trainer-1": "Gadhiya Shreya (MSc CSA)", "Trainer-2": "Shravan K (4MDA)"},
-    {"Class": "III BCom FI A", "Room No": "4506, 5TH FLOOR, BLOCK IV", "Schedule": "Thursday 11:30 AM to 12:30 PM", "Trainer-1": "Gadhiya Shreya (MSc CSA)", "Trainer-2": "Shravan K (4MDA)"},
-    {"Class": "III BCom FI B", "Room No": "4507, 5TH FLOOR, BLOCK IV", "Schedule": "Tuesday 10:30 AM to 11:30 AM", "Trainer-1": "Gadhiya Shreya (MSc CSA)", "Trainer-2": "Shravan K (4MDA)"},
-    {"Class": "III BCom FI B", "Room No": "4507, 5TH FLOOR, BLOCK IV", "Schedule": "Friday 10:30 AM to 11:30 AM", "Trainer-1": "Gadhiya Shreya (MSc CSA)", "Trainer-2": "Shravan K (4MDA)"},
-    {"Class": "III BCOM A", "Room No": "4607, 6TH FLOOR, BLOCK IV", "Schedule": "Wednesday 8:00 AM to 9:00 AM", "Trainer-1": "Gadhiya Shreya (MSc CSA)", "Trainer-2": "Priyadarsh P (5 CME)"},
-    {"Class": "III BCOM A", "Room No": "4607, 6TH FLOOR, BLOCK IV", "Schedule": "Thursday 9:30 AM to 10:30 AM", "Trainer-1": "Gadhiya Shreya (MSc CSA)", "Trainer-2": "Priyadarsh P (5 CME)"},
-    {"Class": "III BCOM B", "Room No": "4608, 6TH FLOOR, BLOCK IV", "Schedule": "Tuesday 8:00 AM to 9:00 AM", "Trainer-1": "Maanav (BCOM)", "Trainer-2": "Shalini Sosa (5 CME)"},
-    {"Class": "III BCOM B", "Room No": "4608, 6TH FLOOR, BLOCK IV", "Schedule": "Wednesday 8:00 AM to 9:00 AM", "Trainer-1": "Maanav (BCOM)", "Trainer-2": "Shalini Sosa (5 CME)"},
-    {"Class": "III BCOM C", "Room No": "4609, 6TH FLOOR, BLOCK IV", "Schedule": "Tuesday 9:30 AM to 10:30 AM", "Trainer-1": "Radhika (PhD Scholar)", "Trainer-2": "Meenu Hani (4 MDA)"},
-    {"Class": "III BCOM C", "Room No": "4609, 6TH FLOOR, BLOCK IV", "Schedule": "Friday 10:30 AM to 11:30 AM", "Trainer-1": "Radhika (PhD Scholar)", "Trainer-2": "Meenu Hani (4 MDA)"},
-    {"Class": "III BCOM D", "Room No": "4610, 6TH FLOOR, BLOCK IV", "Schedule": "Monday 11:30 AM to 12:30 AM", "Trainer-1": "Kiran Kumar", "Trainer-2": "Zainab Khan (5 CME)"},
-    {"Class": "III BCOM D", "Room No": "4610, 6TH FLOOR, BLOCK IV", "Schedule": "Wednesday 8:00 AM to 9:00 AM", "Trainer-1": "Kiran Kumar", "Trainer-2": "Zainab Khan (5 CME)"},
-    {"Class": "III BCOM F", "Room No": "726, 2ND FLOOR, BLOCK II", "Schedule": "Tuesday 8:00 AM to 9:00 AM", "Trainer-1": "Gadhiya Shreya (MSc CSA)", "Trainer-2": "Antoniette Figeredo (5 CME)"},
-    {"Class": "III BCOM F", "Room No": "726, 2ND FLOOR, BLOCK II", "Schedule": "Thursday 8:00 AM to 9:00 AM", "Trainer-1": "Gadhiya Shreya (MSc CSA)", "Trainer-2": "Antoniette Figeredo (5 CME)"},
-    {"Class": "III BCOM AT", "Room No": "4602, 6TH FLOOR, BLOCK IV", "Schedule": "Wednesday 9:30 AM to 10:30 AM", "Trainer-1": "Anjana (PhD Scholar)", "Trainer-2": "Nirupama L (4MDA)"},
-    {"Class": "III BCOM AT", "Room No": "4602, 6TH FLOOR, BLOCK IV", "Schedule": "Thursday 11:30 AM to 12:30 PM", "Trainer-1": "Anjana (PhD Scholar)", "Trainer-2": "Nirupama L (4MDA)"},
-    {"Class": "III BCOM AFA", "Room No": "4604, 6TH FLOOR, BLOCK IV", "Schedule": "Monday 2:30 PM to 3:30 PM", "Trainer-1": "Neha (PhD Scholar)", "Trainer-2": "Ahanya Mariam (6BCA)"},
-    {"Class": "III BCOM AFA", "Room No": "4604, 6TH FLOOR, BLOCK IV", "Schedule": "Wednesday 9:30 AM to 10:30 AM", "Trainer-1": "Neha (PhD Scholar)", "Trainer-2": "Ahanya Mariam (6BCA)"},
-    {"Class": "III SEM BCOM SFH", "Room No": "4412, 4TH FLOOR, BLOCK IV", "Schedule": "Thursday 11:30 AM to 12:30 PM", "Trainer-1": "Sushmitha R (4MDA)", "Trainer-2": "Arjun Ajithan (6BCA)"},
-    {"Class": "III SEM BCOM SFH", "Room No": "4412, 4TH FLOOR, BLOCK IV", "Schedule": "Friday 10:30 AM to 11:30 AM", "Trainer-1": "Sushmitha R (4MDA)", "Trainer-2": "Arjun Ajithan (6BCA)"},
-]
-
-data_international_studies = [
-    {"Class": "1 BAHP", "Module": "Google Workspace", "Schedule": "Tuesday 1:30 to 3:30 PM", "Trainer-1": "Kavaskar (4MCA)", "Trainer-2": "Sakshee Priya (6BCA)"},
-    {"Class": "1 BAHP", "Module": "Google Workspace", "Schedule": "Friday 2:30 to 3:30 PM", "Trainer-1": "Kavaskar (4MCA)", "Trainer-2": "Sakshee Priya (6BCA)"},
-    {"Class": "5 HEP", "Module": "Visualizing Data", "Schedule": "Thursday 2:30 to 3:30 PM", "Trainer-1": "Kalpana N (4MCA)", "Trainer-2": "Brito Jaison (6BCA)"},
-    {"Class": "5 HEP", "Module": "Visualizing Data", "Schedule": "Friday 2:30 to 3:30 PM", "Trainer-1": "Kalpana N (4MCA)", "Trainer-2": "Brito Jaison (6BCA)"},
-    {"Class": "3BAHP", "Module": "Visualizing Data", "Schedule": "Tuesday 10:30 to 12:30 PM", "Trainer-1": "Sushmitha R (4MDA)", "Trainer-2": "Jessica Shirley (4MDA)"},
-    {"Class": "1MAIS", "Module": "Formulas and design", "Schedule": "Wednesday 2:30 to 3:30 PM", "Trainer-1": "Likitha Yadav G (4MCA)", "Trainer-2": "Nayana K Benny (6BCA)"},
-    {"Class": "1MAIS", "Module": "Formulas and design", "Schedule": "Friday 2:30 to 3:30 PM", "Trainer-1": "Likitha Yadav G (4MCA)", "Trainer-2": "Nayana K Benny (6BCA)"},
-    {"Class": "3MAIS", "Module": "Formulas and design", "Schedule": "Tuesday 11:30 to 12:30 PM", "Trainer-1": "Sujana (PhD Scholar)", "Trainer-2": "Nirupama L (4MDA)"},
-    {"Class": "3MAIS", "Module": "Formulas and design", "Schedule": "Friday 10:30 to 11:30 AM", "Trainer-1": "Sujana (PhD Scholar)", "Trainer-2": "Nirupama L (4MDA)"},
-]
-
-data_psychology = [
-    {"Class": "1BA PENG", "Module": "Digital Skills Essentials - Google Workspace", "Room No": "Room No.524, Ground Floor, Block 2", "Schedule": "Monday 11:30-12:30", "Trainer-1": "Gadhiya Shreya (MSc CSA)", "Trainer-2": "Amritha S Nair"},
-    {"Class": "1BA PENG", "Module": "Digital Skills Essentials - Google Workspace", "Room No": "Room No.524, Ground Floor, Block 2", "Schedule": "Tuesday 2:30-3:30", "Trainer-1": "Gadhiya Shreya (MSc CSA)", "Trainer-2": "Amritha S Nair"},
-    {"Class": "1BA PECO", "Module": "Digital Skills Essentials - Google Workspace", "Room No": "Room No.527, Ground Floor, Block 2", "Schedule": "Tuesday 2:30-3:30", "Trainer-1": "Arunoth Symen", "Trainer-2": "Shreyans Jain"},
-    {"Class": "1BA PECO", "Module": "Digital Skills Essentials - Google Workspace", "Room No": "Room No.527, Ground Floor, Block 2", "Schedule": "Monday 2:30-3:30 PM", "Trainer-1": "Arunoth Symen", "Trainer-2": "Shreyans Jain"},
-    {"Class": "3PENG", "Module": "Cybersecurity - Essentials", "Room No": "Room No.605, Ground Floor, Block 2", "Schedule": "Monday 10:30 - 11:30", "Trainer-1": "Jessica Shirley (4MDA)", "Trainer-2": "Nirupama L (4MDA)"},
-    {"Class": "3PENG", "Module": "Cybersecurity - Essentials", "Room No": "Room No.605, Ground Floor, Block 2", "Schedule": "Tuesday 10:30-11:30", "Trainer-1": "Jessica Shirley (4MDA)", "Trainer-2": "Nirupama L (4MDA)"},
-    {"Class": "3PECO", "Module": "Cybersecurity - Essentials", "Room No": "Room No.505, Ground Floor, Block 2", "Schedule": "Tuesday 10:30 - 11:30 AM", "Trainer-1": "Meenu Hani (4MDA)", "Trainer-2": "Aruna (4MDA)"},
-    {"Class": "3PECO", "Module": "Cybersecurity - Essentials", "Room No": "Room No.505, Ground Floor, Block 2", "Schedule": "Wednesday 10:30 - 11:30", "Trainer-1": "Meenu Hani (4MDA)", "Trainer-2": "Aruna (4MDA)"},
-]
-
-data_education = [
-    {"Class": "1 PG", "Module": "Digital Skills Essentials", "Schedule": "Saturday 8 to 10 AM", "Trainer-1": "Kiran", "Trainer-2": "Shubam"},
-    {"Class": "2 PG", "Module": "Digital Skills Essentials", "Schedule": "Saturday 8 to 10 AM", "Trainer-1": "Alby", "Trainer-2": "Gavin"},
-]
-
-trainers_contact = [
-    {"Name": "Dr. Vijay Arputhraj", "Contact": "+91 9677188654", "Remarks": "Coordinator/ In-charge"},
-    {"Name": "Ms. Kaleeshwari", "Contact": "+91 87921 32388"},
-    {"Name": "Ms. Gadhiya Shreya", "Contact": "+91 94284 06333"},
-    {"Name": "Ms. Maanav", "Contact": "+91 6362 512 601"},
-    {"Name": "Ms. Radhika", "Contact": ""},
-    {"Name": "Ms. Anjana", "Contact": "+91 83018 73780"},
-    {"Name": "Ms. Neha Singh", "Contact": "+91 83103 79475"},
-    {"Name": "Mr. Kiran Kumar", "Contact": "+91 70226 41150"},
-    {"Name": "Mr. Priyadarsh P", "Contact": "+91 79945 93685"},
-    {"Name": "Ms. Shalini Sosa", "Contact": ""},
-    {"Name": "Ms. Zainab Khan", "Contact": ""},
-    {"Name": "Ms. Antoniette Figeredo", "Contact": ""},
-    {"Name": "Ms. Ahanya Mariam", "Contact": ""},
-    {"Name": "Mr. Arjun Ajithan", "Contact": ""},
-]
-
-# Combine all data into a single DataFrame
-data = data_commerce + data_international_studies + data_psychology + data_education
-
-df = pd.DataFrame(data)
-
-# Create a function to generate the timetable for a specific trainer
+def faculty():
+    pass
 def display_links():
     st.header("Useful Links")
-    
     st.subheader("Batch-1 Schedule")
     st.markdown("[Batch-1 Schedule](https://docs.google.com/document/d/1I1jIiy-y1SsyF-xFr-KyAl-k7GL6fS1e/edit?usp=sharing&ouid=109717452376599156061&rtpof=true&sd=true)")
-    
     st.subheader("Course contents (Old)")
     st.markdown("[Course contents (Old)](https://drive.google.com/file/d/1m06TR37VW0m-9oF_GNBu4g6f-XK6Eta7/view?usp=drive_link)")
-    
     st.subheader("Course contents (New)")
     st.markdown("[Course contents (New)](https://drive.google.com/file/d/1Vy4MacXOsR75xC9kOxfZU2R3JcGxKI4T/view?usp=drive_link)")
     st.subheader("Day-1 Orientation Slide")
     st.markdown("[Orientation Slides](https://docs.google.com/presentation/d/1hNDKo4M6nXC1OwZJD7fspOWc1S6DPE2m/edit?usp=drive_link&ouid=105423989768943296319&rtpof=true&sd=true)")
-    
     st.subheader("Cloud Literacy- Materials")
     st.markdown("[Unit-1](https://docs.google.com/presentation/d/1oVTTE40gptVj6aGuTBEVMqlvmCX7i0MD/edit?usp=drive_link&ouid=105423989768943296319&rtpof=true&sd=true)")
-    
     st.subheader("Class Activities/ Labs")
-    st.markdown("[Cloud  Literacy - Activities](https://drive.google.com/drive/folders/1JySsRUX_EkqerHvP2-zShHusKetK9unW?usp=drive_link)")
+    st.markdown("[Cloud Literacy - Activities](https://drive.google.com/drive/folders/1JySsRUX_EkqerHvP2-zShHusKetK9unW?usp=drive_link)")
     st.subheader("Cybersecurity Essentials")
     st.markdown("[Cybersecurity Mindfulness](https://docs.google.com/presentation/d/1nvX2MeZu7mMc5Vvb6G-ePR5oM7JD-Sbs/edit?usp=drive_link&ouid=105423989768943296319&rtpof=true&sd=true)")
-    
     st.subheader("Cybersecurity Lab")
     st.markdown("[Lab Program-1](https://docs.google.com/document/d/1KjdFik4_cTA0yobxzyJ03yQ0UZErB8WC/edit?usp=drive_link&ouid=105423989768943296319&rtpof=true&sd=true)")
 
+def newly_added_courses_tab():
+    st.title("Newly Added Courses and Syllabus")
 
+    st.markdown("""
+    **CS192 – FUNDAMENTALS OF PROGRAMMING**
 
+    [Click here to view syllabus](https://drive.google.com/file/d/1pm9QxIvBnqlVVU5WTv-g4GfBcVkI1tp_/view?usp=drive_link)
+
+    **CS194 – AI ESSENTIALS**
+
+    [Click here to view syllabus](https://drive.google.com/file/d/11yQbxN2AtUcE-LoOy1uo57ReEbA-ULrs/view?usp=drive_link)
+    """)
+
+def ai_essentials_material_tab():
+    st.title("AI Essentials Materials")
+
+    # UNIT 1: Introduction to Artificial Intelligence
+    st.header("UNIT 1: Introduction to Artificial Intelligence")
+
+    st.subheader("Introduction and History of AI")
+    st.markdown("""
+    Artificial Intelligence (AI) is the branch of computer science that aims to create machines capable of performing tasks that would typically require human intelligence. The concept of AI dates back to the 1950s when Alan Turing proposed the idea of a machine that could simulate any human reasoning process. Over the decades, AI has evolved from simple rule-based systems to complex machine learning models that can perform tasks like image recognition, natural language processing, and even playing complex games.
+
+    **History of AI**:
+    - **1950s**: Alan Turing introduces the Turing Test, a measure of a machine's ability to exhibit intelligent behavior.
+    - **1960s**: Development of the first AI programs like ELIZA, which could mimic human conversation.
+    - **1980s**: Introduction of machine learning, allowing computers to learn from data.
+    - **2000s**: Breakthroughs in deep learning and neural networks, enabling AI to perform tasks like image and speech recognition with high accuracy.
+    """)
+
+    st.subheader("What is AI? Overview and Scope")
+    st.markdown("""
+    Artificial Intelligence refers to the simulation of human intelligence in machines that are programmed to think and learn like humans. AI can be classified into two broad categories:
+
+    - **Narrow AI**: AI systems that are designed to perform a narrow task (e.g., facial recognition, internet searches).
+    - **General AI**: AI systems that possess the ability to perform any intellectual task that a human can do (still theoretical).
+
+    **Example**: 
+    A virtual assistant like Siri or Google Assistant is an example of Narrow AI. It can perform specific tasks like setting reminders, answering queries, or playing music.
+
+    **Case Study**:
+    AI is used in personalized recommendation systems, such as those used by Netflix or Amazon. These systems analyze user behavior and preferences to suggest movies or products that a user is likely to enjoy.
+    """)
+
+    st.subheader("Key Techniques in AI: Machine Learning and Deep Learning")
+    st.markdown("""
+    **Machine Learning**:
+    Machine Learning (ML) is a subset of AI that enables a machine to automatically learn from past data without programming it explicitly. ML focuses on the development of algorithms that can analyze and learn from data to make decisions or predictions.
+
+    **Example**:
+    A spam email filter is a simple example of ML. The filter learns from a dataset of emails labeled as spam or not spam and then uses this knowledge to classify new emails.
+
+    **Deep Learning**:
+    Deep Learning is a subfield of machine learning that deals with neural networks with many layers (hence "deep"). It is particularly effective in tasks like image and speech recognition.
+
+    **Example**:
+    Image recognition systems, such as those used by Google Photos, can automatically tag people in photos by learning to recognize their faces.
+
+    **Case Study**:
+    **AI in Healthcare**: IBM Watson for Oncology uses AI and machine learning to help oncologists develop treatment plans for cancer patients. Watson analyzes large amounts of data from medical literature, patient records, and clinical trials to recommend treatment options.
+    """)
+
+    st.subheader("Real-World Applications of AI")
+    st.markdown("""
+    AI has a wide range of applications across various industries:
+
+    - **Healthcare**: AI is used for predictive analytics, diagnostics, and personalized medicine.
+    - **Finance**: AI algorithms are used for fraud detection, trading, and risk management.
+    - **Transportation**: Self-driving cars and traffic management systems rely on AI for decision-making.
+    - **Entertainment**: AI powers recommendation engines in platforms like Netflix and Spotify.
+
+    **Example**:
+    AI is used in predictive maintenance for industrial equipment. By analyzing sensor data, AI can predict when a machine is likely to fail, allowing for timely maintenance and reducing downtime.
+
+    **Case Study**:
+    **Self-Driving Cars**: Companies like Tesla use AI for autonomous driving. The AI systems in these cars process data from cameras, radar, and other sensors to make real-time driving decisions.
+    """)
+
+    st.subheader("Example: Basic Python Program to Simulate a Simple Decision-Making Process")
+    st.code("""
+def simple_decision_making(weather):
+    if weather == 'sunny':
+        return 'Go for a walk'
+    elif weather == 'rainy':
+        return 'Stay indoors'
+    else:
+        return 'Check the weather again'
+
+# Example usage
+decision = simple_decision_making('sunny')
+print(decision)  # Output: Go for a walk
+    """, language="python")
+
+    st.markdown("""
+    This simple Python program simulates a basic decision-making process. Based on the input (weather), it returns a suggestion for an activity.
+    """)
+
+    st.subheader("Case Study: Application of AI in Healthcare (IBM Watson)")
+    st.markdown("""
+    **IBM Watson for Oncology**:
+    IBM Watson is an AI platform that assists oncologists in developing treatment plans for cancer patients. Watson analyzes large datasets from medical literature, clinical trials, and patient records to provide evidence-based treatment options. The AI system is designed to augment the decision-making process by offering insights that might not be immediately apparent to human doctors. This application of AI helps in making more informed treatment decisions, potentially leading to better patient outcomes.
+    """)
+# AI Essentials Material - Unit I (Practical)
+def ai_essentials_practical_tab():
+    st.title("AI Essentials Materials - Unit I (Practical)")
+
+    # Python Basics
+    st.header("Python Basics")
+
+    st.subheader("Hello World Program")
+    st.code("""
+# Hello World Program in Python
+print("Hello, World!")
+    """, language="python")
+    st.markdown("""
+    This is the simplest Python program that prints "Hello, World!" to the screen. It's often the first program beginners write when learning a new programming language.
+    """)
+
+    st.subheader("Variables and Data Types")
+    st.code("""
+# Variables and Data Types in Python
+name = "John Doe"
+age = 25
+height = 5.9
+is_student = True
+
+print(f"Name: {name}, Age: {age}, Height: {height}, Is Student: {is_student}")
+    """, language="python")
+    st.markdown("""
+    Python allows you to store different types of data in variables, such as strings, integers, floats, and booleans. The `f` string is used to format the output.
+    """)
+
+    st.subheader("Basic Input and Output")
+    st.code("""
+# Input and Output in Python
+name = input("Enter your name: ")
+print(f"Hello, {name}!")
+    """, language="python")
+    st.markdown("""
+    This program takes input from the user and then prints a greeting message. The `input()` function is used to capture user input as a string.
+    """)
+
+    # AI-Related Libraries Introduction
+    st.header("Introduction to AI-Related Libraries")
+
+    st.subheader("Installing and Importing Libraries")
+    st.code("""
+# Installing AI Libraries
+# Run these commands in your terminal or command prompt
+!pip install numpy
+!pip install pandas
+!pip install scikit-learn
+!pip install tensorflow
+
+# Importing Libraries
+import numpy as np
+import pandas as pd
+from sklearn.model_selection import train_test_split
+import tensorflow as tf
+    """, language="python")
+    st.markdown("""
+    This code snippet shows how to install and import essential AI-related libraries:
     
+    - **Numpy**: For numerical operations.
+    - **Pandas**: For data manipulation and analysis.
+    - **Scikit-learn**: For machine learning algorithms.
+    - **TensorFlow**: For deep learning models.
+    """)
 
-def faculty():
-    st.title("Faculty-wise Schedule")
+    # Interactive Program: Simple Decision Making
+    st.header("Simple Interactive Program: Decision Making")
+    st.code("""
+def simple_response_system(user_input):
+    if user_input.lower() == "hello":
+        return "Hi there!"
+    elif user_input.lower() == "how are you?":
+        return "I'm doing great, thank you!"
+    elif user_input.lower() == "bye":
+        return "Goodbye! Have a nice day!"
+    else:
+        return "Sorry, I didn't understand that."
 
-    # Define the schedule data
-    schedules = [
-        {"Department": "Commerce", "Module": "Enterprise", "SNo": 1, "Class": "III BCom FI A", "Room No": "4506, 5TH FLOOR, BLOCK IV", "Schedule": ["Monday 10:30 AM to 11:30 AM", "Thursday 11:30 AM to 12:30 PM"], "Trainer-1": "Gadhiya Shreya", "Trainer-1 Contact": "+91 94284 06333", "Trainer-2": "Shravan K", "Trainer-2 Contact": "+91 88618 12279"},
-        {"Department": "Commerce", "Module": "Enterprise", "SNo": 2, "Class": "III BCom FI B", "Room No": "4507, 5TH FLOOR, BLOCK IV", "Schedule": ["Tuesday 10:30 AM to 11:30 AM", "Friday 10:30 AM to 11:30 AM"], "Trainer-1": "Shravan K", "Trainer-1 Contact": "+91 88618 12279", "Trainer-2": "Gadhiya Shreya", "Trainer-2 Contact": "+91 94284 06333"},
-        {"Department": "Commerce", "Module": "Enterprise", "SNo": 3, "Class": "III BCOM A", "Room No": "4607, 6TH FLOOR, BLOCK IV", "Schedule": ["Wednesday 8:00 AM to 9:00 AM", "Thursday 9:30 AM to 10:30 AM"], "Trainer-1": "Gadhiya Shreya", "Trainer-1 Contact": "+91 94284 06333", "Trainer-2": "Gagan Patil", "Trainer-2 Contact": "+91 74989 84135"},
-        {"Department": "Commerce", "Module": "Enterprise", "SNo": 4, "Class": "III BCOM B", "Room No": "4608, 6TH FLOOR, BLOCK IV", "Schedule": ["Tuesday 8:00 AM to 9:00 AM", "Wednesday 8:00 AM to 9:00 AM"], "Trainer-1": "Kiran Kumar", "Trainer-1 Contact": "+91 70226 41150", "Trainer-2": "Shalini Sosa", "Trainer-2 Contact": "+91 8590653401"},
-        {"Department": "Commerce", "Module": "Enterprise", "SNo": 5, "Class": "III BCOM C", "Room No": "4609, 6TH FLOOR, BLOCK IV", "Schedule": ["Tuesday 9:30 AM to 10:30 AM", "Friday 10:30 AM to 11:30 AM"], "Trainer-1": "Radhika", "Trainer-1 Contact": "+91 82815 45644", "Trainer-2": "Meenu Hani", "Trainer-2 Contact": ""},
-        {"Department": "Commerce", "Module": "Enterprise", "SNo": 6, "Class": "III BCOM D", "Room No": "4610, 6TH FLOOR, BLOCK IV", "Schedule": ["Monday 11:30 AM to 12:30 AM", "Wednesday 8:00 AM to 9:00 AM"], "Trainer-1": "Aswin T Sidharthan", "Trainer-1 Contact": "+91 86061 26639", "Trainer-2": "Ratna Shiva", "Trainer-2 Contact": "+91 70612 66658"},
-        {"Department": "Commerce", "Module": "Enterprise", "SNo": 7, "Class": "III BCOM F", "Room No": "726, 2ND FLOOR, BLOCK II", "Schedule": ["Tuesday 8:00 AM to 9:00 AM", "Thursday 8:00 AM to 9:00 AM"], "Trainer-1": "Gadhiya Shreya", "Trainer-1 Contact": "+91 94284 06333", "Trainer-2": "Priyadarsh P", "Trainer-2 Contact": "+91 79945 93685"},
-        {"Department": "Commerce", "Module": "Enterprise", "SNo": 8, "Class": "III BCOM AT", "Room No": "4602, 6TH FLOOR, BLOCK IV", "Schedule": ["Wednesday 9:30 AM to 10:30 AM", "Thursday 11:30 AM to 12:30 PM"], "Trainer-1": "Anjana", "Trainer-1 Contact": "+91 83018 73780", "Trainer-2": "Nirupama L", "Trainer-2 Contact": "+91 78923 45943"},
-        {"Department": "Commerce", "Module": "Enterprise", "SNo": 9, "Class": "III BCOM AFA", "Room No": "4604, 6TH FLOOR, BLOCK IV", "Schedule": ["Wednesday 9:30 AM to 10:30 AM", "Thursday 11:30 AM to 12:30 PM"], "Trainer-1": "Aswin T Sidharthan", "Trainer-1 Contact": "+91 86061 26639", "Trainer-2": "Aleena", "Trainer-2 Contact": "+91 82818 36345"},
-        {"Department": "Commerce", "Module": "Enterprise", "SNo": 10, "Class": "III SEM BCOM SFH", "Room No": "4412, 4TH FLOOR, BLOCK IV", "Schedule": ["Thursday 11:30 AM to 12:30 PM", "Friday 10:30 AM to 11:30 AM"], "Trainer-1": "Sushmitha R", "Trainer-1 Contact": "+91 80981 46022", "Trainer-2": "Sumaya Kareem", "Trainer-2 Contact": "+91 6362 447 213"},
-        {"Department": "International Studies", "Module": "Essentials", "SNo": 1, "Class": "1 BAHP", "Room No": "523, Block 2, Ground floor", "Schedule": ["Tuesday 1:30 to 3:30 PM", "Friday 2:30 to 3:30 PM"], "Trainer-1": "Kavaskar", "Trainer-1 Contact": "+91 93847 65759", "Trainer-2": "Likitha Yadav G", "Trainer-2 Contact": "+91 93532 34434"},
-        {"Department": "International Studies", "Module": "Essentials", "SNo": 2, "Class": "5 HEP", "Room No": "712, Block II, 2nd Floor", "Schedule": ["Thursday 2:30 to 3:30 PM"], "Trainer-1": "Kalpana N", "Trainer-1 Contact": "+91 90362 22581", "Trainer-2": "Brito Jaison", "Trainer-2 Contact": "+91 6238 260 864"},
-        {"Department": "International Studies", "Module": "Essentials", "SNo": 3, "Class": "3BAHP", "Room No": "724, Block 2, 2nd floor", "Schedule": ["Tuesday 10:30 to 12:30 PM"], "Trainer-1": "Sushmitha R", "Trainer-1 Contact": "+91 80981 46022", "Trainer-2": "Nirupama L", "Trainer-2 Contact": "+91 78923 45943"},
-        {"Department": "International Studies", "Module": "Essentials", "SNo": 4, "Class": "1MAIS", "Room No": "613, Central block 6th floor", "Schedule": ["Wednesday 2:30 to 3:30 PM"], "Trainer-1": "Aswin T", "Trainer-1 Contact": "+91 86061 26639", "Trainer-2": "Nayana K Benny", "Trainer-2 Contact": "+91 82178 46549"},
-        {"Department": "International Studies", "Module": "Essentials", "SNo": 5, "Class": "3MAIS", "Room No": "612, Central block 6th floor", "Schedule": ["Tuesday 11:30 to 12:30 PM", "Friday 10:30 to 11:30 AM"], "Trainer-1": "Sujana", "Trainer-1 Contact": "+91 90007 90809", "Trainer-2": "Aswin T Sidharthan", "Trainer-2 Contact": "+91 86061 26639"},
-        {"Department": "Psychology - Central Campus", "Module": "Essentials", "SNo": 1, "Class": "1BA PENG", "Room No": "524, Ground Floor, Block 2", "Schedule": ["Monday 11:30-12:30", "Tuesday 2:30-3:30"], "Trainer-1": "Gadhiya Shreya", "Trainer-1 Contact": "+91 94284 06333", "Trainer-2": "Sumaya Kareem", "Trainer-2 Contact": "+91 6362 447 213"},
-        {"Department": "Psychology - Central Campus", "Module": "Essentials", "SNo": 2, "Class": "1BA PECO", "Room No": "527, Ground Floor, Block 2", "Schedule": ["Monday 2:30-3:30 PM", "Tuesday 2:30-3:30"], "Trainer-1": "Arunoth Symen", "Trainer-1 Contact": "+91 91504 18081", "Trainer-2": "Shreyans Jain", "Trainer-2 Contact": ""},
-        {"Department": "Psychology - Central Campus", "Module": "Essentials", "SNo": 3, "Class": "3PENG", "Room No": "605, Ground Floor, Block 2", "Schedule": ["Monday 10:30 - 11:30", "Tuesday 10:30-11:30"], "Trainer-1": "Jessica Shirley", "Trainer-1 Contact": "", "Trainer-2": "Aswin T Sidharthan", "Trainer-2 Contact": ""},
-        {"Department": "Psychology - Central Campus", "Module": "Essentials", "SNo": 4, "Class": "3PECO", "Room No": "505, Ground Floor, Block 2", "Schedule": ["Tuesday 10:30 - 11:30 AM", "Wednesday 10:30 - 11:30"], "Trainer-1": "Meenu Hani", "Trainer-1 Contact": "", "Trainer-2": "Sumaya Kareem", "Trainer-2 Contact": ""},
-        {"Department": "Education - Central Campus", "Module": "Essentials", "SNo": 1, "Class": "3BEd A", "Room No": "734, Block 2, 3rd Floor", "Schedule": ["Saturday 8 to 10 AM"], "Trainer-1": "NEHA SINGH", "Trainer-1 Contact": "neha.singh@res.christuniversity.in", "Trainer-2": "ANUPAMA B NAGARALE", "Trainer-2 Contact": "anupama.nagarale@christuniversity.in"},
-        {"Department": "Education - Central Campus", "Module": "Essentials", "SNo": 2, "Class": "3BEd B", "Room No": "732, Block 2, 3rd Floor", "Schedule": ["Saturday 8 to 10 AM"], "Trainer-1": "NEHA SINGH", "Trainer-1 Contact": "neha.singh@res.christuniversity.in", "Trainer-2": "ANUPAMA B NAGARALE", "Trainer-2 Contact": "anupama.nagarale@christuniversity.in"}
-    ]
+# Example Usage
+user_input = input("Say something to the AI: ")
+response = simple_response_system(user_input)
+print(response)
+    """, language="python")
+    st.markdown("""
+    This program simulates a simple interaction where the AI responds based on the user's input. The `simple_response_system` function checks the input and returns a corresponding response.
+    """)
 
-    # Group the schedules by Trainer-1 and Trainer-2
-    faculty_schedule = {}
-    for schedule in schedules:
-        for trainer in ["Trainer-1", "Trainer-2"]:
-            trainer_name = schedule[trainer]
-            contact = schedule[f"{trainer} Contact"]
-            if trainer_name not in faculty_schedule:
-                faculty_schedule[trainer_name] = {"Contact": contact, "Schedules": []}
-            faculty_schedule[trainer_name]["Schedules"].append(schedule)
+    st.subheader("AI in Action: Basic Data Handling")
+    st.code("""
+# Basic Data Handling with Pandas
+import pandas as pd
 
-    # Display the schedules faculty-wise
-    for faculty, info in faculty_schedule.items():
-        st.subheader(f"{faculty} ({info['Contact']})")
-        for schedule in info["Schedules"]:
-            st.write(f"**Class:** {schedule['Class']}")
-            st.write(f"**Room No:** {schedule['Room No']}")
-            st.write(f"**Schedule:**")
-            for time in schedule["Schedule"]:
-                st.write(f"- {time}")
-            st.write(f"**Module:** {schedule['Module']} ({schedule['Department']} Department)")
-            st.write("---")
+# Create a simple DataFrame
+data = {
+    "Name": ["Alice", "Bob", "Charlie"],
+    "Age": [24, 30, 22],
+    "Score": [88, 92, 85]
+}
 
+df = pd.DataFrame(data)
+
+# Display DataFrame
+print(df)
+
+# Example: Filter students with a score above 85
+high_scorers = df[df["Score"] > 85]
+print(high_scorers)
+    """, language="python")
+    st.markdown("""
+    This example demonstrates how to create and manipulate data using the Pandas library. The code creates a DataFrame with student names, ages, and scores, and then filters out students with scores above 85.
+    """)
+
+    st.subheader("Simple AI Example: Linear Regression with Scikit-learn")
+    st.code("""
+from sklearn.linear_model import LinearRegression
+import numpy as np
+
+# Example data
+X = np.array([[1], [2], [3], [4], [5]])
+y = np.array([1, 2, 3, 4, 5])
+
+# Create and train the model
+model = LinearRegression()
+model.fit(X, y)
+
+# Predict
+predictions = model.predict(X)
+print("Predictions:", predictions)
+    """, language="python")
+    st.markdown("""
+    This basic AI example uses Scikit-learn's `LinearRegression` model to fit a simple dataset. The model is trained on the data and then used to make predictions. This example helps students understand how a basic AI model works.
+    """)
+def attendance_tab():
+    st.title("Extraordinary Attendance Entry")
+    attendance_type = st.selectbox("Type of Attendance", ["Regular", "Extraordinary"])
+    date = st.date_input("Date")
+    teacher_code = "4116"
+    class_name = st.selectbox("Class", [
+        "I BBA FIB A", "I BBA FIB B", "SBA A", "SBA B", "BBA Tourism", 
+        "BBA F&E", "1 BCom FI A", "1 BCom FI B", "1 BCOM A", "1 BCOM B", 
+        "1 BCOM C", "1 BCOM D", "1 BCOM F", "1 BCOM AT", "1 BCOM AFA", 
+        "1 BCOM SFH"
+    ])
+    time = st.time_input("Class Time")
+    subject_name = st.selectbox("Subject Name", ["cs192-Fundamentals of Programming", "cs194 - AI Essentials"])
+    start_reg_no = st.text_input("Starting Register Number")
+    absentees_list = st.text_area("Absentees List (comma-separated)")
+    
+    if st.button("Generate Attendance Slip"):
+        slip = generate_attendance_slip(attendance_type, date, teacher_code, class_name, time, subject_name, start_reg_no, absentees_list)
+        st.success("Attendance slip generated.")
+        st.download_button("Download Slip", slip, file_name="attendance_slip.pdf")
 
 if __name__ == "__main__":
     main()
