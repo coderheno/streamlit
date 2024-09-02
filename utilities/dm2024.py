@@ -596,11 +596,10 @@ def attendance_tab():
     subject_name = st.selectbox("Subject Name", ["cs192-Fundamentals of Programming", "cs194 - AI Essentials"])
     start_reg_no = st.text_input("Starting Register Number")
     absentees_list = st.text_area("Absentees List (comma-separated)")
-    
+  
     if st.button("Generate Attendance Slip"):
         slip = generate_attendance_slip(attendance_type, date, teacher_code, class_name, time, subject_name, start_reg_no, absentees_list)
         st.success("Attendance slip generated.")
         st.download_button("Download Slip", slip, file_name="attendance_slip.pdf")
-
 if __name__ == "__main__":
     main()
