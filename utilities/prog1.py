@@ -263,6 +263,7 @@ def main():
         "Useful Links"
     ])
 
+
     if tab == "Digital Mission 2024 Program":
         digital_mission_2024_program()
     elif tab == "Newly Added Courses and Syllabus":
