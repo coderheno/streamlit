@@ -146,6 +146,62 @@ def defining_functions():
     # city: New York
     ```
     """)
+# Function for Recursive Functions
+def recursive_functions():
+    st.subheader("Recursive Functions")
+    st.write("""
+    Recursive functions are functions that call themselves in order to solve a problem. Each recursive call should bring the problem closer to a base case, which will stop the recursion.
+
+    **Basic Recursive Function (Factorial Example):**
+    ```python
+    # Recursive function to calculate factorial of a number
+    def factorial(n):
+        if n == 1:
+            return 1
+        else:
+            return n * factorial(n - 1)
+
+    print(factorial(5))  # Output: 120
+    ```
+
+    **Base Case and Recursive Case:**
+    - The **base case** prevents the function from calling itself indefinitely.
+    - The **recursive case** makes the function call itself with a simpler or smaller input.
+
+    **Example 2: Recursive Sum of a List:**
+    ```python
+    # Recursive function to sum all elements in a list
+    def recursive_sum(lst):
+        if not lst:
+            return 0
+        else:
+            return lst[0] + recursive_sum(lst[1:])
+
+    print(recursive_sum([1, 2, 3, 4, 5]))  # Output: 15
+    ```
+
+    ### Difference between Functions and Recursive Functions:
+    | Normal Functions                    | Recursive Functions                              |
+    |-------------------------------------|--------------------------------------------------|
+    | Perform a task once or repeatedly   | Call themselves to break the task into subproblems|
+    | Do not have base cases              | Have a base case to stop recursion               |
+    | Usually faster to compute           | Can be slower due to repeated function calls     |
+    | Easier to understand for simple tasks| Useful for problems that naturally have subproblems|
+
+    **Example: Factorial using Normal Function:**
+    ```python
+    def factorial_iterative(n):
+        result = 1
+        for i in range(1, n + 1):
+            result *= i
+        return result
+
+    print(factorial_iterative(5))  # Output: 120
+    ```
+
+    - The iterative (normal) version uses a loop to compute the result.
+    - The recursive version breaks the problem into smaller parts by calling itself.
+    """)
 
 # Function for Instructional Activity: Code Enrichment
 def code_enrichment():
@@ -274,7 +330,7 @@ def main():
     st.title("Python Unit-4 Concepts and Activities")
     
     # Create tabs
-    tabs = st.tabs(["List Comprehensions", "Dict Comprehensions", "Set Comprehensions", "Functions", "Instructional Activity", "Participatory Learning"])
+    tabs = st.tabs(["List Comprehensions", "Dict Comprehensions", "Set Comprehensions", "Functions","Recursive Functions", "Instructional Activity", "Participatory Learning"])
     
     with tabs[0]:
         list_comprehensions()
@@ -287,13 +343,15 @@ def main():
     
     with tabs[3]:
         defining_functions()
-    
     with tabs[4]:
+        recursive_functions()
+    with tabs[5]:
         code_enrichment()
     
-    with tabs[5]:
+    with tabs[6]:
         role_play()
         case_study()
+    
 
 if __name__ == "__main__":
     main()
