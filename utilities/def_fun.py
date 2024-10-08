@@ -1,7 +1,25 @@
 import streamlit as st
+from functools import reduce
 
 # Set page configuration
 st.set_page_config(page_title="Unit 5 - Functional Programming ", page_icon=":computer:")
+
+# Custom module example - a simple math module to import later
+def math_module():
+    st.code("""
+    # File: mymathmodule.py
+    def add(x, y):
+        return x + y
+
+    def subtract(x, y):
+        return x - y
+
+    def multiply(x, y):
+        return x * y
+
+    def divide(x, y):
+        return x / y if y != 0 else "Division by zero!"
+    """, language="python")
 
 # Page Title and Introduction
 st.title("Functional Programming - Unit 5")
@@ -10,7 +28,7 @@ st.write("This tool is designed to help first-time learners understand key conce
 
 # Navigation Bar
 st.sidebar.title("Navigation")
-section = st.sidebar.radio("Go to", ["Lecture", "Activities", "Programs", "Calculator", "Additional Resources"])
+section = st.sidebar.radio("Go to", ["Lecture", "Activities", "Programs", "Calculator", "Domain-Based Calculator", "Additional Resources"])
 
 # Lecture Section
 if section == "Lecture":
@@ -174,6 +192,60 @@ elif section == "Calculator":
     # Display the result
     st.write(f"The result of {operation.lower()}ing {num1} and {num2} is: **{result}**")
 
+# Domain-Based Calculator Section
+elif section == "Domain-Based Calculator":
+    st.header("Domain-Based Calculator Implementation")
+
+    st.subheader("Step 1: Use Lambda Functions")
+    st.write("""
+    We'll create basic arithmetic operations using lambda functions for addition, subtraction, multiplication, and division.
+    """)
+
+    st.code("""
+    add = lambda x, y: x + y
+    subtract = lambda x, y: x - y
+    multiply = lambda x, y: x * y
+    divide = lambda x, y: x / y if y != 0 else "Division by zero!"
+    """, language="python")
+
+    st.subheader("Step 2: Use map(), filter(), and reduce()")
+    st.write("""
+    We'll demonstrate the use of `map()`, `filter()`, and `reduce()` in our domain-based calculator.
+    """)
+
+    st.code("""
+    # Using map to square all numbers
+    numbers = [1, 2, 3, 4]
+    squared_numbers = list(map(lambda x: x**2, numbers))
+
+    # Using filter to find even numbers
+    even_numbers = list(filter(lambda x: x % 2 == 0, numbers))
+
+    # Using reduce to multiply all numbers together
+    product_of_numbers = reduce(lambda x, y: x * y, numbers)
+
+    print(squared_numbers)  # Output: [1, 4, 9, 16]
+    print(even_numbers)  # Output: [2, 4]
+    print(product_of_numbers)  # Output: 24
+    """, language="python")
+
+    st.subheader("Step 3: Implement a Custom Module")
+    st.write("""
+    Create a separate Python file as a module, e.g., `mymathmodule.py`, that contains custom functions for arithmetic operations. This can then be imported and used within the main calculator program.
+    """)
+
+    math_module()
+
+    st.write("""
+    To import and use this module in the main program:
+    ```python
+    import mymathmodule
+
+    result = mymathmodule.add(10, 5)
+    print(result)  # Output: 15
+    ```
+    """)
+
 # Additional Resources Section
 elif section == "Additional Resources":
     st.header("Additional Learning Resources")
@@ -186,4 +258,3 @@ elif section == "Additional Resources":
 # Footer
 st.markdown("---")
 st.markdown("Developed as an ICT Tool for BCA263-3 Introduction to Python course.")
-
