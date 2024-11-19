@@ -7,7 +7,7 @@ def web_designing_course_plan():
     mse_end = datetime(2025, 2, 8)
 
     # Tabs for better interaction
-    tabs = st.tabs(["Lectures", "Practicals", "Tools & Resources", "Activities & Submission"])
+    tabs = st.tabs(["Lectures", "Practicals", "Tools & Resources", "Activities & Submissions"])
 
     # Lectures Tab
     with tabs[0]:
@@ -70,19 +70,43 @@ def web_designing_course_plan():
           - Steven M. Schafer, HTML, XHTML and CSS Bible, 5th Edition, Wiley-Eastern Publishing Inc., 2011
         """)
 
-    # Activities & Submission Tab
+    # Activities & Submissions Tab
     with tabs[3]:
-        st.header("Activities, Submission & Interaction")
+        st.header("Activities, Fun Submission & Interaction")
         
-        # Ice-breaking activity
-        st.subheader("Ice-Breaking Group Activity")
-        st.write("**Activity:** Design a creative pitch for a fun web-based project idea!")
+        # Choice-Based Activity
+        st.subheader("Choice-Based Activity: Fun or Practical!")
+        st.write("**Students can choose one of the following activities for submission:**")
+
         st.markdown("""
-        - **Goal:** Collaborate in small groups (3-4 members) to brainstorm and pitch an innovative web-based project.
-        - **Submission (Initial Abstract):**
-          - Include your group's project idea title, the problem it solves, and a brief implementation plan.
-        - **Deadline:** Submit your abstract in Google Classroom by the end of the first week.
-        - **Follow-up Activity:** The best ideas will be showcased for peer voting and further developed during lab sessions.
+        ### Option 1: Creative Fun Activity
+        - **Activity:** Create a fun meme or a short video based on Unit 1 topics!
+        - **Topics:** 
+          - Introduction to Internet
+          - Internet Service Providers
+          - TCP/IP Protocol Suite
+          - Bandwidth
+          - World Wide Web (WWW)
+          - Web Browsers
+          - Search Engines and SEO
+        - **Guidelines:**
+          - Use tools like Canva or Meme Generators for memes.
+          - Videos should be 1 minute max, using animations or enactments.
+          - **Submission:** Upload to Google Classroom.
+          - **Deadline:** End of Week 1.
+
+        ### Option 2: Group Project Pitch
+        - **Activity:** Submit a group project pitch for a web-based idea.
+        - **Guidelines:**
+          - Form groups of 3-4 members.
+          - Create an abstract that includes:
+            - Project title.
+            - Problem it solves.
+            - Brief implementation plan.
+          - **Submission:** Upload abstract to Google Classroom.
+          - **Deadline:** End of Week 1.
+
+        **Objective:** Engage with course concepts in an interactive and collaborative way!
         """)
 
         # Class invite link and code
@@ -90,7 +114,7 @@ def web_designing_course_plan():
         st.write("**Invite Link:** [Google Classroom](https://classroom.google.com/c/NzMyNDY5NDQ3MTMx?cjc=z2d5nfm)")
         st.write("**Class Code:** z2d5nfm")
 
-    st.success("Course plan updated with revised practical dates and group-based ice-breaking activity!")
+    st.success("COM661B - Web Designing , Dr VIJAY ARPUTHARAJ J and Dr MOHANA PRIYA T")
 
 # To execute the function
 web_designing_course_plan()
