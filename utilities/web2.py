@@ -10,6 +10,7 @@ def dot_net_course_plan():
     **Class**: 4 BCA A & B  
     **Hours**: 75 (3 + 2 hours per week)  
     **Faculty**: Dr. Vijay Arputharaj J, Dr. Smitha Vinod 
+                
     **Contact**:  
     - Dr. Vijay: 9677188654, vijay.arputharaj@christuniversity.in
     - Dr. Smitha Vinod: 9886495919, smitha.vinod@christuniversity.in  
