@@ -3,16 +3,18 @@ from datetime import datetime
 
 def dot_net_course_plan():
     # Course Information
-    st.title("BCA 301-4: Dot Net Course Plan")
+    st.title("BCA 301-4: Dot Net Tentative Plan")
     st.subheader("Course Details")
     st.markdown("""
     **Semester**: IV  
     **Class**: 4 BCA A & B  
     **Hours**: 75 (3 + 2 hours per week)  
-    **Faculty**: Dr. Smitha Vinod, Dr. Vijay Arputharaj J  
+    **Faculty**: Dr. Vijay Arputharaj J, Dr. Smitha Vinod 
     **Contact**:  
-    - Dr. Smitha: 9886495919, smitha.vinod@christuniversity.in  
     - Dr. Vijay: 9677188654, vijay.arputharaj@christuniversity.in
+    - Dr. Smitha Vinod: 9886495919, smitha.vinod@christuniversity.in  
+
+    **Note:** This is a tentative plan and may be subject to changes.
     """)
 
     # Tabs for interaction
@@ -64,6 +66,9 @@ def dot_net_course_plan():
         - **Books**:  
           - Andrew Troelsen, "Pro C# 7 with .NET and .NET Core", 8th Edition  
           - Mark Michaelis, "Essential C#", Addison-Wesley  
+
+        **Installation Guidelines**:  
+        - Download Visual Studio from [Visual Studio Free Developer Offers](https://visualstudio.microsoft.com/free-developer-offers/)
         """)
 
     # Assessments Tab
@@ -88,22 +93,55 @@ def dot_net_course_plan():
     with tabs[4]:
         st.header("Activities and Engagement")
         st.markdown("""
-        ### Coding Challenges
-        - **Objective**: Enhance debugging and problem-solving skills.  
-        - **Topics**: Regular Expressions, Exception Handling.
-
-        ### Group Projects
-        - **Objective**: Develop practical applications and collaborative skills.  
-        - **Deliverable**: Functional application with detailed documentation.
-
-        ### Workshops
-        - **Objective**: Learn database interaction and .exe creation through hands-on sessions.  
-        - **Dates**: Week 14.
-
-        **Submission:** Upload projects and assignments to Google Classroom.
+        ### Project Domain Activity
+        **Objective**: Encourage students to develop practical applications while addressing real-world problems.  
+        
+        **Suggested Domains**:
+        - **Community Services**:
+            - NGO Management System: Application to manage volunteer activities, events, and fundraisers.
+            - Blood Donation System: Real-time database for blood bank availability and donor registration.
+        - **Education**:
+            - Online Quiz System: Create a database-backed system for quizzes with different subjects.
+            - Student Progress Tracker: Application to monitor and report academic performance.
+        - **Healthcare**:
+            - Appointment Scheduling System: Simplify booking appointments with real-time slots.
+            - Prescription Tracker: Help patients keep track of prescribed medications.
+        - **Environment & SDGs**:
+            - Carbon Footprint Calculator: Allow users to assess their environmental impact.
+            - Waste Management System: Facilitate better waste segregation and recycling efforts.
+        - **Small Businesses**:
+            - Inventory Management System: Track stock, suppliers, and orders for small shops.
+            - Food Ordering System: Design a simple system for online orders with admin control.
+        
+        **Submission Guidelines**:
+        - Deliverable: Functional application with detailed documentation.
+        - Timeline: Projects must be finalized and submitted by **Week 16**.
+        
+        ### Fun Group Activity: "Code Quest: Calculator Showdown!"
+        - **Objective**: Extend calculator functionality while competing in fun challenges.  
+        - **Setup**:
+            1. Form 4–5 teams of 3–5 students each.
+            2. Provide a basic calculator starter code.
+        - **Tasks**:
+            - Add Features: Expand functionality with at least 2 new operations.
+            - Improve UI: Make the calculator visually appealing and interactive.
+            - Handle Errors: Implement error handling for invalid inputs.
+        - **Challenges**:
+            - **Button Bonanza**: Add a special button like "Clear All" or "Calculate Squares".
+            - **Math Madness**: Use improved calculators to answer random math questions.
+            - **Creative Spark**: Rename the calculator app and pitch its features.
+        - **Scoring**:
+            - Basic Functionality: 10 points
+            - New Features Added: 10 points
+            - UI Improvements: 5 points
+            - Error Handling: 5 points
+            - Creative App Name: 5 points
+            - Team Pitch Presentation: 5 points
+        
+        **Submission**: Upload projects and assignments to Google Classroom.
         """)
-        st.write("**Google Classroom Invite Link:** [Join Class](https://classroom.google.com/c/NzMyNDY5NDQ3MTMx?cjc=z2d5nfm)")
-        st.write("**Class Code:** z2d5nfm")
+        st.write("**Google Classroom Invite Link:** [Join Class](https://classroom.google.com/c/NzM0NjExNzUyMTQ1?cjc=j6y7j6v)")
+        st.write("**Class Code:** j6y7j6v")
 
     st.success("Course Plan for Dot Net - Semester IV, Dr. Vijay & Dr. Smitha")
 
