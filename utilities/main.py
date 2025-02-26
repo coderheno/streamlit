@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import random
+import time
 
 def main():
     st.set_page_config(page_title="Managing Resources for Business Analytics", layout="wide")
@@ -17,22 +18,30 @@ def main():
     
     tab1, tab2 = st.tabs(["Session Content", "Participant Contributions"])
 
+    if "public_responses" not in st.session_state:
+        st.session_state["public_responses"] = []
+    
     with tab1:
         if choice == "Introduction":
             st.header("🎯 Introduction & Icebreaker")
             st.write("🤣 *Funny Business Analytics Story:* Once, a data analyst spent weeks cleaning data, only to realize they had been analyzing last year’s sales instead of the current one. Moral of the story? Always check your dataset first! 😆")
             st.write("💡 *What’s Your BA Challenge?* - Share a key challenge in managing BA resources.")
             user_input = st.text_area("Enter your challenge here:")
-            st.subheader("🌟 Name Generator")
+            
+            st.subheader("🌟 Fun Name Generator")
             fav_food = st.text_input("Your Favorite Food:")
             first_name = st.text_input("Your First Name:")
-            if st.button("Make Public"):
+            
+            if st.button("Generate Fun Name"):
                 fun_name = f"{fav_food} {first_name}"
                 st.session_state["user_name"] = fun_name
                 st.success(f"Your new fun name is: {fun_name} 🎉")
-                formatted_input = f"{user_input} - ({st.session_state.get('user_name', 'Anonymous')})"
-                st.session_state.setdefault("public_responses", []).append(formatted_input)
             
+            if st.button("Make Public"):
+                timestamp = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+                formatted_input = f"{timestamp} - {user_input} - ({st.session_state.get('user_name', 'Anonymous')})"
+                st.session_state["public_responses"].append(formatted_input)
+    
         elif choice == "Session Breakdown & Activities":
             st.header("📝 Session Breakdown")
             session_data = pd.DataFrame({
@@ -52,9 +61,12 @@ def main():
     
     with tab2:
         st.header("🌍 Public Contributions")
-        if "public_responses" in st.session_state:
-            for response in st.session_state["public_responses"]:
+        if st.session_state["public_responses"]:
+            sorted_responses = sorted(st.session_state["public_responses"], reverse=True)
+            for response in sorted_responses:
                 st.write(f"💬 {response}")
+        else:
+            st.write("No contributions yet. Be the first to share!")
 
 if __name__ == "__main__":
     main()
