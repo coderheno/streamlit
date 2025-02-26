@@ -23,14 +23,13 @@ def main():
             st.write("🤣 *Funny Business Analytics Story:* Once, a data analyst spent weeks cleaning data, only to realize they had been analyzing last year’s sales instead of the current one. Moral of the story? Always check your dataset first! 😆")
             st.write("💡 *What’s Your BA Challenge?* - Share a key challenge in managing BA resources.")
             user_input = st.text_area("Enter your challenge here:")
-            st.subheader("🌟 Fun Name Generator")
+            st.subheader("🌟 Name Generator")
             fav_food = st.text_input("Your Favorite Food:")
             first_name = st.text_input("Your First Name:")
-            if st.button("Generate Fun Name"):
+            if st.button("Make Public"):
                 fun_name = f"{fav_food} {first_name}"
                 st.session_state["user_name"] = fun_name
                 st.success(f"Your new fun name is: {fun_name} 🎉")
-            if st.button("Make Public"):
                 formatted_input = f"{user_input} - ({st.session_state.get('user_name', 'Anonymous')})"
                 st.session_state.setdefault("public_responses", []).append(formatted_input)
             
