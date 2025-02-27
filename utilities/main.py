@@ -89,6 +89,49 @@ def main():
                 st.session_state.setdefault("public_responses", []).append(user_input)
         elif choice == "Lecture Notes & Case Studies":
             st.header("📚 Lecture Notes & Case Studies")
+            
+            st.write("## What Are Business Analytics?")
+            st.write("### Chapter Objectives:")
+            st.markdown("- Define business analytics.")
+            st.markdown("- Explain the relationship of analytics and business intelligence to business analytics.")
+            st.markdown("- Describe the three steps of the business analytics process.")
+            st.markdown("- Describe four data classification measurement scales.")
+            st.markdown("- Explain the relationship of the business analytics process with the organization decision-making process.")
+        
+            st.write("### 1.1 Terminology")
+            st.write("Business analytics begins with data sets or databases that store information. As these grow, technologies like cloud computing and data warehousing store and manage this information efficiently.")
+            st.write("**Big Data vs. Little Data:** Big data refers to vast and complex data sets, while little data focuses on smaller, business-specific insights.")
+        
+            st.write("### 1.2 Types of Analytics")
+            st.table(pd.DataFrame({
+            "Type of Analytics": ["Descriptive", "Predictive", "Prescriptive"],
+            "Definition": [
+                "Describes what is contained in a data set using basic statistical methods.",
+                "Uses advanced statistical, software, or operations research methods to identify patterns and make forecasts.",
+                "Uses decision science techniques to determine optimal actions and resource allocation."
+            ],
+            "Example": [
+                "A bar chart of customer ages to target advertisements.",
+                "A regression model predicting how age, weight, and exercise impact diet food sales.",
+                "An optimization model allocating a department store’s advertising budget optimally."
+            ]
+            }))
+        
+            st.write("### 1.3 Business Analytics Process")
+            st.write("Business analytics follows a sequential process:")
+            st.markdown("1. **Descriptive Analytics** - Identifies past trends and summarizes data.")
+            st.markdown("2. **Predictive Analytics** - Uses historical data to predict future trends.")
+            st.markdown("3. **Prescriptive Analytics** - Uses models to determine the best possible decisions.")
+        
+            st.write("### 1.4 Relationship Between BA & Decision-Making")
+            st.write("Business analytics supports organizational decision-making by providing data-driven insights, helping businesses identify opportunities and allocate resources efficiently.")
+        
+            st.write("### Case Studies")
+            st.markdown("**Infosys** - Implemented structured BA to optimize IT service management.")
+            st.markdown("**Flipkart** - Used hybrid BA models for decision-making efficiency.")
+            st.markdown("**HDFC Bank** - Leveraged BA for data governance and regulatory compliance.")
+            st.markdown("**Tata Motors** - Successfully transitioned to cloud-based BA with minimal disruption.")
+
             st.write("### Managing BA Personnel, Data, and Technology")
             st.write("Business Analytics personnel include Data Analysts, Data Scientists, Business Intelligence Experts, and IT specialists who extract insights from data to drive business decisions.")
             st.write("**Case Study:** Infosys implemented a structured BA team to optimize IT service management.")
