@@ -1,6 +1,5 @@
 import streamlit as st
 import pandas as pd
-
 def python_streamlit_ba():
     st.title("🚀 Why Include Python and Streamlit in Business Analytics?")
     
