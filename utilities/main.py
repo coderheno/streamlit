@@ -104,7 +104,7 @@ def main():
         
             st.write("### 1.2 Types of Analytics")
             st.table(pd.DataFrame({
-            "Type of Analytics": ["Descriptive", "Predictive", "Prescriptive"],
+            "Type of Analytics": ["Desc", "Pred", "Pres"],
             "Definition": [
                 "Describes what is contained in a data set using basic statistical methods.",
                 "Uses advanced statistical, software, or operations research methods to identify patterns and make forecasts.",
