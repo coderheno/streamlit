@@ -40,49 +40,44 @@ def main():
                 formatted_input = f"{timestamp} - {user_input} - ({st.session_state.get('user_name', 'Anonymous')})"
                 st.session_state["public_responses"].append(formatted_input)
     
-        elif choice == "Managing BA Personnel, Data, and Technology":
-            st.header("👥 Role-Play: The BA Team Challenge")
-            st.markdown("Participants take roles (Data Analyst, IT Manager, Business Leader) and discuss resource conflicts.")
-            st.markdown("**Key Discussion Points:**")
-            st.write("- Aligning technical and business needs")
-            st.write("- Balancing security with accessibility")
-            st.write("- Budget constraints and technology investment")
-            user_input = st.text_area("Your Thoughts:")
-            if st.button("Make Public"):
-                st.session_state.setdefault("public_responses", []).append(user_input)
+        elif choice == "Lecture Notes & Case Studies":
+            st.header("📚 Lecture Notes & Case Studies")
+            st.write("### Managing BA Personnel, Data, and Technology")
+            st.write("Business Analytics personnel include Data Analysts, Data Scientists, Business Intelligence Experts, and IT specialists who extract insights from data to drive business decisions.")
+            st.write("**Case Study:** Infosys implemented a structured BA team to optimize IT service management.")
+            
+            st.write("### Organizational Structures Aligning BA")
+            st.write("Organizations can have different BA team structures: Centralized, Decentralized, and Hybrid.")
+            st.write("**Case Study:** Flipkart adopted a hybrid BA model to balance centralized decision-making with departmental autonomy.")
+            
+            st.write("### Managing Information Policy & Data Quality")
+            st.write("Good data governance ensures compliance, security, and data quality.")
+            st.write("**Case Study:** HDFC Bank’s data governance policies ensure data integrity and regulatory compliance.")
+            
+            st.write("### Managing Change in BA")
+            st.write("Change management in BA requires clear communication, training, and stakeholder engagement.")
+            st.write("**Case Study:** Tata Motors successfully transitioned to cloud-based BA despite initial resistance.")
     
-        elif choice == "Organizational Structures Aligning BA":
-            st.header("🏢 Case Study: Which Structure Works Best?")
-            st.write("Compare centralized, decentralized, and hybrid BA models.")
-            user_input = st.text_area("Your Analysis:")
-            if st.button("Make Public"):
-                st.session_state.setdefault("public_responses", []).append(user_input)
-    
-        elif choice == "Managing Information Policy & Data Quality":
-            st.header("🛠️ Hands-on Data Quality Check")
-            st.write("Analyze a dataset with quality issues and propose fixes.")
-            user_input = st.text_area("Your Observations:")
-            if st.button("Make Public"):
-                st.session_state.setdefault("public_responses", []).append(user_input)
-    
-        elif choice == "Managing Change in BA":
-            st.header("🔄 Change Resistance Simulation")
-            st.write("Brainstorm reasons for resistance to BA tools and strategies to overcome it.")
-            user_input = st.text_area("Your Strategies:")
-            if st.button("Make Public"):
-                st.session_state.setdefault("public_responses", []).append(user_input)
-    
-        elif choice == "Action Plan & Best Practices":
-            st.header("✅ Group Brainstorm: How to Optimize BA Resources?")
-            user_input = st.text_area("Your Key Takeaways:")
-            if st.button("Make Public"):
-                st.session_state.setdefault("public_responses", []).append(user_input)
-    
-        elif choice == "Wrap-Up & Q&A":
-            st.header("📌 Reflection & Key Takeaways")
-            user_input = st.text_area("Your Learning:")
-            if st.button("Make Public"):
-                st.session_state.setdefault("public_responses", []).append(user_input)
+        elif choice == "Student Activity Group Generator":
+            st.header("🎲 Student Activity Group Generator")
+            
+            uploaded_file = st.file_uploader("📂 Upload student list (CSV/Excel)", type=["csv", "xlsx"])
+            num_groups = st.number_input("How many groups do you want?", min_value=2, step=1)
+            
+            if uploaded_file:
+                df = pd.read_excel(uploaded_file) if uploaded_file.name.endswith("xlsx") else pd.read_csv(uploaded_file)
+                df = df.sample(frac=1).reset_index(drop=True)  # Shuffle students
+                groups = [df.iloc[i::num_groups] for i in range(num_groups)]
+                
+                st.write("### Generated Groups:")
+                for i, group in enumerate(groups):
+                    st.write(f"#### Group {i+1}: ")
+                    st.dataframe(group)
+            
+            if st.button("Download Group Format"):
+                format_df = pd.DataFrame({"S.No": [], "Student Name": []})
+                format_df.to_csv("group_format.csv", index=False)
+                st.download_button(label="Download Template", data=format_df.to_csv(index=False), file_name="group_format.csv", mime="text/csv")
     
     with tab2:
         st.header("🌍 Public Contributions")
