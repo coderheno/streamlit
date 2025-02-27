@@ -21,7 +21,7 @@ def python_streamlit_ba():
     """)
 
     # Business Analytics Tools Table
-    st.subheader("📊 Updated List of Business Analytics Tools")
+    st.subheader("📊 List of Business Analytics Tools")
     data = {
         "Category": [
             "Spreadsheet-Based Tools", "Statistical & Predictive Analytics",
