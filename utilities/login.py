@@ -1,95 +1,67 @@
 import streamlit as st
 import pandas as pd
-import gspread
-from oauth2client.service_account import ServiceAccountCredentials
-import time
 
-# Google Sheets API setup
-scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/spreadsheets",
-         "https://www.googleapis.com/auth/drive.file", "https://www.googleapis.com/auth/drive"]
+def python_streamlit_ba():
+    st.title("🚀 Why Include Python and Streamlit in Business Analytics?")
+    
+    # Introduction
+    st.subheader("Why Include Python and Streamlit?")
+    st.write("""
+    Python is one of the most widely used languages in business analytics due to its extensive libraries:
+    - **Data Cleaning & Preprocessing** (Pandas, NumPy)
+    - **Statistical Analysis & Hypothesis Testing** (Statsmodels)
+    - **Machine Learning & Predictive Analytics** (Scikit-learn, TensorFlow)
+    - **Data Visualization** (Matplotlib, Seaborn)
+    - **Automation of Repetitive Tasks** (Scripting & APIs)
+    
+    Streamlit is an open-source framework that helps create interactive business applications quickly:
+    - **Rapid Deployment** of business dashboards
+    - **Interactive Visualizations** for real-time decision-making
+    - **Seamless ML Integration** for predictive analytics
+    """)
 
-creds = ServiceAccountCredentials.from_json_keyfile_name("credentials.json", scope)
-client = gspread.authorize(creds)
+    # Business Analytics Tools Table
+    st.subheader("📊 Updated List of Business Analytics Tools")
+    data = {
+        "Category": [
+            "Spreadsheet-Based Tools", "Statistical & Predictive Analytics",
+            "Data Mining & Machine Learning", "Data Visualization",
+            "Big Data & Cloud Analytics", "Programming & Development"
+        ],
+        "Tools": [
+            "MS Excel, Google Sheets",
+            "SPSS, SAS, R, MATLAB, Stata, Salford Systems",
+            "Python (Pandas, Scikit-learn, TensorFlow), KXEN, RapidMiner",
+            "Tableau, Power BI, Streamlit, Python (Matplotlib, Seaborn)",
+            "Apache Spark, Google BigQuery, AWS SageMaker",
+            "Python, R, Julia, SQL"
+        ]
+    }
+    df = pd.DataFrame(data)
+    st.dataframe(df, use_container_width=True)
 
-# Open Google Sheet (Replace with your Google Sheet name)
-sheet = client.open("BA_Responses").sheet1
-
-def save_response_to_sheets(response):
-    """Save response to Google Sheets"""
-    timestamp = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
-    sheet.append_row([timestamp, response])
-
-def fetch_responses_from_sheets():
-    """Fetch all responses from Google Sheets"""
-    records = sheet.get_all_values()
-    return records[1:]  # Skip header row
-
-def main():
-    st.set_page_config(page_title="Managing Resources for Business Analytics", layout="wide")
-    st.title("📊 Managing Resources for Business Analytics")
-    st.markdown("### 🚀 An Interactive Learning Session")
-
-    st.sidebar.title("📌 Navigation")
-    options = [
-        "Introduction", "Session Breakdown & Activities", "Managing BA Personnel, Data, and Technology",
-        "Organizational Structures Aligning BA", "Managing Information Policy & Data Quality",
-        "Managing Change in BA", "Action Plan & Best Practices", "Wrap-Up & Q&A", "Lecture Notes & Case Studies",
-        "Student Activity Group Generator"
+    # Advantages of Python & Streamlit
+    st.subheader("🚀 Advantages of Python and Streamlit in Business Analytics")
+    advantages = [
+        "✅ **Open-source & Cost-effective** – Unlike SAS & SPSS, Python & Streamlit are free.",
+        "✅ **Scalability** – Python efficiently handles large datasets, unlike Excel.",
+        "✅ **Real-time Analytics** – Streamlit enables interactive dashboards for business insights.",
+        "✅ **AI/ML Integration** – Python supports ML models, unlike traditional tools."
     ]
-    choice = st.sidebar.radio("Go to Section", options)
-    
-    tab1, tab2 = st.tabs(["Session Content", "Participant Contributions"])
+    for adv in advantages:
+        st.markdown(adv)
 
-    with tab1:
-        if choice == "Introduction":
-            st.header("🎯 Introduction & Icebreaker")
-            st.write("🤣 *Funny Business Analytics Story:* Once, a data analyst spent weeks cleaning data, only to realize they had been analyzing last year’s sales instead of the current one. Always check your dataset first! 😆")
-            st.write("💡 *What’s Your BA Challenge?* - Share a key challenge in managing BA resources.")
-            
-            user_input = st.text_area("Enter your challenge here:")
-            
-            st.subheader("🌟 Fun Name Generator")
-            fav_food = st.text_input("Your Favorite Food:")
-            first_name = st.text_input("Your First Name:")
+    # Optional Comparison Table Prompt
+    st.write("Would you like a **comparison table** showing how Python and Streamlit compare to traditional tools? 🚀")
+    if st.button("Generate Comparison"):
+        comparison_data = {
+            "Feature": ["Cost", "Scalability", "AI/ML Support", "Real-Time Dashboards", "Ease of Use"],
+            "Python & Streamlit": ["Free & Open Source", "High", "Yes", "Yes", "User-friendly"],
+            "Traditional Tools (Excel, SPSS, SAS)": ["Paid", "Limited", "Limited", "No", "Requires Training"]
+        }
+        comparison_df = pd.DataFrame(comparison_data)
+        st.table(comparison_df)
 
-            if st.button("Generate Fun Name"):
-                fun_name = f"{fav_food} {first_name}"
-                st.session_state["user_name"] = fun_name
-                st.success(f"Your new fun name is: {fun_name} 🎉")
-
-            if st.button("Make Public"):
-                fun_name = st.session_state.get("user_name", "Anonymous")
-                formatted_input = f"{fun_name}: {user_input}"
-                save_response_to_sheets(formatted_input)
-    
-        elif choice == "Session Breakdown & Activities":
-            st.header("📝 Session Breakdown")
-            session_data = pd.DataFrame({
-                "Time": ["0-10 mins", "10-30 mins", "30-50 mins", "50-60 mins", "60-80 mins", "80-100 mins", "100-120 mins"],
-                "Topic": ["Introduction & Icebreaker", "Managing BA Personnel, Data, and Technology",
-                          "Organizational Structures Aligning BA", "Managing Information Policy & Data Quality",
-                          "Managing Change in BA", "Action Plan & Best Practices", "Wrap-Up & Q&A"],
-                "Activity": [
-                    "'What’s Your BA Challenge?' - Participants share a key challenge in managing BA resources.",
-                    "Role-Play: 'The BA Team Challenge' – Assign roles (Analyst, IT, Data Engineer) and discuss resource conflicts.",
-                    "Case Study: Compare centralized vs decentralized BA teams & their impact.",
-                    "Hands-on: Participants analyze a dataset with quality issues & propose fixes.",
-                    "'Change Resistance Simulation' – Small groups strategize on overcoming resistance to a new BA tool.",
-                    "Group Brainstorm: 'How to Optimize BA Resources?' - Teams present solutions.",
-                    "Reflection: What’s one key takeaway? Share & discuss."
-                ]
-            })
-            st.table(session_data)
-
-    with tab2:
-        st.header("🌍 Public Contributions")
-        responses = fetch_responses_from_sheets()
-        
-        if responses:
-            for row in responses:
-                st.write(f"💬 {row[0]} - {row[1]}")
-        else:
-            st.write("No contributions yet. Be the first to share!")
-
+# Run Function
 if __name__ == "__main__":
-    main()
+    python_streamlit_ba()
