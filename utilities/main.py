@@ -90,15 +90,15 @@ def main():
         elif choice == "Lecture Notes & Case Studies":
             st.header("📚 Lecture Notes & Case Studies")
             
-            st.write("## What Are Business Analytics?")
-            st.write("### Chapter Objectives:")
+            st.write("## What Are Business Analytics and Managing Resources?")
+            st.write("### Learning Objectives:")
             st.markdown("- Define business analytics.")
             st.markdown("- Explain the relationship of analytics and business intelligence to business analytics.")
             st.markdown("- Describe the three steps of the business analytics process.")
             st.markdown("- Describe four data classification measurement scales.")
             st.markdown("- Explain the relationship of the business analytics process with the organization decision-making process.")
-        
-            st.write("### 1.1 Terminology")
+            st.markdown("- Manage the resources of the business analytics process with managing information policy, data quality and change in BA.")
+            st.write("### 1.1 Terminologies")
             st.write("Business analytics begins with data sets or databases that store information. As these grow, technologies like cloud computing and data warehousing store and manage this information efficiently.")
             st.write("**Big Data vs. Little Data:** Big data refers to vast and complex data sets, while little data focuses on smaller, business-specific insights.")
         
@@ -132,19 +132,19 @@ def main():
             st.markdown("**HDFC Bank** - Leveraged BA for data governance and regulatory compliance.")
             st.markdown("**Tata Motors** - Successfully transitioned to cloud-based BA with minimal disruption.")
 
-            st.write("### Managing BA Personnel, Data, and Technology")
+            st.write("### 2.1. Managing BA Personnel, Data, and Technology")
             st.write("Business Analytics personnel include Data Analysts, Data Scientists, Business Intelligence Experts, and IT specialists who extract insights from data to drive business decisions.")
             st.write("**Case Study:** Infosys implemented a structured BA team to optimize IT service management.")
         
-            st.write("### Organizational Structures Aligning BA")
+            st.write("### 2.2. Organizational Structures Aligning BA")
             st.write("Organizations can have different BA team structures: Centralized, Decentralized, and Hybrid.")
             st.write("**Case Study:** Flipkart adopted a hybrid BA model to balance centralized decision-making with departmental autonomy.")
         
-            st.write("### Managing Information Policy & Data Quality")
+            st.write("### 2.3. Managing Information Policy & Data Quality")
             st.write("Good data governance ensures compliance, security, and data quality.")
             st.write("**Case Study:** HDFC Bank’s data governance policies ensure data integrity and regulatory compliance.")
         
-            st.write("### Managing Change in BA")
+            st.write("### 2.4. Managing Change in BA")
             st.write("Change management in BA requires clear communication, training, and stakeholder engagement.")
             st.write("**Case Study:** Tata Motors successfully transitioned to cloud-based BA despite initial resistance.")
 
