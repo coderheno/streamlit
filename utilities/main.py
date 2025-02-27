@@ -2,7 +2,78 @@ import streamlit as st
 import pandas as pd
 import random
 import time
+import streamlit as st
+import pandas as pd
 
+def business_analytics_app():
+    st.set_page_config(page_title="Business Analytics Course", layout="wide")
+
+    # Sidebar Navigation
+    st.sidebar.title("📌 Navigation")
+    options = [
+        "Introduction", "Session Breakdown & Activities", "Managing BA Personnel, Data, and Technology", 
+        "Organizational Structures Aligning BA", "Managing Information Policy & Data Quality", 
+        "Managing Change in BA", "Action Plan & Best Practices", "Wrap-Up & Q&A", 
+        "Lecture Notes & Case Studies", "Student Activity Group Generator"
+    ]
+    choice = st.sidebar.radio("Go to Section", options)
+
+    # Main Title
+    st.title("📊 Business Analytics Course")
+
+    # Define Tabs
+    tab1, tab2 = st.tabs(["Session Content", "Participant Contributions"])
+
+    # Tab 1: Session Content
+    with tab1:
+        st.subheader("Comparison of Business Analytics Tools")
+        data = {
+            "Category": [
+                "Spreadsheet-Based Tools", "Statistical & Predictive Analytics",
+                "Data Mining & Machine Learning", "Data Visualization",
+                "Big Data & Cloud Analytics", "Programming & Development"
+            ],
+            "Tools": [
+                "MS Excel, Google Sheets",
+                "SPSS, SAS, R, MATLAB, Stata, Salford Systems",
+                "Python (Pandas, Scikit-learn, TensorFlow), KXEN, RapidMiner",
+                "Tableau, Power BI, Streamlit, Python (Matplotlib, Seaborn)",
+                "Apache Spark, Google BigQuery, AWS SageMaker",
+                "Python, R, Julia, SQL"
+            ]
+        }
+        df = pd.DataFrame(data)
+        st.dataframe(df, use_container_width=True)
+
+        st.subheader("Why Use Python & Streamlit in Business Analytics?")
+        advantages = [
+            "✅ **Open-source & Cost-effective** – Unlike commercial tools like SAS and SPSS, Python & Streamlit are free.",
+            "✅ **Scalability** – Python can handle large datasets efficiently, making it superior to Excel.",
+            "✅ **Real-time Analytics** – Streamlit enables interactive dashboards for decision-making.",
+            "✅ **AI/ML Integration** – Python supports ML models, difficult to implement in Excel."
+        ]
+        for adv in advantages:
+            st.markdown(adv)
+
+    # Tab 2: Participant Contributions (Public Responses)
+    with tab2:
+        st.subheader("📝 Share Your Insights")
+        if "public_responses" not in st.session_state:
+            st.session_state["public_responses"] = []
+
+        response = st.text_area("Enter your thoughts or questions:", key="user_response")
+        if st.button("Submit Response"):
+            if response:
+                st.session_state["public_responses"].append(response)
+                st.success("✅ Response recorded!")
+        
+        if st.session_state["public_responses"]:
+            st.write("### 🔍 Public Responses")
+            for i, res in enumerate(st.session_state["public_responses"], 1):
+                st.write(f"**{i}.** {res}")
+
+
+    
 def main():
     st.set_page_config(page_title="Managing Resources for Business Analytics", layout="wide")
     st.title("📊 Managing Resources for Business Analytics")
@@ -87,6 +158,14 @@ def main():
             user_input = st.text_area("Share your key learning:")
             if st.button("Make Public"):
                 st.session_state.setdefault("public_responses", []).append(user_input)
+            with tab2:
+                st.header("🌍 Public Contributions")
+                if st.session_state["public_responses"]:
+                    sorted_responses = sorted(st.session_state["public_responses"], reverse=True)
+                    for response in sorted_responses:
+                        st.write(f"💬 {response}")
+                else:
+                    st.write("No contributions yet. Be the first to share!")
         elif choice == "Lecture Notes & Case Studies":
             st.header("📚 Lecture Notes & Case Studies")
             
@@ -170,15 +249,70 @@ def main():
                 st.download_button(label="Download Template", data=format_df.to_csv(index=False), file_name="group_format.csv", mime="text/csv")
 
     with tab2:
-        st.header("🌍 Public Contributions")
-        if st.session_state["public_responses"]:
-            sorted_responses = sorted(st.session_state["public_responses"], reverse=True)
-            for response in sorted_responses:
-                st.write(f"💬 {response}")
-        else:
-            st.write("No contributions yet. Be the first to share!")
-            
+               
+
+        st.title("🚀 Why Include Python and Streamlit in Business Analytics?")
+    
+        # Introduction
+        st.subheader("Why Include Python and Streamlit?")
+        st.write("""
+    Python is one of the most widely used languages in business analytics due to its extensive libraries:
+    - **Data Cleaning & Preprocessing** (Pandas, NumPy)
+    - **Statistical Analysis & Hypothesis Testing** (Statsmodels)
+    - **Machine Learning & Predictive Analytics** (Scikit-learn, TensorFlow)
+    - **Data Visualization** (Matplotlib, Seaborn)
+    - **Automation of Repetitive Tasks** (Scripting & APIs)
+    
+    Streamlit is an open-source framework that helps create interactive business applications quickly:
+    - **Rapid Deployment** of business dashboards
+    - **Interactive Visualizations** for real-time decision-making
+    - **Seamless ML Integration** for predictive analytics
+    """)
+
+     # Business Analytics Tools Table
+        st.subheader("📊 List of Business Analytics Tools")
+        data = {
+        "Category": [
+            "Spreadsheet-Based Tools", "Statistical & Predictive Analytics",
+            "Data Mining & Machine Learning", "Data Visualization",
+            "Big Data & Cloud Analytics", "Programming & Development"
+        ],
+        "Tools": [
+            "MS Excel, Google Sheets",
+            "SPSS, SAS, R, MATLAB, Stata, Salford Systems",
+            "Python (Pandas, Scikit-learn, TensorFlow), KXEN, RapidMiner",
+            "Tableau, Power BI, Streamlit, Python (Matplotlib, Seaborn)",
+            "Apache Spark, Google BigQuery, AWS SageMaker",
+            "Python, R, Julia, SQL"
+        ]
+    }
+        df = pd.DataFrame(data)
+        st.dataframe(df, use_container_width=True)
+
+    # Advantages of Python & Streamlit
+        st.subheader("🚀 Advantages of Python and Streamlit in Business Analytics")
+    advantages = [
+        "✅ **Open-source & Cost-effective** – Unlike SAS & SPSS, Python & Streamlit are free.",
+        "✅ **Scalability** – Python efficiently handles large datasets, unlike Excel.",
+        "✅ **Real-time Analytics** – Streamlit enables interactive dashboards for business insights.",
+        "✅ **AI/ML Integration** – Python supports ML models, unlike traditional tools."
+    ]
+    for adv in advantages:
+        st.markdown(adv)
+
+    # Optional Comparison Table Prompt
+    st.write("Would you like a **comparison table** showing how Python and Streamlit compare to traditional tools? 🚀")
+    if st.button("Generate Comparison"):
+        comparison_data = {
+            "Feature": ["Cost", "Scalability", "AI/ML Support", "Real-Time Dashboards", "Ease of Use"],
+            "Python & Streamlit": ["Free & Open Source", "High", "Yes", "Yes", "User-friendly"],
+            "Traditional Tools (Excel, SPSS, SAS)": ["Paid", "Limited", "Limited", "No", "Requires Training"]
+        }
+        comparison_df = pd.DataFrame(comparison_data)
+        st.table(comparison_df)
+
+
 
 if __name__ == "__main__":
     main()
-
+   
