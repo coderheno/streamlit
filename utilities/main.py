@@ -24,25 +24,13 @@ def main():
     with tab1:
         if choice == "Introduction":
             st.header("🎯 Introduction & Icebreaker")
-            st.write("🤣 *Funny Business Analytics Story:* Once, a data analyst spent weeks cleaning data, only to realize they had been analyzing last year’s sales instead of the current one. Moral of the story? Always check your dataset first! 😆")
             st.write("💡 *What’s Your BA Challenge?* - Share a key challenge in managing BA resources.")
             user_input = st.text_area("Enter your challenge here:")
-            
-            st.subheader("🌟 Name Generator")
-            fav_food = st.text_input("Your Favorite Food:")
-            first_name = st.text_input("Your First Name:")
-            
             if st.button("Make Public"):
-                fun_name = f"{fav_food} {first_name}"
-                st.session_state["user_name"] = fun_name
-                st.success(f"Your new fun name is: {fun_name} 🎉")
-                timestamp = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
-                formatted_input = f"{timestamp} - {user_input} - ({st.session_state.get('user_name', 'Anonymous')})"
-                st.session_state["public_responses"].append(formatted_input)
+                st.session_state.setdefault("public_responses", []).append(user_input)
     
         elif choice == "Session Breakdown & Activities":
             st.header("📝 Session Breakdown")
-            st.write("An overview of how the session is structured, including various activities and discussions.")
             session_data = pd.DataFrame({
                 "Time": ["0-10 mins", "10-30 mins", "30-50 mins", "50-60 mins", "60-80 mins", "80-100 mins", "100-120 mins"],
                 "Topic": ["Introduction & Icebreaker", "Managing BA Personnel, Data, and Technology", "Organizational Structures Aligning BA", "Managing Information Policy & Data Quality", "Managing Change in BA", "Action Plan & Best Practices", "Wrap-Up & Q&A"],
@@ -83,6 +71,20 @@ def main():
             st.header("🔄 Change Resistance Simulation")
             st.write("Brainstorm reasons for resistance to BA tools and strategies to overcome it.")
             user_input = st.text_area("Your Strategies:")
+            if st.button("Make Public"):
+                st.session_state.setdefault("public_responses", []).append(user_input)
+    
+        elif choice == "Action Plan & Best Practices":
+            st.header("✅ Group Brainstorm: How to Optimize BA Resources?")
+            st.write("Teams develop a framework for effective resource management and share best practices.")
+            user_input = st.text_area("Enter your key takeaways:")
+            if st.button("Make Public"):
+                st.session_state.setdefault("public_responses", []).append(user_input)
+    
+        elif choice == "Wrap-Up & Q&A":
+            st.header("📌 Reflection & Key Takeaways")
+            st.write("Participants summarize what they learned and ask final questions.")
+            user_input = st.text_area("Share your key learning:")
             if st.button("Make Public"):
                 st.session_state.setdefault("public_responses", []).append(user_input)
     
