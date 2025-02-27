@@ -31,8 +31,6 @@ def main():
             st.subheader("🌟 Name Generator")
             fav_food = st.text_input("Your Favorite Food:")
             first_name = st.text_input("Your First Name:")
-                   
-                
             
             if st.button("Make Public"):
                 fun_name = f"{fav_food} {first_name}"
@@ -42,22 +40,49 @@ def main():
                 formatted_input = f"{timestamp} - {user_input} - ({st.session_state.get('user_name', 'Anonymous')})"
                 st.session_state["public_responses"].append(formatted_input)
     
-        elif choice == "Session Breakdown & Activities":
-            st.header("📝 Session Breakdown")
-            session_data = pd.DataFrame({
-                "Time": ["0-10 mins", "10-30 mins", "30-50 mins", "50-60 mins", "60-80 mins", "80-100 mins", "100-120 mins"],
-                "Topic": ["Introduction & Icebreaker", "Managing BA Personnel, Data, and Technology", "Organizational Structures Aligning BA", "Managing Information Policy & Data Quality", "Managing Change in BA", "Action Plan & Best Practices", "Wrap-Up & Q&A"],
-                "Activity": [ 
-                    "'What’s Your BA Challenge?' - Participants share a key challenge in managing BA resources.",
-                    "Role-Play: 'The BA Team Challenge' – Assign roles (Analyst, IT, Data Engineer) and discuss resource conflicts.",
-                    "Case Study: Compare centralized vs decentralized BA teams & their impact.",
-                    "Hands-on: Participants analyze a dataset with quality issues & propose fixes.",
-                    "'Change Resistance Simulation' – Small groups strategize on overcoming resistance to a new BA tool.",
-                    "Group Brainstorm: 'How to Optimize BA Resources?' - Teams present solutions.",
-                    "Reflection: What’s one key takeaway? Share & discuss."
-                ]
-            })
-            st.table(session_data)
+        elif choice == "Managing BA Personnel, Data, and Technology":
+            st.header("👥 Role-Play: The BA Team Challenge")
+            st.markdown("Participants take roles (Data Analyst, IT Manager, Business Leader) and discuss resource conflicts.")
+            st.markdown("**Key Discussion Points:**")
+            st.write("- Aligning technical and business needs")
+            st.write("- Balancing security with accessibility")
+            st.write("- Budget constraints and technology investment")
+            user_input = st.text_area("Your Thoughts:")
+            if st.button("Make Public"):
+                st.session_state.setdefault("public_responses", []).append(user_input)
+    
+        elif choice == "Organizational Structures Aligning BA":
+            st.header("🏢 Case Study: Which Structure Works Best?")
+            st.write("Compare centralized, decentralized, and hybrid BA models.")
+            user_input = st.text_area("Your Analysis:")
+            if st.button("Make Public"):
+                st.session_state.setdefault("public_responses", []).append(user_input)
+    
+        elif choice == "Managing Information Policy & Data Quality":
+            st.header("🛠️ Hands-on Data Quality Check")
+            st.write("Analyze a dataset with quality issues and propose fixes.")
+            user_input = st.text_area("Your Observations:")
+            if st.button("Make Public"):
+                st.session_state.setdefault("public_responses", []).append(user_input)
+    
+        elif choice == "Managing Change in BA":
+            st.header("🔄 Change Resistance Simulation")
+            st.write("Brainstorm reasons for resistance to BA tools and strategies to overcome it.")
+            user_input = st.text_area("Your Strategies:")
+            if st.button("Make Public"):
+                st.session_state.setdefault("public_responses", []).append(user_input)
+    
+        elif choice == "Action Plan & Best Practices":
+            st.header("✅ Group Brainstorm: How to Optimize BA Resources?")
+            user_input = st.text_area("Your Key Takeaways:")
+            if st.button("Make Public"):
+                st.session_state.setdefault("public_responses", []).append(user_input)
+    
+        elif choice == "Wrap-Up & Q&A":
+            st.header("📌 Reflection & Key Takeaways")
+            user_input = st.text_area("Your Learning:")
+            if st.button("Make Public"):
+                st.session_state.setdefault("public_responses", []).append(user_input)
     
     with tab2:
         st.header("🌍 Public Contributions")
@@ -70,3 +95,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
