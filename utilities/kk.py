@@ -22,59 +22,79 @@ def main():
         st.session_state["public_responses"] = []
     
     with tab1:
-        if choice == "Lecture Notes & Case Studies":
+        if choice == "Introduction":
+            st.header("📌 Introduction")
+            st.write("The Internet of Things (IoT) is transforming healthcare by enabling real-time data collection, remote monitoring, and predictive analytics for disease diagnosis and genetic analysis.")
+            st.write("This session will explore IoT's role in genetic data collection, its applications in disease diagnosis, security challenges, and future advancements.")
+
+        elif choice == "Session Breakdown & Activities":
+            st.header("📝 Session Breakdown & Activities")
+            session_data = pd.DataFrame({
+                "Time": ["0-10 mins", "10-30 mins", "30-50 mins", "50-60 mins", "60-80 mins", "80-100 mins", "100-120 mins"],
+                "Topic": ["Introduction", "IoT in Genetic Data Collection", "IoT Applications in Disease Diagnosis", "Security and Privacy in IoT-based Genetic Data Handling", "Challenges and Future Trends", "Case Studies & Best Practices", "Wrap-Up & Q&A"],
+                "Activity": [
+                    "What are your thoughts on IoT in healthcare? Participants share opinions.",
+                    "Hands-on: Explore IoT devices used in genetic data collection.",
+                    "Case Study Discussion: IoT-powered disease diagnosis solutions.",
+                    "Identify key security risks and propose mitigation strategies.",
+                    "Brainstorm future IoT trends in genetic research.",
+                    "Analyze real-world IoT applications in disease prediction.",
+                    "Q&A and participant reflections."
+                ]
+            })
+            st.table(session_data)
+
+        elif choice == "IoT in Genetic Data Collection":
+            st.header("📡 IoT in Genetic Data Collection")
+            st.write("IoT devices such as biosensors, wearable health monitors, and smart laboratory equipment are essential for gathering genetic data in real-time.")
+            st.write("**Example:** Smart wearables measuring biomarkers for early disease detection.")
+
+        elif choice == "IoT Applications in Disease Diagnosis":
+            st.header("🩺 IoT Applications in Disease Diagnosis")
+            st.write("IoT-powered healthcare solutions enable early detection and real-time monitoring of diseases through connected devices and AI-driven analysis.")
+            st.write("**Example:** IoT-enabled imaging diagnostics improving cancer detection accuracy.")
+
+        elif choice == "Security and Privacy in IoT-based Genetic Data Handling":
+            st.header("🔒 Security and Privacy in IoT-based Genetic Data Handling")
+            st.write("With large-scale genetic data collection comes the need for robust security measures, including encryption, blockchain, and regulatory compliance (GDPR, HIPAA).")
+            st.write("**Example:** Blockchain-based storage ensuring secure genetic data transmission.")
+
+        elif choice == "Challenges and Future Trends":
+            st.header("🚀 Challenges and Future Trends")
+            st.write("Despite IoT advancements, challenges like data standardization, interoperability, and cost constraints remain.")
+            st.write("Future trends include AI-integrated IoT for predictive healthcare and cloud-based genetic data analysis.")
+
+        elif choice == "Case Studies & Best Practices":
+            st.header("📊 Case Studies & Best Practices")
+            st.write("1. **Philips Healthcare** - Remote patient monitoring using IoT for genetic disease prediction.")
+            st.write("2. **IBM Watson Genomics** - AI-driven analysis of genetic mutations for precise cancer diagnosis.")
+            st.write("3. **23andMe** - IoT-integrated genetic testing kits identifying inherited traits.")
+
+        elif choice == "Wrap-Up & Q&A":
+            st.header("📝 Wrap-Up & Q&A")
+            st.write("Key takeaways from the session, open discussion, and reflections on how IoT is shaping genetic research and healthcare.")
+
+        elif choice == "Lecture Notes & Case Studies":
             st.header("📚 Lecture Notes & Case Studies")
             st.write("## Role of IoT in Genetic Data Analysis and Disease Diagnosis")
-            st.write("### Chapter Objectives:")
-            st.markdown("- Define IoT and its significance in genetic data analysis.")
-            st.markdown("- Explain how IoT facilitates disease diagnosis through real-time monitoring.")
-            st.markdown("- Describe IoT-based data collection methods in healthcare.")
-            st.markdown("- Discuss security and privacy concerns in IoT genetic data handling.")
-            st.markdown("- Explore future trends in IoT applications for genetic research and healthcare.")
-            
-            st.write("### 1.1 Introduction to IoT in Healthcare")
-            st.write("The Internet of Things (IoT) is revolutionizing healthcare by enabling connected devices to collect, analyze, and transmit medical data in real-time.")
-            st.write("**Applications in Genetic Data Analysis:** Wearable devices and smart sensors help in monitoring genetic markers, enabling early disease detection and personalized treatment.")
-            
-            st.write("### 1.2 IoT in Disease Diagnosis")
-            st.table(pd.DataFrame({
-                "IoT Application": ["Wearable Health Monitors", "Smart Diagnostic Devices", "Cloud-based Genetic Data Processing"],
-                "Function": [
-                    "Continuous tracking of vital signs and genetic markers.",
-                    "Automated real-time detection of diseases through IoT-enabled lab tests.",
-                    "Secure and fast analysis of genetic data using cloud computing."
-                ],
-                "Example": [
-                    "Smartwatches monitoring heart rate variability to detect genetic predispositions.",
-                    "IoT-enabled blood tests identifying genetic disorders instantly.",
-                    "AI-driven cloud analysis of genome sequences for early cancer detection."
-                ]
-            }))
-            
-            st.write("### 1.3 Security and Privacy Challenges")
-            st.write("With increasing use of IoT in healthcare, protecting sensitive genetic data is crucial. Data encryption, secure access control, and compliance with GDPR and HIPAA are essential.")
-            
-            st.write("### Case Studies")
-            st.markdown("**Philips Healthcare** - Implemented IoT-driven remote patient monitoring for genetic disease prediction.")
-            st.markdown("**IBM Watson Genomics** - Uses AI and IoT to analyze genetic mutations for precise cancer diagnosis.")
-            st.markdown("**23andMe** - IoT-integrated genetic testing kits enable users to identify inherited traits and risks.")
-    
+            st.write("### Key Learnings:")
+            st.markdown("- IoT devices enhance genetic data collection for precision medicine.")
+            st.markdown("- AI and IoT integration improves disease diagnosis and patient monitoring.")
+            st.markdown("- Security risks in IoT healthcare solutions require advanced encryption and compliance measures.")
+            st.markdown("- Future trends include real-time genome analysis and cloud-based predictive healthcare.")
+
         elif choice == "Student Activity Group Generator":
             st.header("🎲 Student Activity Group Generator")
-            
             uploaded_file = st.file_uploader("📂 Upload student list (CSV/Excel)", type=["csv", "xlsx"])
             num_groups = st.number_input("How many groups do you want?", min_value=2, step=1)
-            
             if uploaded_file:
                 df = pd.read_excel(uploaded_file) if uploaded_file.name.endswith("xlsx") else pd.read_csv(uploaded_file)
                 df = df.sample(frac=1).reset_index(drop=True)  # Shuffle students
                 groups = [df.iloc[i::num_groups] for i in range(num_groups)]
-                
                 st.write("### Generated Groups:")
                 for i, group in enumerate(groups):
                     st.write(f"#### Group {i+1}: ")
                     st.dataframe(group)
-            
             if st.button("Download Group Format"):
                 format_df = pd.DataFrame({"S.No": [], "Student Name": []})
                 format_df.to_csv("group_format.csv", index=False)
