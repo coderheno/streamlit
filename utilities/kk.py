@@ -11,7 +11,7 @@ def main():
     st.sidebar.title("📌 Navigation")
     options = [
         "Introduction", "Session Breakdown & Activities", "Icebreaker & Activity", "IoT in Genetic Data Collection", 
-        "IoT Applications in Disease Diagnosis", "Security and Privacy in IoT-based Genetic Data Handling", 
+        "IoT Applications in Disease Diagnosis", "Security and Privacy in Genetic Data Handling", 
         "Challenges and Future Trends", "Case Studies & Best Practices", "Wrap-Up & Q&A", "Lecture Notes & Case Studies", "Student Activity Group Generator"
     ]
     choice = st.sidebar.radio("Go to Section", options)
