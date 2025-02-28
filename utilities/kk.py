@@ -111,7 +111,7 @@ def main():
             st.header("📝 Wrap-Up & Q&A")
             st.write("Key takeaways from the session, open discussion, and reflections on how IoT is shaping genetic research and healthcare.")
         elif choice == "Lecture Notes & Case Studies":
-            st.title("Watch This Video on IoT in Genetic Data Analysis!")
+            st.subheader("Watch This Video on IoT in Genetic Data Analysis!")
             st.video("https://www.youtube.com/watch?v=Q3RMS1OWKwY")
 
 if __name__ == "__main__":
