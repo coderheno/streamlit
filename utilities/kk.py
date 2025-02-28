@@ -19,6 +19,8 @@ def main():
     with st.container():
         if choice == "Introduction":
             st.header("📌 Introduction")
+            st.title("Genomics Fun Facts: Genome Data")
+            st.video("https://www.youtube.com/watch?v=ZXY0udW61uI")
             st.write("The Internet of Things (IoT) is transforming healthcare by enabling real-time data collection, remote monitoring, and predictive analytics for disease diagnosis and genetic analysis.")
             st.subheader("🔬 Sensors and Real-time Data Collection")
             st.write("IoT in genetic data analysis relies heavily on advanced **biosensors** and **wearable technology** that collect physiological and genetic markers in real-time. These sensors include:")
@@ -111,6 +113,7 @@ def main():
         elif choice == "Lecture Notes & Case Studies":
             st.title("Watch This Video on IoT in Genetic Data Analysis!")
             st.video("https://www.youtube.com/watch?v=Q3RMS1OWKwY")
+
 if __name__ == "__main__":
     main()
 
