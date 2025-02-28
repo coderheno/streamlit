@@ -148,27 +148,7 @@ def main():
             st.table(df)
 
         elif choice == "Student Activity Group Generator":
-            st.header("🎲 Student Activity Group Generator")
-        
-        uploaded_file = st.file_uploader("📂 Upload student list (CSV/Excel)", type=["csv", "xlsx"])
-        num_groups = st.number_input("How many groups do you want?", min_value=2, step=1)
-        
-        if uploaded_file:
-            df = pd.read_excel(uploaded_file) if uploaded_file.name.endswith("xlsx") else pd.read_csv(uploaded_file)
-            df = df.sample(frac=1).reset_index(drop=True)  # Shuffle students
-            groups = [df.iloc[i::num_groups] for i in range(num_groups)]
-            
-            st.write("### Generated Groups:")
-            for i, group in enumerate(groups):
-                st.write(f"#### Group {i+1}: ")
-                st.dataframe(group)
-        
-            if st.button("Download Group Format"):
-                format_df = pd.DataFrame({"S.No": [], "Student Name": []})
-                format_df.to_csv("group_format.csv", index=False)
-                st.download_button(label="Download Template", data=format_df.to_csv(index=False), file_name="group_format.csv", mime="text/csv")
-
-          
+            st.markdown("[Visit CIT 2024 App](https://cit2024.streamlit.app)")
 if __name__ == "__main__":
     main()
 
