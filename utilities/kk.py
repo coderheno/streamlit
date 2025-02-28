@@ -3,6 +3,72 @@ import pandas as pd
 import random
 import time
 
+
+def iot_genetic_data():
+    st.title("🔬 IoT Devices for Real-Time Genetic Data Collection")
+
+    st.write("""
+    IoT devices play a crucial role in **genetic research and healthcare** by enabling **real-time data collection, analysis, and monitoring**.
+    Below are three major categories of IoT devices used in genetic studies:
+    """)
+
+    option = st.radio("Select a category:", ["Biosensors", "Wearable Health Monitors", "Smart Laboratory Equipment"])
+
+    if option == "Biosensors":
+        st.subheader("🧪 Biosensors")
+        st.write("""
+        **Biosensors** detect and analyze biological molecules such as DNA, RNA, and proteins.  
+        They convert biological responses into measurable signals for real-time genetic analysis.
+        """)
+
+        st.markdown("### 🔹 Examples:")
+        st.write("- **DNA Sequencing Biosensors** for detecting genetic mutations.")
+        st.write("- **Glucose Biosensors** used in genetic predisposition studies.")
+        st.write("- **Microfluidic Biosensors** for rapid genetic screening.")
+
+        st.markdown("### ✅ Advantages:")
+        st.write("✔ High sensitivity & specificity")
+        st.write("✔ Rapid real-time analysis")
+        st.write("✔ Portable & suitable for field use")
+
+    elif option == "Wearable Health Monitors":
+        st.subheader("⌚ Wearable Health Monitors")
+        st.write("""
+        **Wearable devices** track real-time physiological and genetic markers,  
+        helping in personalized medicine and disease prevention.
+        """)
+
+        st.markdown("### 🔹 Examples:")
+        st.write("- **Smartwatches** track heart rate & genetic health analysis.")
+        st.write("- **Electrodermal Sensors** detect stress-related genetic markers.")
+        st.write("- **Smart Contact Lenses** analyze tear fluid for genetic disorders.")
+
+        st.markdown("### ✅ Advantages:")
+        st.write("✔ Continuous & real-time health tracking")
+        st.write("✔ Non-invasive & user-friendly")
+        st.write("✔ AI-powered predictive analytics")
+
+    elif option == "Smart Laboratory Equipment":
+        st.subheader("🧬 Smart Laboratory Equipment")
+        st.write("""
+        **IoT-enabled lab devices** automate genetic sequencing and analysis,  
+        improving accuracy and scalability in genetic research.
+        """)
+
+        st.markdown("### 🔹 Examples:")
+        st.write("- **Automated DNA Sequencers** allow remote genome sequencing.")
+        st.write("- **Smart PCR Machines** optimize genetic amplification & analysis.")
+        st.write("- **Hyperspectral Imaging Sensors** detect genetic anomalies.")
+
+        st.markdown("### ✅ Advantages:")
+        st.write("✔ Reduces human error with automation")
+        st.write("✔ Remote monitoring & real-time analysis")
+        st.write("✔ High-throughput sequencing capabilities")
+
+    st.info("IoT in genetic research enables **faster detection, personalized medicine, and remote genetic monitoring**. 🌍💡")
+
+
+    
 def main():
     st.set_page_config(page_title="Role of IoT in Genetic Data Analysis and Disease Diagnosis", layout="wide")
     st.title("🔬 Role of IoT in Genetic Data Analysis and Disease Diagnosis")
@@ -89,6 +155,7 @@ def main():
         elif choice == "IoT in Genetic Data Collection":
             st.header("📡 IoT in Genetic Data Collection")
             st.write("IoT devices such as biosensors, wearable health monitors, and smart laboratory equipment are essential for gathering genetic data in real-time.")
+            iot_genetic_data()
 
         elif choice == "IoT Applications in Disease Diagnosis":
             st.header("🩺 IoT Applications in Disease Diagnosis")
