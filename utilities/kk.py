@@ -306,7 +306,7 @@ def main():
             st.table(df)
 
         elif choice == "Student Activity Group Generator":
-            st.markdown("[Visit CIT 2024 App](https://cit2024.streamlit.app)")
+            st.markdown("[Visit CIT 2024 App](https://cit2025.streamlit.app/)")
 if __name__ == "__main__":
     main()
 
