@@ -19,7 +19,7 @@ def main():
     with st.container():
         if choice == "Introduction":
             st.header("📌 Introduction")
-            st.title("Genomics Fun Facts: Genome Data")
+            st.subheader("Genomics Fun Facts: Genome Data")
             st.video("https://www.youtube.com/watch?v=ZXY0udW61uI")
             st.write("The Internet of Things (IoT) is transforming healthcare by enabling real-time data collection, remote monitoring, and predictive analytics for disease diagnosis and genetic analysis.")
             st.subheader("🔬 Sensors and Real-time Data Collection")
