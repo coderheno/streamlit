@@ -6,7 +6,7 @@ import time
 def main():
     st.set_page_config(page_title="Role of IoT in Genetic Data Analysis and Disease Diagnosis", layout="wide")
     st.title("🔬 Role of IoT in Genetic Data Analysis and Disease Diagnosis")
-    st.markdown("## 🚀 An Interactive Learning Session")
+    st.markdown("### 🚀 An Interactive Learning Session")
 
     st.sidebar.title("📌 Navigation")
     options = [
