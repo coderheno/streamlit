@@ -16,12 +16,7 @@ def main():
     ]
     choice = st.sidebar.radio("Go to Section", options)
     
-    tab1, tab2 = st.tabs(["Session Content", "Participant Contributions"])
-
-    if "public_responses" not in st.session_state:
-        st.session_state["public_responses"] = []
-    
-    with tab1:
+    with st.container():
         if choice == "Introduction":
             st.header("📌 Introduction")
             st.write("The Internet of Things (IoT) is transforming healthcare by enabling real-time data collection, remote monitoring, and predictive analytics for disease diagnosis and genetic analysis.")
@@ -49,7 +44,6 @@ def main():
             st.write("Get ready to explore the world of IoT in genetic data with a fun and interactive icebreaker!")
             
             st.write("### Step 1: Your Futuristic Health IoT Device")
-            st.write("If you could create a futuristic health-monitoring IoT device, what would it do?")
             user_input = st.text_area("Describe your futuristic IoT device:")
             
             st.write("### Step 2: Generate Your DNA Code Name")
@@ -58,7 +52,6 @@ def main():
             
             if st.button("Generate Code Name"):
                 fun_name = f"{fav_food} {first_name}"
-                st.session_state["user_name"] = fun_name
                 st.success(f"Your DNA Code Name is: {fun_name} 🧬")
 
             st.write("### 🔬 Main Activity: IoT Lab Challenge")
@@ -97,15 +90,6 @@ def main():
             st.header("📝 Wrap-Up & Q&A")
             st.write("Key takeaways from the session, open discussion, and reflections on how IoT is shaping genetic research and healthcare.")
     
-    with tab2:
-        st.header("🌍 Public Contributions")
-        if st.session_state["public_responses"]:
-            sorted_responses = sorted(st.session_state["public_responses"], reverse=True)
-            for response in sorted_responses:
-                st.write(f"💬 {response}")
-        else:
-            st.write("No contributions yet. Be the first to share!")
-
 if __name__ == "__main__":
     main()
 
