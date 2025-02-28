@@ -266,7 +266,7 @@ def main():
             st.write("**IBM Watson Genomics** - AI-driven analysis of genetic mutations for precise cancer diagnosis.")
         elif choice == "Wrap-Up & Q&A":
             st.header("📌 Wrap-Up & Q&A")
-            st.write("Summarizing the key takeaways and opening the floor for questions and discussions.")
+            st.write("Students should Summarize the key takeaways and opening the floor for questions and discussions.")
         
         elif choice == "Lecture Notes & Case Studies":
             st.subheader("Watch This Video on IoT in Genetic Data Analysis!")
