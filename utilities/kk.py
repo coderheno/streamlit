@@ -115,26 +115,26 @@ def main():
             st.video("https://www.youtube.com/watch?v=Q3RMS1OWKwY")
                   
 
-            st.title("🚀 Why Include Python and Streamlit in Business Analytics?")
+            st.subheader("🚀 Why Include Python and Streamlit in Genetic Data Analysis?")
     
                 # Introduction
             st.subheader("Why Include Python and Streamlit?")
             st.write("""
-    Python is one of the most widely used languages in business analytics due to its extensive libraries:
+    Python is one of the most widely used languages in GDA due to its extensive libraries:
     - **Data Cleaning & Preprocessing** (Pandas, NumPy)
     - **Statistical Analysis & Hypothesis Testing** (Statsmodels)
     - **Machine Learning & Predictive Analytics** (Scikit-learn, TensorFlow)
     - **Data Visualization** (Matplotlib, Seaborn)
     - **Automation of Repetitive Tasks** (Scripting & APIs)
     
-    Streamlit is an open-source framework that helps create interactive business applications quickly:
-    - **Rapid Deployment** of business dashboards
+    Streamlit is an open-source framework that helps create interactive Genomic models quickly:
+    - **Rapid Deployment** of dashboards
     - **Interactive Visualizations** for real-time decision-making
     - **Seamless ML Integration** for predictive analytics
     """)
 
      # Business Analytics Tools Table
-            st.subheader("📊 List of Business Analytics Tools")
+            st.subheader("📊 List of GDA Analytics Tools")
         data = {
         "Category": [
             "Spreadsheet-Based Tools", "Statistical & Predictive Analytics",
@@ -154,7 +154,7 @@ def main():
         st.dataframe(df, use_container_width=True)
 
     # Advantages of Python & Streamlit
-        st.subheader("🚀 Advantages of Python and Streamlit in Business Analytics")
+        st.subheader("🚀 Advantages of Python and Streamlit in GDA")
     advantages = [
         "✅ **Open-source & Cost-effective** – Unlike SAS & SPSS, Python & Streamlit are free.",
         "✅ **Scalability** – Python efficiently handles large datasets, unlike Excel.",
