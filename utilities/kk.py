@@ -5,7 +5,7 @@ import time
 
 
 def iot_genetic_data():
-    st.title("🔬 IoT Devices for Real-Time Genetic Data Collection")
+    st.subheader("🔬 IoT Devices for Real-Time Genetic Data Collection")
 
     st.write("""
     IoT devices play a crucial role in **genetic research and healthcare** by enabling **real-time data collection, analysis, and monitoring**.
