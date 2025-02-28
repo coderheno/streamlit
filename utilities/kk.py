@@ -252,7 +252,7 @@ def main():
             st.header("🩺 IoT Applications in Disease Diagnosis")
             st.write("IoT-powered healthcare solutions enable early detection and real-time monitoring of diseases through connected devices and AI-driven analysis.")
             iot_healthcare_solutions()
-        elif choice == "Security and Privacy in IoT-based Genetic Data Handling":
+        elif choice == "Security and Privacy in Genetic Data Handling":
             st.header("🔒 Security and Privacy in IoT-based Genetic Data Handling")
             st.write("With large-scale genetic data collection comes the need for robust security measures, including encryption, blockchain, and regulatory compliance (GDPR, HIPAA).")
 
