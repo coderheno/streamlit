@@ -106,77 +106,49 @@ def main():
             st.header("📊 Case Studies & Best Practices")
             st.write("**Philips Healthcare** - Remote patient monitoring using IoT for genetic disease prediction.")
             st.write("**IBM Watson Genomics** - AI-driven analysis of genetic mutations for precise cancer diagnosis.")
-
         elif choice == "Wrap-Up & Q&A":
-            st.header("📝 Wrap-Up & Q&A")
-            st.write("Key takeaways from the session, open discussion, and reflections on how IoT is shaping genetic research and healthcare.")
+            st.header("📌 Wrap-Up & Q&A")
+            st.write("Summarizing the key takeaways and opening the floor for questions and discussions.")
+        
         elif choice == "Lecture Notes & Case Studies":
             st.subheader("Watch This Video on IoT in Genetic Data Analysis!")
             st.video("https://www.youtube.com/watch?v=Q3RMS1OWKwY")
-                  
-
             st.subheader("🚀 Why Include Python and Streamlit in Genetic Data Analysis?")
-    
-                # Introduction
-            st.subheader("Why Include Python and Streamlit?")
             st.write("""
-    Python is one of the most widely used languages in GDA due to its extensive libraries:
-    - **Data Cleaning & Preprocessing** (Pandas, NumPy)
-    - **Statistical Analysis & Hypothesis Testing** (Statsmodels)
-    - **Machine Learning & Predictive Analytics** (Scikit-learn, TensorFlow)
-    - **Data Visualization** (Matplotlib, Seaborn)
-    - **Automation of Repetitive Tasks** (Scripting & APIs)
-    
-    Streamlit is an open-source framework that helps create interactive Genomic models quickly:
-    - **Rapid Deployment** of dashboards
-    - **Interactive Visualizations** for real-time decision-making
-    - **Seamless ML Integration** for predictive analytics
-    """)
+            Python is one of the most widely used languages in GDA due to its extensive libraries:
+            - **Data Cleaning & Preprocessing** (Pandas, NumPy)
+            - **Statistical Analysis & Hypothesis Testing** (Statsmodels)
+            - **Machine Learning & Predictive Analytics** (Scikit-learn, TensorFlow)
+            - **Data Visualization** (Matplotlib, Seaborn)
+            - **Automation of Repetitive Tasks** (Scripting & APIs)
+            
+            Streamlit is an open-source framework that helps create interactive Genomic models quickly:
+            - **Rapid Deployment** of dashboards
+            - **Interactive Visualizations** for real-time decision-making
+            - **Seamless ML Integration** for predictive analytics
+            """)
 
-     # Business Analytics Tools Table
             st.subheader("📊 List of GDA Analytics Tools")
-        data = {
-        "Category": [
-            "Spreadsheet-Based Tools", "Statistical & Predictive Analytics",
-            "Data Mining & Machine Learning", "Data Visualization",
-            "Big Data & Cloud Analytics", "Programming & Development"
-        ],
-        "Tools": [
-            "MS Excel, Google Sheets",
-            "SPSS, SAS, R, MATLAB, Stata, Salford Systems",
-            "Python (Pandas, Scikit-learn, TensorFlow), KXEN, RapidMiner",
-            "Tableau, Power BI, Streamlit, Python (Matplotlib, Seaborn)",
-            "Apache Spark, Google BigQuery, AWS SageMaker",
-            "Python, R, Julia, SQL"
-        ]
-    }
-        df = pd.DataFrame(data)
-        st.dataframe(df, use_container_width=True)
+            data = {
+                "Category": [
+                    "Spreadsheet-Based Tools", "Statistical & Predictive Analytics",
+                    "Data Mining & Machine Learning", "Data Visualization",
+                    "Big Data & Cloud Analytics", "Programming & Development"
+                ],
+                "Tools": [
+                    "MS Excel, Google Sheets",
+                    "SPSS, SAS, R, MATLAB, Stata, Salford Systems",
+                    "Python (Pandas, Scikit-learn, TensorFlow), KXEN, RapidMiner",
+                    "Tableau, Power BI, Streamlit, Python (Matplotlib, Seaborn)",
+                    "Apache Spark, Google BigQuery, AWS SageMaker",
+                    "Python, R, SQL, Julia"
+                ]
+            }
+            df = pd.DataFrame(data)
+            st.table(df)
 
-    # Advantages of Python & Streamlit
-        st.subheader("🚀 Advantages of Python and Streamlit in GDA")
-    advantages = [
-        "✅ **Open-source & Cost-effective** – Unlike SAS & SPSS, Python & Streamlit are free.",
-        "✅ **Scalability** – Python efficiently handles large datasets, unlike Excel.",
-        "✅ **Real-time Analytics** – Streamlit enables interactive dashboards for business insights.",
-        "✅ **AI/ML Integration** – Python supports ML models, unlike traditional tools."
-    ]
-    for adv in advantages:
-        st.markdown(adv)
-
-    # Optional Comparison Table Prompt
-    st.write("Would you like a **comparison table** showing how Python and Streamlit compare to traditional tools? 🚀")
-    if st.button("Generate Comparison"):
-        comparison_data = {
-            "Feature": ["Cost", "Scalability", "AI/ML Support", "Real-Time Dashboards", "Ease of Use"],
-            "Python & Streamlit": ["Free & Open Source", "High", "Yes", "Yes", "User-friendly"],
-            "Traditional Tools (Excel, SPSS, SAS)": ["Paid", "Limited", "Limited", "No", "Requires Training"]
-        }
-        comparison_df = pd.DataFrame(comparison_data)
-        st.table(comparison_df)
-
-    elif choice == "Student Activity Group Generator":
-        st.header("🎲 Student Activity Group Generator")
+        elif choice == "Student Activity Group Generator":
+            st.header("🎲 Student Activity Group Generator")
         
         uploaded_file = st.file_uploader("📂 Upload student list (CSV/Excel)", type=["csv", "xlsx"])
         num_groups = st.number_input("How many groups do you want?", min_value=2, step=1)
