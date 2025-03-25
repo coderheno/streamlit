@@ -1,5 +1,69 @@
 import streamlit as st
 import pandas as pd
+import streamlit as st
+
+def submission_and_feedback():
+    """Streamlit function to display submission and feedback details along with video production tools and stages."""
+    
+    st.header("🎥 Video Production Stages")
+    st.write("""
+    **1. Pre-Production**:
+    - This is the planning phase of the production process. It includes the development of the script, storyboarding, and preparing all the necessary elements for shooting.
+    - **Tools**: 
+        - **Scriptwriting Software** like **Celtx** or **Final Draft** to help structure your script.
+        - **Storyboarding Tools** like **Storyboard That** or **Canva** to visualize your scenes.
+        - **Location Scouting** using tools like **Shot Lister**.
+
+    **2. Production**:
+    - The shooting phase where the video is filmed.
+    - **Tools**: 
+        - **Teleprompter Apps** like **PromptSmart** or **Teleprompter Pro** help you read your script while looking directly into the camera, making your delivery smoother and more natural.
+        - **Camera Equipment**: A DSLR or Mirrorless Camera is ideal for high-quality video. For a more budget-friendly option, **smartphones** with high-resolution cameras work too.
+        - **Lighting Tools**: Softbox lighting or ring lights, such as **Neewer** or **Elgato Key Light**, to ensure your face is well-lit and visually appealing.
+
+    **3. Post-Production**:
+    - The editing phase where all the footage is put together, refined, and finalized.
+    - **Tools**:
+        - **Editing Software**: **Adobe Premiere Pro**, **Final Cut Pro**, or **DaVinci Resolve** for professional-level editing. For beginners, **Camedica** or **Filmora** can be good alternatives.
+        - **Color Grading Tools**: Use tools like **FilmConvert** or **DaVinci Resolve** to adjust the colors and make the video look more polished.
+        - **Audio Editing**: Use **Audacity** (free) or **Adobe Audition** for noise reduction, equalization, and mastering the audio.
+        - **Text and Animation**: **After Effects** or **Camtasia** can be used for adding titles, transitions, and animations to enhance the video.
+
+    **4. Feedback & Review**:
+    - After post-production, it's important to review your video, get feedback from peers or mentors, and make necessary revisions.
+    - Ask for feedback on aspects like the flow of information, pacing, and engagement. Ensure the call to action is clear and impactful.
+    """)
+
+    st.header("💻 Prompter Apps and Teleprompter Tools")
+    st.write("""
+    A **teleprompter** can make a significant difference in delivering your script smoothly and naturally. Here are some prompter apps you can use:
+    - **PromptSmart Pro**: This is a highly recommended teleprompter app that automatically follows your speech, ensuring you don’t get stuck reading.
+    - **Teleprompter Pro**: Another great app that offers a simple interface and works well for both iOS and Android devices. It also lets you control the speed of the script and add cues.
+    - **Parrot Teleprompter**: A low-cost solution for small setups, with both mobile and professional use options.
+    - **OnCue**: Offers a full teleprompter system that you can use to project your script onto a screen while you record.
+
+    **Tips for Using a Teleprompter**:
+    - **Practice**: Familiarize yourself with the script before recording. Even though the teleprompter follows your speech, you should feel comfortable and natural while delivering your lines.
+    - **Speed**: Adjust the scrolling speed of the teleprompter to match your speaking pace. If you speak slowly, ensure the text doesn’t move too quickly.
+    - **Eye Contact**: Position the teleprompter screen so it’s directly in front of the camera, ensuring that you maintain eye contact with the audience. This makes you appear more engaging and sincere.
+
+    By using a teleprompter, you'll look more confident and professional, making it easier to deliver a smooth and impactful video.
+    """)
+
+    st.header("📁 Upload Your Files")
+    st.write("""
+    Once you have completed your script, video, and audio files, please upload them to the following **[Google Drive Link](https://drive.google.com/drive/folders/1NPLc70_IYDmqO5SiGF82vUIYw2CuU28G)** for assessment. Make sure your video quality is at least **1080p** for optimal viewing. The feedback will focus on areas such as:
+    - Engagement and clarity of the script
+    - Pacing and timing of the video
+    - Audio quality and background noise
+    - Visual elements (lighting, background, camera quality)
+    - Overall presentation and professionalism
+
+    After submitting, we will provide constructive feedback and suggestions for improving your content, ensuring you create a polished, professional final product.
+    """)
+
+
+
 def script_preparation_tips():
     """Streamlit function to display tips for script preparation for promo videos."""
     
@@ -219,6 +283,7 @@ def online_courses_development():
             st.write("""
             Once the scripts, videos, and audio files are ready, participants can upload their materials for assessment. Please use the following **[Drive Link](https://drive.google.com/drive/folders/1NPLc70_IYDmqO5SiGF82vUIYw2CuU28G?usp=sharing)** to submit your files. Feedback will be provided on improving your content for maximum impact.
             """)
+            submission_and_feedback()
 
 def main():
     st.set_page_config(page_title="Online Courses Development FDP", layout="wide")
