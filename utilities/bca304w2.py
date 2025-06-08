@@ -263,15 +263,94 @@ Students plan and present a functional VR space (e.g., gallery, station), using 
 
 # Tools & Examples Section
 elif selection == "3D Tools & Examples":
-    st.header("\U0001F527 VR Creation Tools: Blender, 3ds Max, Unity")
 
-    st.subheader("3D Modeling Basics")
+    st.title("🧱 3D Modeling Basics for AR/VR Projects")
+
+    st.header("🎨 Blender – Organic, Artistic 3D Tool")
+
+    with st.expander("🌟 Basics"):
+        st.markdown("""
+        - **Primitives**: Cube, Sphere, Cylinder, Cone, Monkey (Suzanne)
+        - **Sculpting Tools**: Dynamic topology, multiresolution sculpt
+        - **Modifiers**:
+            - Subdivision Surface (for smoothing)
+            - Mirror (for symmetry)
+            - Boolean (for cutout/merge)
+        - **UV Unwrapping**: For precise texture painting
+        """)
+
+    with st.expander("💡 Lighting & Camera"):
+        st.markdown("""
+        - **Lights**: Point, Area, Spot, Sun
+        - **Shadows**: Use Cycles or Eevee with soft/hard shadows
+        - **Camera Setup**: Lock camera to view, adjust depth of field
+        """)
+
+    with st.expander("🎞️ Animation"):
+        st.markdown("""
+        - **Keyframe Animation**: Move/rotate/scale over timeline
+        - **Rigging**: Add bones (Armature) for character animation
+        - **Timeline & Dope Sheet**: For smooth control
+        """)
+
+    st.info("🛠️ Example: Create a detailed car with modifiers and texture it using UV map. Export as `.fbx` to Unity.")
+
+    st.header("🏛️ 3ds Max – Architectural & Precision Tool")
+
+    with st.expander("🔧 Modeling Essentials"):
+        st.markdown("""
+        - **Standard Primitives**: Box, Cylinder, Torus, Teapot
+        - **Extended Primitives**: Hedra, Chamfer Box
+        - **Modifiers**:
+            - Bend, Taper, Twist
+            - Shell (to give thickness)
+            - Lattice (for wireframes)
+        """)
+
+    with st.expander("🏙️ Architecture Tools"):
+        st.markdown("""
+        - **2D Spline Drawing + Modifier**: Extrude, Bevel, Lathe
+        - **CAD Import**: Use `.dwg` files for precision designs
+        """)
+
+    with st.expander("🔦 Lighting & Rendering"):
+        st.markdown("""
+        - **Photometric Lights**, **Target Spot**, **Omni**
+        - Shadow Parameters: Ray Traced, Area Shadows
+        - Use **Arnold Renderer** for high-quality outputs
+        """)
+
+    with st.expander("📸 Camera & Animation"):
+        st.markdown("""
+        - **Camera Types**: Free, Target, Physical Camera
+        - **Walkthrough Animation**: Animate camera paths
+        - **Auto Key/Set Key** system for object animation
+        """)
+
+    st.success("🎯 Example: Model a multi-floor building with materials and daylight system. Export to Unity for interaction.")
+
+    st.header("🛠️ Export Workflow to Unity")
+
     st.markdown("""
-- **Blender**: Ideal for organic modeling, sculpting, UV unwrapping
-- **3ds Max**: Best for architectural CAD-like structures, precision
-
-**Example:** Create a car model in Blender; design a building in 3ds Max
+    - ✅ Apply all transforms and materials before export
+    - 🧾 Export Format: `.fbx` (Recommended for Unity)
+    - 🎯 Drag-and-drop `.fbx` files into Unity Assets
+    - 🎮 Add Interactions in Unity (XR Toolkit, physics, etc.)
     """)
+
+    st.markdown("---")
+    st.subheader("📌 Summary Table")
+
+    st.markdown("""
+    | Tool | Best For | Key Features |
+    |------|----------|--------------|
+    | **Blender** | Organic modeling | Sculpting, Modifiers, Animation |
+    | **3ds Max** | CAD-style precision | Architectural modeling, Walkthroughs |
+    | **Unity** | Integration & Interactivity | Scene setup, VR toolkit, scripting |
+    """)
+
+    st.warning("👨‍🏫 Tip: Teach Blender for modeling basics and 3ds Max for CAD-style accuracy. Combine both in Unity for immersive VR scenes.")
+
 
     st.subheader("Scene Setup in Unity")
     st.markdown("""
@@ -316,18 +395,3 @@ Activities:
 - Virtual space planning
     """
 
-    if st.button("Download Notes as PDF"):
-        pdf = FPDF()
-        pdf.add_page()
-        pdf.set_font("Arial", size=12)
-        for line in notes.split('\n'):
-            pdf.cell(200, 10, txt=line, ln=True)
-
-        pdf_output = BytesIO()
-        pdf.output(pdf_output)
-        st.download_button(
-            label="Click to Download PDF",
-            data=pdf_output.getvalue(),
-            file_name="VR_Lecture_Notes.pdf",
-            mime="application/pdf"
-        )
