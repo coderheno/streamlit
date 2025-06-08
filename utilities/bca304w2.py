@@ -1,8 +1,7 @@
 # VR Educational Tool Streamlit App
 
 import streamlit as st
-from io import BytesIO
-from fpdf import FPDF
+
 
 st.set_page_config(page_title="VR Educational Tool", layout="wide")
 st.title("\U0001F393 Virtual Reality (VR) Educational Tool")
@@ -11,8 +10,7 @@ st.title("\U0001F393 Virtual Reality (VR) Educational Tool")
 pages = [
     "Lecture Notes",
     "Activities",
-    "3D Tools & Examples",
-    "Export Notes"
+    "3D Tools & Examples"
 ]
 selection = st.sidebar.radio("Navigate", pages)
 
