@@ -349,7 +349,7 @@ elif selection == "3D Tools & Examples":
     | **Unity** | Integration & Interactivity | Scene setup, VR toolkit, scripting |
     """)
 
-    st.warning("👨‍🏫 Tip: Teach Blender for modeling basics and 3ds Max for CAD-style accuracy. Combine both in Unity for immersive VR scenes.")
+    st.warning("👨‍🏫 Tip: Learn Blender for modeling basics and 3ds Max for CAD-style accuracy. Combine both in Unity for immersive VR scenes.")
 
 
     st.subheader("Scene Setup in Unity")
