@@ -86,11 +86,4 @@ st.markdown("""
 
 ---
 
-### Need Help?
-You can expand this app by adding:
-- Code examples using A-Frame or Unity scripts
-- Domain-specific downloadable resources
-- User-contributed VR scenes
-
-Let me know which part you'd like to develop more!
 """)
