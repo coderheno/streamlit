@@ -280,13 +280,17 @@ elif section == "Career Outlook":
     st.markdown("---")
     st.subheader("📬 Contact Information")
     st.markdown("""
+    **Dr. Vijay Arputharaj**  
+    📱 09677188654  
+    📧 [vijay.arputharaj@christuniversity.in](mailto:vijay.arputharaj@christuniversity.in)  
+    🌐 [Christ University Faculty Profile](https://m.christuniversity.in/dept/faculty-details/NzAyNQ==/NjI=)
+    """)
+    st.markdown("""
     **Mr. Sambhav Jain**  
     📱 07878559290  
     📧 [sambhav.jain@bcah.christuniversity.in](mailto:sambhav.jain@bcah.christuniversity.in)  
     🌐 [Linkedin Profile](https://www.linkedin.com/in/sambhav-jain-8243a526a/)
     """)
-    
-
     st.markdown("---")
     st.caption("For queries regarding coursework, industry sessions, or project guidance, feel free to reach out.")
 
