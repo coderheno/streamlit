@@ -49,11 +49,9 @@ if section == "Welcome":
             st.error("❌ Not quite. Try again! Hint: It's VR.")
 
     st.markdown("---")
-    st.markdown("📘 **Refer to the full course here:**")
+    st.markdown("📘 **Creating Immersive VR Environments:**")
     st.markdown(
-        "[📄 Course Link](https://learn.unity.com/search?k=%5B%22q%3A3D%22%5D)",
-        unsafe_allow_html=True
-    )
+        "[📄 Course Link](https://bca304w3.streamlit.app/)", unsafe_allow_html=True )
 elif section == "AR/VR Fundamentals":
     st.header("🕶️ AR and VR Fundamentals")
 
