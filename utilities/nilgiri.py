@@ -3,8 +3,8 @@ import streamlit as st
 st.set_page_config(page_title="AR/VR, AI, and Emerging Tech", layout="wide")
 
 st.title("🚀 Augmented Reality (AR) and Virtual Reality (VR)")
-st.markdown("### Presented by: Dr. Vijay Arputharaj, CHRIST (Deemed to be University), India")
-st.markdown("### Practical Demo by: Mr. Sambhav Jain, CHRIST (Deemed to be University), India")
+st.markdown("#### Presented by: Dr. Vijay Arputharaj, CHRIST (Deemed to be University), India")
+st.markdown("#### Practical Demo by: Mr. Sambhav Jain, CHRIST (Deemed to be University), India")
 
 # Sidebar navigation
 section = st.sidebar.radio("Choose a Section", [
