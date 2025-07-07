@@ -51,7 +51,7 @@ if section == "Welcome":
     st.markdown("---")
     st.markdown("📘 **Creating Immersive VR Environments:**")
     st.markdown(
-        "[📄 Course Link](https://bca304w3.streamlit.app/)", unsafe_allow_html=True )
+        "[📄 Link](https://bca304w3.streamlit.app/)", unsafe_allow_html=True )
 elif section == "AR/VR Fundamentals":
     st.header("🕶️ AR and VR Fundamentals")
 
