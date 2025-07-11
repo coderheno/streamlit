@@ -39,103 +39,6 @@ def display_groups():
 
 import streamlit as st
 
-def quiz():
-    st.title("Blender Basics Quiz: Primitives and Viewports")
-
-    # Questions and choices
-    questions = [
-        ("In Blender, which shortcut is used to add a new primitive object?", 
-         ["Shift+A", "Ctrl+A", "Alt+A", "A"], "Shift+A"),
-        ("Which of the following is NOT a basic primitive object in Blender?", 
-         ["Cube", "Sphere", "Monkey", "Cone"], "Monkey"),
-        ("What is the default primitive object when you first open Blender?", 
-         ["Cube", "Plane", "Sphere", "Suzanne"], "Cube"),
-        ("Which viewport shading mode allows you to see the object with materials and textures applied?", 
-         ["Wireframe", "Solid", "Material Preview", "Rendered"], "Material Preview"),
-        ("What is the shortcut to switch to the top orthographic view in Blender?", 
-         ["Numpad 7", "Numpad 1", "Numpad 3", "Numpad 5"], "Numpad 7"),
-        ("How can you switch to the wireframe view in the 3D viewport?", 
-         ["Z", "Alt+Z", "Ctrl+Z", "Shift+Z"], "Z"),
-        ("Which panel in the Properties editor is used to add modifiers to an object?", 
-         ["Modifiers", "Object Properties", "Material Properties", "Scene Properties"], "Modifiers"),
-        ("What does pressing the period (.) key on the Numpad do in Blender?", 
-         ["Focuses on the selected object", "Adds a new object", "Renders the scene", "Opens preferences"], "Focuses on the selected object"),
-        ("How do you delete a selected object in Blender?", 
-         ["X", "Shift+X", "Alt+X", "Ctrl+X"], "X"),
-        ("Which tool allows you to move objects in Blender?", 
-         ["Grab Tool (G)", "Rotate Tool (R)", "Scale Tool (S)", "Extrude Tool (E)"], "Grab Tool (G)"),
-    ]
-
-    # Dictionary to store the user's answers
-    user_answers = {}
-
-    # Display questions and collect answers
-    for i, (question, options, correct_answer) in enumerate(questions):
-        st.write(f"Q{i+1}: {question}")
-        if options:
-            user_answers[f"q{i}"] = st.radio("", options, key=f"q{i}")
-        else:
-            user_answers[f"q{i}"] = st.text_input("", key=f"q{i}")
-
-    if st.button("View Score"):
-        score = 0
-        # Calculate score
-        for i, (question, options, correct_answer) in enumerate(questions):
-            if user_answers[f"q{i}"].strip().lower() == correct_answer.strip().lower():
-                score += 1
-        
-        # Display score and corresponding icon/smiley
-        st.write(f"Your score: {score}/{len(questions)}")
-
-        if score == len(questions):
-            st.success("Excellent! 🎉😃")
-        elif score >= len(questions) * 0.7:
-            st.success("Good job! 😊")
-        elif score >= len(questions) * 0.4:
-            st.warning("Fair effort! 🙂")
-        else:
-            st.error("Needs Improvement! 😕")
-
-
-def case_study_recipe_management():
-    st.title("Case Study: Streamlining Recipe Management")
-
-    st.subheader("Background")
-    st.write("""
-    **Bake My Day**, a popular bakery known for its delicious and creative pastries, is struggling with recipe management. Their recipes are currently stored on handwritten cards and scattered notebooks, making it difficult for bakers to find specific recipes quickly and consistently. This chaos often leads to errors in ingredient measurements and baking times, impacting the quality and consistency of their baked goods.
-    """)
-    
-    st.write("""
-    **Challenges:**
-    - Handwritten recipes are time-consuming to locate and prone to damage or misplacement.
-    - Variations in handwriting and lack of standardized units can lead to inaccurate measurements and inconsistencies in baking results.
-    - New recipes developed by one baker are not readily accessible to others, hindering knowledge sharing and innovation.
-    - Estimating ingredient needs based on handwritten recipes is difficult, leading to potential overstocking or understocking of ingredients.
-    """)
-
-    st.write("""
-    **Proposed Solution:**
-    - Using dictionaries and lists to provide a structured and searchable way to store and access recipes, eliminating reliance on handwritten cards.
-    - Calculations can ensure consistent ingredient amounts, leading to more reliable baking results.
-    - All bakers can access and share recipes within the program, fostering knowledge exchange and recipe innovation.
-    - The system can calculate the total ingredient needs for a recipe batch, aiding in inventory planning and preventing stock shortages.
-    """)
-
-    st.subheader("Discussion Questions")
-    st.write("""
-    1. **What are some limitations of using simple data types for recipe management?**
-        - Simple data types such as strings and basic lists can lack the necessary structure and flexibility needed for comprehensive recipe management.
-        - They may not easily support complex queries or updates, and large amounts of data can become cumbersome to manage and prone to errors.
-    
-    2. **How could these limitations be addressed by incorporating libraries or more complex data structures?**
-        - Incorporating libraries such as pandas can allow for more sophisticated data manipulation and querying capabilities.
-        - Using more complex data structures like nested dictionaries or dataframes can provide better organization and accessibility for recipes, allowing for more efficient searches, updates, and calculations.
-    
-    3. **How can Bake My Day further leverage the system to automate other aspects of their operations?**
-        - Bake My Day can integrate inventory management by linking ingredient usage with stock levels to automate reordering processes.
-        - They can implement scheduling and task management for bakers, automating workflow and ensuring timely preparation of baked goods.
-        - Additionally, they can use the system to analyze sales data and customer preferences, optimizing recipe offerings and improving customer satisfaction.
-    """)
 
 
 
@@ -254,114 +157,114 @@ def lca_contents():
     st.subheader("Research Based Learning and Case Study")
     st.write("Description: In this research-based learning activity, students conducted in-depth investigations on specific Python programming topics, culminating in a detailed case study.")
 
-#def course_plan():
-#    st.header("Course Schedule: Introduction to Python")
+def course_plan():
+    st.header("Course Schedule: Introduction to Python")
 
     # Unit 1: INTRODUCING PYTHON
- #   st.subheader("Unit-1: INTRODUCING PYTHON")
- #   st.subheader("Unit details:")
-  #  st.write("Introduction, Python Fundamentals, Features of Python, Components of a Python Program")
+    st.subheader("Unit-1: INTRODUCING PYTHON")
+    st.subheader("Unit details:")
+    st.write("Introduction, Python Fundamentals, Features of Python, Components of a Python Program")
 
-   # st.subheader("Week 1 (19-22 June)")
-    #st.write("Hours per Chapter: 4")
-    #st.subheader("Learner Centered Approach:")
-    #st.markdown("- Activity: Group Discussion")
-    #st.markdown("- [Python Features](https://www.geeksforgeeks.org/python-features/)")
+    st.subheader("Week 1 (19-22 June)")
+    st.write("Hours per Chapter: 4")
+    st.subheader("Learner Centered Approach:")
+    st.markdown("- Activity: Group Discussion")
+    st.markdown("- [Python Features](https://www.geeksforgeeks.org/python-features/)")
 
-    #st.subheader("Week 2 (24-29 June)")
-    #st.write("Hours per Chapter: 4")
-    #st.subheader("Learner Centered Approach:")
-    #st.markdown("- Experiential Learning: (colab, VS code, Jupyter Notebook, Python IDE, Pycharm etc.)")
-    #st.markdown("- [Python Keywords and Identifiers](https://www.geeksforgeeks.org/python-keywords-and-identifiers/)")
+    st.subheader("Week 2 (24-29 June)")
+    st.write("Hours per Chapter: 4")
+    st.subheader("Learner Centered Approach:")
+    st.markdown("- Experiential Learning: (colab, VS code, Jupyter Notebook, Python IDE, Pycharm etc.)")
+    st.markdown("- [Python Keywords and Identifiers](https://www.geeksforgeeks.org/python-keywords-and-identifiers/)")
 
-    #st.subheader("Week 3 (1-6 July)")
-    #st.write("Hours per Chapter: 4")
-    #st.subheader("Learner Centered Approach:")
-    #st.markdown("- Problem-solving Sessions.")
-    #st.markdown("- Assessment-1 (20 Marks)")
-    #st.markdown("- [Precedence and Associativity of Operators in Python](https://www.javatpoint.com/precedence-and-associativity-of-operators-in-python)")
+    st.subheader("Week 3 (1-6 July)")
+    st.write("Hours per Chapter: 4")
+    st.subheader("Learner Centered Approach:")
+    st.markdown("- Problem-solving Sessions.")
+    st.markdown("- Assessment-1 (20 Marks)")
+    st.markdown("- [Precedence and Associativity of Operators in Python](https://www.javatpoint.com/precedence-and-associativity-of-operators-in-python)")
 
     # Unit 2: PYTHON DATA TYPES: LISTS AND TUPLES
-    #st.subheader("Unit-2: PYTHON DATA TYPES: LISTS AND TUPLES")
-    #st.subheader("Unit details:")
-    #st.write("Introduction to Python Data types and Data structures")
+    st.subheader("Unit-2: PYTHON DATA TYPES: LISTS AND TUPLES")
+    st.subheader("Unit details:")
+    st.write("Introduction to Python Data types and Data structures")
 
-    #st.subheader("Week 4 (8-13 July)")
-    #st.write("Hours per Chapter: 4")
-    #st.subheader("Learner Centered Approach:")
-    #st.markdown("- Activity: Participatory Learning: Poster Presentation")
-    #st.markdown("- [Lists: Accessing elements, Basic List operations, Built-in methods](https://corporatefinanceinstitute.com/resources/data-science/python-data-structures/)")
+    st.subheader("Week 4 (8-13 July)")
+    st.write("Hours per Chapter: 4")
+    st.subheader("Learner Centered Approach:")
+    st.markdown("- Activity: Participatory Learning: Poster Presentation")
+    st.markdown("- [Lists: Accessing elements, Basic List operations, Built-in methods](https://corporatefinanceinstitute.com/resources/data-science/python-data-structures/)")
 
-    #st.subheader("Week 5 (15-19 July)")
-    #st.write("Hours per Chapter: 4")
-    #st.subheader("Learner Centered Approach:")
-    #st.markdown("- Instructional activity: Brainstorming")
-    #st.markdown("- [Tuples: working with elements, Basic Tuple operation, Tuple methods and Type of Tuples](https://www.geeksforgeeks.org/list-methods-python/)")
+    st.subheader("Week 5 (15-19 July)")
+    st.write("Hours per Chapter: 4")
+    st.subheader("Learner Centered Approach:")
+    st.markdown("- Instructional activity: Brainstorming")
+    st.markdown("- [Tuples: working with elements, Basic Tuple operation, Tuple methods and Type of Tuples](https://www.geeksforgeeks.org/list-methods-python/)")
 
-    #st.subheader("Week 6 (22-27 July)")
-    #st.write("Hours per Chapter: 4")
-    #st.subheader("Learner Centered Approach:")
-    #st.markdown("- Formative Assessment: Quiz using Kahoot")
-    #st.markdown("- Assessment-2 (20 Marks)")
-    #st.markdown("- [Python Tuple Methods](https://www.geeksforgeeks.org/python-tuple-methods/)")
+    st.subheader("Week 6 (22-27 July)")
+    st.write("Hours per Chapter: 4")
+    st.subheader("Learner Centered Approach:")
+    st.markdown("- Formative Assessment: Quiz using Kahoot")
+    st.markdown("- Assessment-2 (20 Marks)")
+    st.markdown("- [Python Tuple Methods](https://www.geeksforgeeks.org/python-tuple-methods/)")
 
     # Unit 3: PYTHON DATA TYPES: SETS AND DICTIONARIES
-    #st.subheader("Unit-3: PYTHON DATA TYPES: SETS AND DICTIONARIES")
-    #st.subheader("Unit details:")
-    #st.write("Introduction to Sets and Dictionaries")
+    st.subheader("Unit-3: PYTHON DATA TYPES: SETS AND DICTIONARIES")
+    st.subheader("Unit details:")
+    st.write("Introduction to Sets and Dictionaries")
 
-    #st.subheader("Week 7 (29 July - 3 Aug)")
-    #st.write("Hours per Chapter: 4")
-    #st.subheader("Learner Centered Approach:")
-    #st.markdown("- Experiential Learning: Code Review Session (Review by peer)")
-    #st.markdown("- [Sets: Definition, Set Elements, Built-in methods, basic set operations](https://www.geeksforgeeks.org/python-operators-for-sets-and-dictionaries/)")
+    st.subheader("Week 7 (29 July - 3 Aug)")
+    st.write("Hours per Chapter: 4")
+    st.subheader("Learner Centered Approach:")
+    st.markdown("- Experiential Learning: Code Review Session (Review by peer)")
+    st.markdown("- [Sets: Definition, Set Elements, Built-in methods, basic set operations](https://www.geeksforgeeks.org/python-operators-for-sets-and-dictionaries/)")
 
-    #st.subheader("Week 8 (5-10 Aug)")
-    #st.write("Hours per Chapter: 4")
-    #st.subheader("Learner Centered Approach:")
-    #st.markdown("- Participatory Learning: Think-Pair-Share Activities")
-    #st.markdown("- [Dictionaries: Defining a dictionary, accessing elements, basic operations, methods](https://www.geeksforgeeks.org/sets-in-python/)")
+    st.subheader("Week 8 (5-10 Aug)")
+    st.write("Hours per Chapter: 4")
+    st.subheader("Learner Centered Approach:")
+    st.markdown("- Participatory Learning: Think-Pair-Share Activities")
+    st.markdown("- [Dictionaries: Defining a dictionary, accessing elements, basic operations, methods](https://www.geeksforgeeks.org/sets-in-python/)")
 
-    #st.subheader("Week 9 (12-16 Aug)")
-    #st.write("Hours per Chapter: 4")
-    #st.subheader("Learner Centered Approach:")
-    #st.markdown("- Summative Assessment: Concept Map (or) Mind map (Assessment-3: 10 Marks)")
-    #st.markdown("- [Dictionary Methods in Python](https://www.w3schools.com/python/python_ref_dictionary.asp)")
+    st.subheader("Week 9 (12-16 Aug)")
+    st.write("Hours per Chapter: 4")
+    st.subheader("Learner Centered Approach:")
+    st.markdown("- Summative Assessment: Concept Map (or) Mind map (Assessment-3: 10 Marks)")
+    st.markdown("- [Dictionary Methods in Python](https://www.w3schools.com/python/python_ref_dictionary.asp)")
 
     # Unit 4: Comprehensions and Functions
-    #st.subheader("Unit-4: Comprehensions and Functions")
-    #st.subheader("Unit details:")
-    #st.write("Comprehensions: List Comprehensions, Set Comprehension, Dictionary Comprehension")
+    st.subheader("Unit-4: Comprehensions and Functions")
+    st.subheader("Unit details:")
+    st.write("Comprehensions: List Comprehensions, Set Comprehension, Dictionary Comprehension")
 
-    #st.subheader("Week 10 (19-24 Aug)")
-    #st.write("Hours per Chapter: 4")
-    #st.subheader("Learner Centered Approach:")
-    #st.markdown("- Diagnostic Assessment: Debugging Challenges (Assessment-4: 30 Marks)")
-    #st.markdown("- [Python List Comprehension and Dictionary](https://www.netguru.com/blog/python-list-comprehension-dictionary)")
+    st.subheader("Week 10 (19-24 Aug)")
+    st.write("Hours per Chapter: 4")
+    st.subheader("Learner Centered Approach:")
+    st.markdown("- Diagnostic Assessment: Debugging Challenges (Assessment-4: 30 Marks)")
+    st.markdown("- [Python List Comprehension and Dictionary](https://www.netguru.com/blog/python-list-comprehension-dictionary)")
 
-    #st.subheader("Week 12 (2-7 Sep)")
-    #st.write("Hours per Chapter: 4")
-    #st.subheader("Learner Centered Approach:")
-    #st.markdown("- Instructional Activity: Code Enrichment")
-    #st.markdown("- [Functions: Defining a function, Types of arguments](https://www.geeksforgeeks.org/python-functions/)")
-    #st.markdown("- Unpacking arguments, Recursive functions")
+    st.subheader("Week 12 (2-7 Sep)")
+    st.write("Hours per Chapter: 4")
+    st.subheader("Learner Centered Approach:")
+    st.markdown("- Instructional Activity: Code Enrichment")
+    st.markdown("- [Functions: Defining a function, Types of arguments](https://www.geeksforgeeks.org/python-functions/)")
+    st.markdown("- Unpacking arguments, Recursive functions")
 
     # Unit 5: Functional Programming
-    #st.subheader("Unit-5: Functional Programming")
-    #st.subheader("Unit details:")
-    #st.write("Lambda functions, Higher order functions, Map, Filter, Reduce")
+    st.subheader("Unit-5: Functional Programming")
+    st.subheader("Unit details:")
+    st.write("Lambda functions, Higher order functions, Map, Filter, Reduce")
 
-    #st.subheader("Week 14 (16-20 Sep)")
-    #st.write("Hours per Chapter: 4")
-    #st.subheader("Learner Centered Approach:")
-    #st.markdown("- Experiential Learning: Workshops and MooC courses")
-    #st.markdown("- [Using Lambda with map(), filter(), reduce()](https://www.javatpoint.com/map-filter-and-reduce-in-python-with-examples)")
+    st.subheader("Week 14 (16-20 Sep)")
+    st.write("Hours per Chapter: 4")
+    st.subheader("Learner Centered Approach:")
+    st.markdown("- Experiential Learning: Workshops and MooC courses")
+    st.markdown("- [Using Lambda with map(), filter(), reduce()](https://www.javatpoint.com/map-filter-and-reduce-in-python-with-examples)")
 
-    #st.subheader("Week 15 (23-28 Sep)")
-    #st.write("Hours per Chapter: 4")
-    #st.subheader("Learner Centered Approach:")
-    #st.markdown("- Project Deployment Project Based learning")
-    #st.markdown("- [Modules, Packages and Namespaces: Main module, built-in, creation of user defined modules](https://realpython.com/python-modules-packages/)")
+    st.subheader("Week 15 (23-28 Sep)")
+    st.write("Hours per Chapter: 4")
+    st.subheader("Learner Centered Approach:")
+    st.markdown("- Project Deployment Project Based learning")
+    st.markdown("- [Modules, Packages and Namespaces: Main module, built-in, creation of user defined modules](https://realpython.com/python-modules-packages/)")
 
 def display_hello_world_examples():
     st.title("Hello, World! in Different Python Frameworks")
@@ -587,31 +490,31 @@ def display_instructions():
   st.write("* Prepare to present your project idea to the class.")
   st.write("**Submission:**")
   st.write("Upload your project details (Domain, Title, Scope, Objectives, Unique Automation) through the designated channel:")
-  st.write("[Google Classroom](https://classroom.google.com/c/Njk2MzEyODQ4ODI2?cjc=o3sug4y)") 
-  st.write("**GCR code:** o3sug4y")
+  st.write("[Google Classroom](https://classroom.google.com/c/Njk2MzEyODQ4ODI2?cjc=gc2q5ra5)") 
+  st.write("**GCR code:** gc2q5ra5")
 def main():
     
      
     # Sidebar tabs and hyperlinks
     st.sidebar.title('Quick Navigation')
-    tab = st.sidebar.radio('Go to', ['Quiz','Groups'])
+    tab = st.sidebar.radio('Go to', ['Home', 'Activity-1', 'Program-1'])
     if tab == 'Home':
         course_contents()
-           
+        
     elif tab == 'LCA-Activities':
         lca_contents()
 
     elif tab == 'Activity-1':
         display_instructions()
-
-    elif tab == 'Quiz':
-        quiz()
+   
+        
     elif tab == 'Program-1':
         display_hello_world_examples()
     elif tab == 'Groups':
         display_groups()
     elif tab == 'Submissions':
         submission()
+        
 
 if __name__ == "__main__":
     main()
