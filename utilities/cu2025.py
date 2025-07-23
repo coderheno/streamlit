@@ -118,6 +118,9 @@ def script_preparation_tips():
     - **Don’t** make it too long—aim for brevity and clarity.
     - **Don’t** leave the audience hanging—always end with a call to action!
     """)
+    st.header("📑 Sample Course Planner")
+    st.write("""
+    Let's take a look at a sample course planner** course planner [here](https://docs.google.com/spreadsheets/d/1rhhB333HipDj6YukVhmZqPhpAq7vdbSTxE2J2ywGJZw/edit?gid=0#gid=0):
 
     st.header("📑 Sample Promo Script")
     st.write("""
