@@ -2,7 +2,7 @@ import streamlit as st
 import random
 
 st.set_page_config(page_title="VR Basics Interactive Guide", layout="wide")
-st.title("🎮 Getting Started with Virtual Reality (VR)")
+st.title("🎮 Virtual Reality (VR) - Revison and Mockupos")
 
 # --- Step 1: Welcome ---
 st.header("👋 Welcome to the World of Virtual Reality")
