@@ -158,7 +158,7 @@ AR (Augmented Reality) overlays digital information on the real world; VR (Virtu
 ''')
 
 if show_notes:
-    st.header("Lecture Notes (core)")
+    
     st.markdown(lecture_md)
 
 # Diagrams
