@@ -163,3 +163,17 @@ if st.button("Generate simple PPTX of slides"):
     except Exception as e:
         st.error("Could not generate PPTX. Make sure python-pptx is installed in your environment.")
         st.write(e)
+import streamlit as st
+
+st.header("Session 2: Live Q&A & Polls with Slido")
+
+st.write("Join the live interaction by clicking below:")
+
+slido_url = "https://wall.sli.do/event/wFJqRfNF2Y2VmBR4LHwrSp?section=b9cfea71-b26b-464b-b6af-d6bf60a861d5"
+
+# Display as a markdown link
+st.markdown(f"[🔗 Join the Slido Q&A & Polls here →]({slido_url})")
+
+# Or as a button
+if st.button("Open Slido Session"):
+    st.write(f"[Opening Slido... Click here if nothing happens]({slido_url})")
