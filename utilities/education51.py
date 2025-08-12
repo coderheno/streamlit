@@ -192,15 +192,20 @@ st.markdown("---")
 # ----------------------
 # 4) Quick usage guide and tie to microcredential
 # ----------------------
-st.header("4 — How this ties to your microcredential course and lifelong learning")
-st.write("Use this simple flow to demonstrate the power of microlearning and microcredentials:")
+st.header("4 — Education 5.0: Self-Paced Learning & Microcredential Pathways")
+st.write("**The Power of Microlearning and Microcredentials**:")
+
 st.markdown("""
-- A teacher builds a tiny micro-module (1-minute video + 3-question quiz)
-- Students complete the module and submit feedback using the generated app
-- Analytics (even simple CSV counts) track engagement; these feed into badges/microcredentials
-- AI/analytics can later personalize next modules based on performance
+- I have developed a **microcredential course** made up of small, focused learning units.
+- Each micro-module includes a **1-minute explainer video** and a **3-question quiz**.
+- Learners complete the module, then share feedback using a quick **Streamlit feedback app**.
+- Simple analytics (even from a CSV) track participation and performance, which contribute to awarding **digital badges**.
+- In the future, **AI-driven analytics** can personalize the next module based on each learner’s progress and needs.
 """)
 
-st.markdown("**Notes for live session**: Run the generated `feedback_app.py` in a separate tab or ask participants to download and run locally. If you deploy to Streamlit Cloud, share the link and collect live responses.")
 
 st.markdown("---")
+st.markdown("""
+**Quick Links:**  
+[Microcredential Course](https://mooc.christuniversity.in/course/view.php?id=157) | [Session-1](https://13july.streamlit.app)
+""")

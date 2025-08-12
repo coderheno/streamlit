@@ -177,3 +177,7 @@ st.markdown(f"[🔗 Join the Slido Q&A & Polls here →]({slido_url})")
 # Or as a button
 if st.button("Open Slido Session"):
     st.write(f"[Opening Slido... Click here if nothing happens]({slido_url})")
+    st.markdown("""
+**Quick Links:**  
+[Session-2](https://13july2.streamlit.app)
+""")
