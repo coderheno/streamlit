@@ -180,5 +180,5 @@ if st.button("Open Slido Session"):
     
 st.markdown("""
 **Quick Links:**  
-[Session-2](https://13july2.streamlit.app)
+[Session-2](https://13july2.streamlit.app) [Session-3](https://13july25.streamlit.app)
 """)
