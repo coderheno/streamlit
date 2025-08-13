@@ -207,5 +207,5 @@ st.markdown("""
 st.markdown("---")
 st.markdown("""
 **Quick Links:**  
-[Microcredential Course](https://mooc.christuniversity.in/course/view.php?id=157) | [Session-1](https://13july.streamlit.app)
+[Microcredential Course](https://mooc.christuniversity.in/course/view.php?id=157) | [Session-3](https://13july25.streamlit.app) 
 """)

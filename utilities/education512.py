@@ -129,29 +129,12 @@ A Computer Science department replaced traditional **PowerPoint** slides with a 
 Students stopped being passive viewers and started **interacting** with live code outputs, charts, and mini‑activities during lectures.
 """)
 
-    st.markdown("---")
-    st.subheader("Before vs After (Upload your visuals)")
-    c3, c4 = st.columns(2)
-    with c3:
-        st.markdown("**Before**")
-        bef2 = st.file_uploader("Upload 'Before' (e.g., PPT slide screenshot)", type=["png","jpg","jpeg"], key="bef2")
-        if bef2:
-            st.image(bef2, caption="Before: Static PPT bullets", use_column_width=True)
-        else:
-            st.info("Tip: Upload a typical slide image for contrast.")
-        st.markdown("""
+    st.markdown("""
 - **Linear** teaching with fixed slides  
 - **Limited** student participation  
 - **No hands‑on** coding during class
 """)
-    with c4:
-        st.markdown("**After**")
-        aft2 = st.file_uploader("Upload 'After' (e.g., class portal screenshot)", type=["png","jpg","jpeg"], key="aft2")
-        if aft2:
-            st.image(aft2, caption="After: Interactive portal (charts, inputs, code)", use_column_width=True)
-        else:
-            st.info("Tip: Upload your Streamlit portal screenshot with charts/buttons.")
-        st.markdown("""
+    st.markdown("""
 - **Live** code execution (prebuilt, safe demos)  
 - Embedded **videos**, **quizzes**, and **instant polls**  
 - Students access the portal **anytime** from home
@@ -194,4 +177,8 @@ Students stopped being passive viewers and started **interacting** with live cod
             st.warning("Not this time—try again! Tiny games = quick cognitive resets.")
 
     st.markdown("---")
-    st.info("Wrap‑up talking point: These tiny, **interactive** elements turn a lecture into a **learning experience**—perfect for Education 5.0, microlearning, and personalized learning paths.")
+    st.info("These tiny, **interactive** elements turn a lecture into a **learning experience**—perfect for Education 5.0, microlearning, and personalized learning paths.")
+    st.markdown("""
+**Quick Links:**  
+[Session-1](https://13july.streamlit.app) [Session-2](https://13july2.streamlit.app)
+""")
