@@ -6,9 +6,7 @@ import base64
 st.set_page_config(page_title="My Education Journey", layout="wide")
 
 st.title("My Journey through Education 1.0 to 5.0")
-st.markdown("""
-This interactive app is built to accompany your seminar introduction. Use the controls to navigate the five stages of your career and optionally upload photos for each stage.
-""")
+
 
 # Timeline data
 stages = [
