@@ -31,7 +31,7 @@ In a small government school in rural Karnataka, students had never built a webs
 Using **Streamlit** as a low‑code approach (they wrote **very little** Python), they created a **local weather & crop suggestion dashboard**.  
 
 **Before:** project work stayed on chart papers and could not be updated.  
-**After:** a mobile‑friendly dashboard that local farmers use to check daily rainfall and **crop suggestions in Tamil**.
+**After:** a mobile‑friendly dashboard that local farmers use to check daily rainfall and **crop suggestions in Local Languages**.
 """)
 
     st.markdown("""
