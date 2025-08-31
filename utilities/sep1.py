@@ -5,8 +5,6 @@
 
 import streamlit as st
 import numpy as np
-import matplotlib.pyplot as plt
-from matplotlib.patches import Rectangle, FancyArrow
 from io import BytesIO
 import textwrap
 
@@ -220,157 +218,15 @@ notes_implementing = wrap(
 # Diagrams (Matplotlib)
 # -------------------------------
 
-def diagram_pipeline_surface_detection():
-    fig, ax = plt.subplots(figsize=(7, 3))
-    ax.axis('off')
-    steps = ["Features", "Plane\nHypotheses", "RANSAC\nFit", "Track", "Anchors"]
-    x = 0.05
-    for s in steps:
-        ax.add_patch(Rectangle((x, 0.3), 0.16, 0.4, fill=False))
-        ax.text(x+0.08, 0.5, s, ha='center', va='center')
-        x += 0.2
-    # arrows
-    for i in range(5-1):
-        ax.add_patch(FancyArrow(0.21 + 0.2*i, 0.5, 0.06, 0, width=0.01, head_width=0.05, head_length=0.03))
-    return fig
 
 
-def diagram_slam_flow():
-    fig, ax = plt.subplots(figsize=(7, 3))
-    ax.axis('off')
-    blocks = ["Cam/IMU\nInput", "Feature\nTracking", "Pose\nEstimation", "Map\nUpdate", "Loop\nClosure"]
-    x = 0.05
-    for b in blocks:
-        ax.add_patch(Rectangle((x, 0.3), 0.16, 0.4, fill=False))
-        ax.text(x+0.08, 0.5, b, ha='center', va='center')
-        x += 0.2
-    for i in range(len(blocks)-1):
-        ax.add_patch(FancyArrow(0.21 + 0.2*i, 0.5, 0.06, 0, width=0.01, head_width=0.05, head_length=0.03))
-    return fig
-
-
-def diagram_gesture_cheatsheet():
-    fig, ax = plt.subplots(figsize=(6, 3))
-    ax.axis('off')
-    # Draw simple phone and gesture icons
-    ax.add_patch(Rectangle((0.05, 0.2), 0.2, 0.6, fill=False))
-    ax.text(0.15, 0.85, "Tap", ha='center')
-    ax.plot([0.15], [0.5], marker='o')
-
-    ax.add_patch(Rectangle((0.4, 0.2), 0.2, 0.6, fill=False))
-    ax.text(0.5, 0.85, "Pinch", ha='center')
-    ax.plot([0.45, 0.55], [0.5, 0.5], marker='o')
-    ax.add_patch(FancyArrow(0.46, 0.5, -0.05, 0, width=0.005, head_width=0.04, head_length=0.02))
-    ax.add_patch(FancyArrow(0.54, 0.5, 0.05, 0, width=0.005, head_width=0.04, head_length=0.02))
-
-    ax.add_patch(Rectangle((0.75, 0.2), 0.2, 0.6, fill=False))
-    ax.text(0.85, 0.85, "Rotate", ha='center')
-    circle = plt.Circle((0.85, 0.5), 0.1, fill=False)
-    ax.add_patch(circle)
-    ax.add_patch(FancyArrow(0.85, 0.62, 0.0, -0.05, width=0.005, head_width=0.04, head_length=0.02))
-    return fig
 
 
 # -------------------------------
 # Activities / Simulations
 # -------------------------------
 
-def activity_bbox_simulator():
-    st.markdown("**Hands-on:** Simulate surface selection by drawing a bounding box on an image.")
-    uploaded = st.file_uploader("Upload a room photo (JPG/PNG)", type=["jpg", "jpeg", "png"], key="bbox_img")
-    if uploaded:
-        import PIL.Image as Image
-        img = Image.open(uploaded).convert("RGB")
-        w, h = img.size
-        st.image(img, caption=f"Image {w}x{h}", use_column_width=True)
-        st.write("Select bounding box (normalized coordinates)")
-        x = st.slider("x (left)", 0.0, 0.9, 0.2, 0.01)
-        y = st.slider("y (top)", 0.0, 0.9, 0.2, 0.01)
-        bw = st.slider("width", 0.05, 1.0 - x, 0.5, 0.01)
-        bh = st.slider("height", 0.05, 1.0 - y, 0.3, 0.01)
-        # visualize
-        fig, ax = plt.subplots()
-        ax.imshow(img)
-        ax.axis('off')
-        ax.add_patch(Rectangle((x*w, y*h), bw*w, bh*h, fill=False, linewidth=2))
-        st.pyplot(fig, use_container_width=True)
-        st.success("Pretend this is a candidate plane region; discuss stability and cues.")
-    else:
-        st.info("Upload an image to try the bounding box simulator.")
 
-
-def activity_pointcloud_plane_demo():
-    st.markdown("**Concept demo:** Plane fitting on a noisy point cloud.")
-    n_plane = st.slider("Points on plane", 100, 2000, 800, 50)
-    n_out = st.slider("Outliers", 0, 1000, 150, 25)
-    noise = st.slider("Noise (σ)", 0.0, 0.1, 0.02, 0.005)
-
-    # Generate synthetic plane z = 0.3x + 0.1y + 0.0 + noise
-    rng = np.random.default_rng(42)
-    X = rng.uniform(-1, 1, size=(n_plane, 2))
-    Z = 0.3 * X[:, 0] + 0.1 * X[:, 1] + rng.normal(0, noise, size=n_plane)
-    plane_pts = np.c_[X, Z]
-
-    outliers = rng.uniform(-1, 1, size=(n_out, 3))
-    pts = np.vstack([plane_pts, outliers])
-
-    fig = plt.figure(figsize=(6, 4))
-    ax = fig.add_subplot(111, projection='3d')
-    ax.scatter(pts[:, 0], pts[:, 1], pts[:, 2], s=4)
-    ax.set_xlabel('x')
-    ax.set_ylabel('y')
-    ax.set_zlabel('z')
-    ax.set_title('Synthetic point cloud with plane + outliers')
-    st.pyplot(fig, use_container_width=True)
-    st.info("Discuss: how RANSAC would sample, vote, and select best plane; impact of outliers.")
-
-
-def activity_interaction_simulator():
-    st.markdown("**Interaction Simulator:** Conceptual 2D plane with a virtual object.")
-    col1, col2 = st.columns([1,1])
-    with col1:
-        placed = st.session_state.pose["placed"]
-        st.checkbox("Placed?", value=placed, key="placed_check")
-        st.session_state.pose["placed"] = st.session_state.placed_check
-        if st.button("Tap to place at center"):
-            st.session_state.pose.update({"placed": True, "x": 0.5, "y": 0.5})
-        st.slider("X position", 0.0, 1.0, st.session_state.pose["x"], 0.01, key="xpos")
-        st.slider("Y position", 0.0, 1.0, st.session_state.pose["y"], 0.01, key="ypos")
-        st.slider("Scale", 0.2, 2.0, st.session_state.pose["scale"], 0.05, key="scale")
-        st.slider("Rotation (deg)", -180.0, 180.0, st.session_state.pose["rotation_deg"], 1.0, key="rot")
-        st.session_state.pose.update({"x": st.session_state.xpos, "y": st.session_state.ypos, "scale": st.session_state.scale, "rotation_deg": st.session_state.rot})
-        if st.button("Reset"):
-            st.session_state.pose.update({"placed": False, "x": 0.5, "y": 0.5, "scale": 1.0, "rotation_deg": 0.0})
-    with col2:
-        # Render a simple plane and a rectangle object
-        fig, ax = plt.subplots(figsize=(5, 5))
-        ax.set_xlim(0, 1)
-        ax.set_ylim(0, 1)
-        ax.set_aspect('equal')
-        ax.axis('off')
-        # plane grid
-        for i in np.linspace(0, 1, 11):
-            ax.plot([i, i], [0, 1], linewidth=0.3)
-            ax.plot([0, 1], [i, i], linewidth=0.3)
-        if st.session_state.pose["placed"]:
-            cx, cy = st.session_state.pose["x"], st.session_state.pose["y"]
-            s = 0.15 * st.session_state.pose["scale"]
-            ax.text(0.03, 0.97, f"pos=({cx:.2f},{cy:.2f}) scale={st.session_state.pose['scale']:.2f} rot={st.session_state.pose['rotation_deg']:.0f}°", va='top')
-            # Draw oriented rectangle representing the object
-            theta = np.deg2rad(st.session_state.pose["rotation_deg"])
-            # Corners of square centered at origin
-            corners = np.array([[-s, -s], [s, -s], [s, s], [-s, s]])
-            # Rotation
-            R = np.array([[np.cos(theta), -np.sin(theta)], [np.sin(theta), np.cos(theta)]])
-            rc = corners @ R.T
-            rc[:, 0] += cx
-            rc[:, 1] += cy
-            poly = plt.Polygon(rc, fill=False, linewidth=2)
-            ax.add_patch(poly)
-            ax.plot(cx, cy, marker='o')
-        else:
-            ax.text(0.5, 0.5, "Tap to place", ha='center', va='center')
-        st.pyplot(fig, use_container_width=True)
 
 
 # -------------------------------
@@ -499,21 +355,19 @@ if topic == "Home":
     with colA:
         st.markdown(notes_home)
         md_download_button("01_home_notes.md", notes_home)
-        st.pyplot(diagram_pipeline_surface_detection())
+        
     with colB:
         st.markdown("### SLAM overview")
-        st.pyplot(diagram_slam_flow())
-        st.markdown("### Gesture cheatsheet")
-        st.pyplot(diagram_gesture_cheatsheet())
+        
 
 elif topic == "AR Systems & Surface Detection":
     st.header("AR Systems & Surface Detection")
     tabs = st.tabs(["Lecture", "Activity", "Quiz", "Code", "Notes"])
     with tabs[0]:
         st.markdown(notes_ar_systems)
-        st.pyplot(diagram_pipeline_surface_detection())
+        
     with tabs[1]:
-        activity_bbox_simulator()
+        render_quiz("AR Systems", quiz_ar_systems)
     with tabs[2]:
         render_quiz("AR Systems", quiz_ar_systems)
     with tabs[3]:
@@ -552,9 +406,9 @@ elif topic == "Spatial Mapping in AR":
     tabs = st.tabs(["Lecture", "Activity", "Quiz", "Code", "Notes"])
     with tabs[0]:
         st.markdown(notes_spatial_mapping)
-        st.pyplot(diagram_slam_flow())
+        
     with tabs[1]:
-        activity_pointcloud_plane_demo()
+        render_quiz("AR Systems", quiz_ar_systems)
     with tabs[2]:
         render_quiz("Spatial Mapping", quiz_spatial_mapping)
     with tabs[3]:
@@ -589,7 +443,7 @@ elif topic == "Surface Detection Algorithms":
     with tabs[0]:
         st.markdown(notes_algorithms)
     with tabs[1]:
-        activity_pointcloud_plane_demo()
+        render_quiz("AR Systems", quiz_ar_systems)
     with tabs[2]:
         render_quiz("Algorithms", quiz_algorithms)
     with tabs[3]:
@@ -626,11 +480,11 @@ elif topic == "Designing User Interactions":
     tabs = st.tabs(["Lecture", "Activity", "Quiz", "Code", "Notes"])
     with tabs[0]:
         st.markdown(notes_design_interactions)
-        st.pyplot(diagram_gesture_cheatsheet())
+        render_quiz("AR Systems", quiz_ar_systems)
     with tabs[1]:
         st.markdown("**Group task:** Map gestures to actions for an AR lab guide.")
         st.markdown("- Define tap/drag/rotate/scale; add voice command for accessibility.")
-        activity_interaction_simulator()
+        render_quiz("AR Systems", quiz_ar_systems)
     with tabs[2]:
         render_quiz("Design", quiz_design)
     with tabs[3]:
@@ -653,7 +507,7 @@ elif topic == "Basic Interaction Techniques":
     with tabs[0]:
         st.markdown(notes_basic_techniques)
     with tabs[1]:
-        activity_interaction_simulator()
+        render_quiz("AR Systems", quiz_ar_systems)
     with tabs[2]:
         render_quiz("Basic Techniques", quiz_basic)
     with tabs[3]:
@@ -677,7 +531,7 @@ elif topic == "Implementing Interactions":
         st.markdown(notes_implementing)
     with tabs[1]:
         st.markdown("**Case study:** Furniture preview (place/scale/rotate on floor plane).")
-        activity_interaction_simulator()
+        render_quiz("AR Systems", quiz_ar_systems)
     with tabs[2]:
         render_quiz("Implementation", quiz_implementing)
     with tabs[3]:
