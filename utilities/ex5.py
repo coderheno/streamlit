@@ -21,50 +21,50 @@ with tab1:
     color = st.color_picker("Pick a Color", "#FF0000")
 
     # Initialize Figure
-    fig = go.Figure()
+#    fig = go.Figure()
 
     # Create Shapes
-    if shape == "Cube":
-        x = [0, 0, 1, 1, 0, 0, 1, 1]
-        y = [0, 1, 1, 0, 0, 1, 1, 0]
-        z = [0, 0, 0, 0, 1, 1, 1, 1]
-        fig.add_trace(go.Mesh3d(
-            x=x, y=y, z=z,
-            i=[0, 0, 0, 1, 2, 4],
-            j=[1, 2, 4, 5, 3, 5],
-            k=[2, 3, 5, 6, 7, 6],
-            color=color,
-            opacity=0.6
-        ))
+ #   if shape == "Cube":
+  #      x = [0, 0, 1, 1, 0, 0, 1, 1]
+   #     y = [0, 1, 1, 0, 0, 1, 1, 0]
+    #    z = [0, 0, 0, 0, 1, 1, 1, 1]
+     #   fig.add_trace(go.Mesh3d(
+      #      x=x, y=y, z=z,
+       #     i=[0, 0, 0, 1, 2, 4],
+        #    j=[1, 2, 4, 5, 3, 5],
+         #   k=[2, 3, 5, 6, 7, 6],
+          #  color=color,
+           # opacity=0.6
+       # ))
 
-    elif shape == "Sphere":
-        phi, theta = np.mgrid[0:np.pi:30j, 0:2*np.pi:30j]
-        x = np.sin(phi)*np.cos(theta)
-        y = np.sin(phi)*np.sin(theta)
-        z = np.cos(phi)
-        fig.add_trace(go.Surface(
-            x=x, y=y, z=z,
-            colorscale=[[0, color], [1, color]]
-        ))
+    #elif shape == "Sphere":
+     #   phi, theta = np.mgrid[0:np.pi:30j, 0:2*np.pi:30j]
+      #  x = np.sin(phi)*np.cos(theta)
+       # y = np.sin(phi)*np.sin(theta)
+        #z = np.cos(phi)
+        #fig.add_trace(go.Surface(
+          #  x=x, y=y, z=z,
+           # colorscale=[[0, color], [1, color]]
+        #))
 
-    else:  # Pyramid
-        x = [0, 1, 1, 0, 0.5]
-        y = [0, 0, 1, 1, 0.5]
-        z = [0, 0, 0, 0, 1]
-        fig.add_trace(go.Mesh3d(
-            x=x, y=y, z=z,
-            i=[0, 0, 0, 1, 2],
-            j=[1, 2, 3, 4, 4],
-            k=[4, 4, 4, 2, 3],
-            color=color,
-            opacity=0.6
-        ))
+    #else:  # Pyramid
+     #   x = [0, 1, 1, 0, 0.5]
+      #  y = [0, 0, 1, 1, 0.5]
+       # z = [0, 0, 0, 0, 1]
+        #fig.add_trace(go.Mesh3d(
+         #   x=x, y=y, z=z,
+          #  i=[0, 0, 0, 1, 2],
+           # j=[1, 2, 3, 4, 4],
+            #k=[4, 4, 4, 2, 3],
+            #color=color,
+          #  opacity=0.6
+        #))
 
     # Adjust Layout
-    fig.update_layout(scene=dict(aspectmode="data"), margin=dict(l=0, r=0, t=0, b=0))
+    #fig.update_layout(scene=dict(aspectmode="data"), margin=dict(l=0, r=0, t=0, b=0))
 
     # Display 3D Shape
-    st.plotly_chart(fig, use_container_width=True)
+    #st.plotly_chart(fig, use_container_width=True)
 
     # Shape Properties
     st.subheader("Shape Properties")
