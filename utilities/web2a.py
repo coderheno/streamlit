@@ -1,24 +1,26 @@
 # app.py
 """
 Streamlit app to display the BCA 301-4 .NET Course Plan
-Simplified version: no python-docx import or DOCX parsing.
-You can paste or upload plain text / markdown instead.
-Run:
+Lightweight version — no python-docx, no markdownify.
+You can paste or upload plain text.
+Run with:
     streamlit run app.py
 """
 
 import streamlit as st
 import re
-from markdownify import markdownify as md
 
+# ----------------------------
+# App configuration
+# ----------------------------
 st.set_page_config(page_title="BCA301-4 .NET Course Plan", layout="wide")
 
-st.title("BCA 301-4 — .NET Course Plan (Simplified)")
-st.caption("Simplified version without python-docx")
+st.title("BCA 301-4 — .NET Course Plan")
+st.caption("Minimal Streamlit app (no external parsing libraries)")
 
-col1, col2 = st.columns([3, 1])
-
-# Utility: split text into SECTION blocks
+# ----------------------------
+# Helper: split text into SECTION blocks
+# ----------------------------
 SECTION_PATTERN = re.compile(r"(SECTION\s+[IVXLC]+)", flags=re.IGNORECASE)
 
 def split_sections(text: str):
@@ -35,7 +37,10 @@ def split_sections(text: str):
         i += 2
     return sections
 
-# Input source options
+
+# ----------------------------
+# Sidebar: input options
+# ----------------------------
 st.sidebar.header("Input Options")
 source_option = st.sidebar.radio(
     "Choose how to load the course plan:",
@@ -46,8 +51,9 @@ text_content = ""
 
 if source_option == "Paste text manually":
     text_content = st.text_area(
-        "Paste course content here:", height=300,
-        placeholder="Paste the full course content (including SECTION I, II, etc.)..."
+        "Paste course content here:",
+        height=300,
+        placeholder="Paste the full course content (including SECTION I, II, etc.)...",
     )
 elif source_option == "Upload text file":
     uploaded = st.sidebar.file_uploader("Upload .txt or .md file", type=["txt", "md"])
@@ -55,7 +61,9 @@ elif source_option == "Upload text file":
         text_content = uploaded.read().decode("utf-8")
         st.success("File uploaded successfully.")
 
-# Default summary (if nothing entered)
+# ----------------------------
+# Fallback summary
+# ----------------------------
 FALLBACK_SUMMARY = """
 **Course**: BCA 301-4 — Dot Net  
 **Semester**: IV  
@@ -64,6 +72,11 @@ FALLBACK_SUMMARY = """
 **Contact**: see uploaded or pasted content for details.  
 """
 
+col1, col2 = st.columns([3, 1])
+
+# ----------------------------
+# Display logic
+# ----------------------------
 if not text_content.strip():
     col1.markdown(FALLBACK_SUMMARY)
 else:
@@ -76,15 +89,6 @@ else:
 
     # Search box
     query = st.sidebar.text_input("Search inside document")
-
-    # Markdown download
-    md_text = md(text_content)
-    st.sidebar.download_button(
-        "Download as Markdown",
-        md_text,
-        file_name="BCA301-4_course_plan.md",
-        mime="text/markdown",
-    )
 
     # Display chosen section
     with col1:
@@ -116,6 +120,7 @@ else:
                 preview = cnt[:800] + ("..." if len(cnt) > 800 else "")
                 st.markdown(preview)
 
+# ----------------------------
 # Footer
-st.markdown("---")
-st.caption("Simplified Streamlit version — no python-docx used.")
+# ----------------------------
+
