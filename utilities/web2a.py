@@ -125,7 +125,7 @@ st.table(mapping)
 # ----------------------------------------------------------------------
 st.header("SECTION IV — Evaluation Rubrics (CIA, ESE-I, ESE-II, ESE-III)")
 
-st.subheader("CIA – I (Regular Lab Evaluation)")
+st.subheader("CIA Overall (Regular Lab Evaluation)")
 cia_rubrics = pd.DataFrame([
     ["1", "On-time completion & Domain based knowledge", "2"],
     ["2", "Execution With Complexity", "2"],
@@ -134,7 +134,16 @@ cia_rubrics = pd.DataFrame([
     ["5", "Viva", "2"],
 ], columns=["S.No.", "Evaluation Rubrics", "Marks"])
 st.table(cia_rubrics)
-
+st.subheader("CIA – II (MSE Exam and Evaluation - Centralized)")
+st.subheader("ESE – I (Research Assignment/ Case Analysis) Evaluation Rubrics")
+ese1 = pd.DataFrame([
+    ["1", "Concept Clarity and Viva", "20%"],
+    ["2", "Complexity/Documentation", "20%"],
+    ["3", "Task-1", "20%"],
+    ["4", "Task-2", "20%"],
+    ["5", "Validations/ Correctness", "20%"],
+], columns=["S.No.", "Evaluation Rubrics", "Weightage"])
+st.table(ese1)
 st.subheader("ESE – II (Lab Test) Evaluation Rubrics")
 ese2 = pd.DataFrame([
     ["1", "Identification of Problem / UI Design", "20%"],
@@ -145,13 +154,13 @@ ese2 = pd.DataFrame([
 ], columns=["S.No.", "Evaluation Rubrics", "Weightage"])
 st.table(ese2)
 
-st.subheader("ESE – III (Project Evaluation Rubrics)")
+st.subheader("ESE – III (Lab test/ Project Evaluation Rubrics)")
 ese3 = pd.DataFrame([
-    ["1", "Project domain, Title, Abstract Scope, Objectives", "20%"],
-    ["2", "Review of Literature", "20%"],
-    ["3", "Methodologies and Results", "20%"],
-    ["4", "Review Presentation and Implementation", "20%"],
-    ["5", "Publication/Final Presentation", "20%"],
+    ["1", "UI Design/ Project domain, Title, Abstract Scope, Objectives", "20%"],
+    ["2", "Task-1/ Review of Literature", "20%"],
+    ["3", "Task-2/ Methodologies and Results", "20%"],
+    ["4", "Complexity/ Review Presentation and Implementation", "20%"],
+    ["5", "Validation, viva, add-ons/ Publication/Final Presentation", "20%"],
 ], columns=["S.No.", "Evaluation Rubrics (Project)", "Weightage"])
 st.table(ese3)
 
