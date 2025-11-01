@@ -169,4 +169,4 @@ st.table(ese3)
 # ----------------------------------------------------------------------
 st.download_button("📄 Download Full Course Plan (Text)", data=open(__file__).read(), file_name="BCA301-4_COURSE_PLAN.txt")
 st.markdown("---")
-st.caption("This web app embeds and formats the official BCA 301-4 DOT NET course plan without altering any content.")
+st.caption("Streamlit + Passion = Innovation")
