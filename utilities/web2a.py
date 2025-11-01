@@ -1,69 +1,179 @@
 # app.py
 """
-Streamlit app to display the full contents of a DOCX file (paragraphs + tables).
-- Automatically uses /mnt/data/BCA301-4 Updated.docx if present.
-- Also allows users to upload a .docx file.
-- If python-docx is not installed, shows install instructions and allows paste/upload of plain text as fallback.
-
+BCA 301-4 DOT NET COURSE PLAN Viewer
+------------------------------------
+- Shows the exact contents of the course plan (no upload or parsing needed)
+- Fully self-contained
 Run:
-    pip install streamlit python-docx
+    pip install streamlit
     streamlit run app.py
 """
 
 import streamlit as st
 import re
-from pathlib import Path
-import io
 
-st.set_page_config(page_title="BCA301-4 Course Plan Viewer", layout="wide")
+st.set_page_config(page_title="BCA301-4 DOT NET COURSE PLAN", layout="wide")
 
-st.title("BCA301-4 — Course Plan Viewer")
-st.caption("Displays full contents of a DOCX (paragraphs & tables).")
+st.title("BCA 301-4 DOT NET COURSE PLAN")
+st.caption("Exact text version — no modifications or omissions")
 
-# Try to import python-docx (Document). If not present, we keep going but show instructions.
-try:
-    from docx import Document
-    HAS_DOCX = True
-except Exception:
-    HAS_DOCX = False
+# -------------------------------------------------------------------------------------
+# The complete document content EXACTLY as provided (do not change or reformat)
+# -------------------------------------------------------------------------------------
+COURSE_PLAN = """BCA 301-4 DOT NET COURSE PLAN
+SECTION I
+Semester	IV	Class	 4 BCA A & B
+Course Code	 BCA 301-4	Course title	Dot Net
+Hours	 75	Hours per week	3+2
+Faculty name	Dr Smitha Vinod
+Dr Vijay Arputharaj J
+Dr Gayathry S Warrier
+Dr Deepa BG
+	Contact 
+details	Mobile:  9886495919, 9677188654, 9497640670, 8105095047
+Mail:  smitha.vinod@christuniversity.in
+vijay.arputharaj@christuniversity.in
+gayathry.warrier@christuniversity.in
+deepa.bg@christuniversity.in
+Class policies and guidelines	1.	All communication will be done through CHRIST University Official Mail/Google Class/Moodle.
+2.	Read the course content / resources shared in Google Drive before coming to the class.
+3.	Usage of the Laptop is only with the prior permission (as per the requirements of the Class work/Lab/Demo)
+4.	Mentoring sessions, discussions, and assistance will be available only on prior appointment. Please schedule your sessions in advance to ensure availability and effective preparation.
+Course Description	This course provides an in-depth understanding of .NET technologies, focusing on C# and VB.NET for Windows Forms applications. Students will explore .NET Framework, CLR, OOPS concepts, Windows-based application development, database integration using ADO.NET, file handling, security, and deployment. The course emphasizes hands-on learning through practical lab exercises and culminates in a real-world mini-project aligned with SDG’s and social initiatives.
+Course Objectives	This course equips students with .NET development skills, focusing on C# and VB.NET for Windows Forms applications. It covers .NET Framework, OOP concepts, event-driven programming, ADO.NET database integration, file handling, security, and deployment.
+Students will explore advanced applications like face recognition, voice-based systems, and biometrics. The course culminates in a real-world mini-project supporting NGOs, SDGs, or
+social initiatives, preparing students for industry-ready software development.
+Learning Outcomes for the Course	CO1: Explain the core concepts of .NET Framework and compare the features of C# and VB.NET for Windows application development.
+CO2: Develop Windows Forms applications using event-driven programming, implementing custom controls, menus, toolbars, and dialog boxes for interactive user interfaces.
+CO3: Integrate databases with ADO.NET, demonstrating proficiency in connected and disconnected architectures, and performing CRUD operations using SQL Server.
+CO4: Implement file handling techniques using System.IO, including text, binary, and secure data storage, ensuring efficiency and security in .NET applications.
+CO5: Design and deploy advanced applications using face recognition, voice-based systems, and biometric authentication, applying real-world secure coding practices.
 
-# -------------------------
-# Utilities for DOCX parsing
-# -------------------------
-def read_docx_paragraphs(path_or_bytes) -> list:
-    """
-    Returns a list of paragraph texts in order from the docx.
-    Accepts a Path-like or bytes/BytesIO.
-    """
-    doc = Document(path_or_bytes)
-    paras = []
-    for p in doc.paragraphs:
-        paras.append(p.text)
-    return paras
+ 
 
-def read_docx_tables(path_or_bytes) -> list:
-    """
-    Returns a list of tables, where each table is a list of rows,
-    and each row is a list of cell text.
-    """
-    doc = Document(path_or_bytes)
-    tables = []
-    for table in doc.tables:
-        rows = []
-        for r in table.rows:
-            cells = [c.text for c in r.cells]
-            rows.append(cells)
-        tables.append(rows)
-    return tables
+SECTION II
+Module/ Unit	Topic details	Week
+(starting and
+end dates)	Hours
+per
+Chapter	Teaching learning methods used/ activities and dates for assessment 	Resource/ Reference details
+Unit-1
 
-def extract_headings_and_sections(paragraphs: list) -> dict:
-    """
-    Heuristic: split text into sections based on lines that start with 'SECTION' (common in your syllabus).
-    Returns dict: {section_heading: full_text_in_section}
-    If no SECTION headings found, return {"Full Document": full_text}
-    """
-    text = "\n\n".join(paragraphs)
-    SECTION_PATTERN = re.compile(r"(SECTION\s+[IVXLC]+)", flags=re.IGNORECASE)
+.NET AND OBJECT-ORIENTED PROGRAMMING
+(Teaching Hours: 15)	.NET Framework and .NET 6/7 Overview, CLR, MSIL, Assemblies, Metadata, Garbage
+Collection, C# vs. VB.NET – Key Differences	Week 1
+
+30th - 31st  Oct 2025 and 3rd - 5th Nov 2025	5	
+
+
+Experiential Learning
+
+Problem Solving Sessions
+
+Diagnostic Assessments
+ 
+ICT tools used: Visual Studio 
+JetBrains Rider
+.NET CLI
+You Tube
+GitHub	Text Books
+Ref. Books
+
+Online Tutorials
+
+	Advanced OOPS in C# and VB.NET
+(Encapsulation, Inheritance, Polymorphism)	Week 2
+
+
+	5		Text Books
+Ref. Books
+
+Online Tutorials
+	Delegates, Events, Lambda Expressions,
+Working with Threads and Asynchronous Programming
+
+	5		Text Books
+Ref. Books
+
+Online Tutorials
+Unit-2
+
+WINDOWS APPLICATIONS & EVENT-DRIVEN PROGRAMMING  (Teaching Hours:15)	Windows Forms Development in C# and VB.NET, Event Handling, Common controls,	Week 4
+
+	5	Activity: Collaborative Learning	Text Books
+Ref. Books
+
+Online Tutorials
+	ListView, TreeView, ProgressBar, Components: Errorlogs, Timer Creating Custom Controls
+in Windows Forms,
+	Week 5
+
+
+	5 + 2	CIA -I (KP 4th Jan)
+Formative Assessment: Problem Solving Lab test-1 (40 Marks)	Text Books
+Ref. Books
+
+Online Tutorials
+	Menus, Toolbars and Dialog Boxes, Interoperability between VB.NET
+and C#
+	Week 6
+
+6th - 11th Jan 	5	Experiential 
+Learning : Code Review Session (Review by peer)	Text Books
+Ref. Books
+
+Online Tutorials
+Unit-3
+
+DATABASE INTEGRATION WITH ADO.NET (Teaching Hours:15)	Introduction to ADO.NET, Connection, Command, DataReader, and DataAdapter, DataSet,	Week 7
+
+	5	ESE -I (KP 25th Jan)
+Formative Assessment: Problem Solving MCQ Quiz (20 Marks)	Text Books
+Ref. Books
+
+Online Tutorials
+	DataTable, and DataGridView Controls, Connected vs. Disconnected Architecture,	Week 8
+
+
+20th - 25th Jan	5	Participatory 
+Learning: Think-Pair-Share Activities
+	Text Books
+Ref. Books
+
+Online Tutorials
+	Mid Semester Week ( Week-9: 3rd - 8th Feb )
+...
+SECTION IV
+Assessment Description: CIA – I
+Assessment Name	CIA I
+Schedule 	Every week (As per lab schedule)
+Weightage	50%
+Individual Assignment Details   	Individual 
+Assessment description:	Regular Lab exercises evaluations
+Mode of the Test	Practical & GCR Submission/ Moodle.
+Marks	50 Marks
+Duration	Based on lab schedule
+Topics Covered	List of Programs 1 to 8 and project from Unit-5 (regular Lab evaluation)
+Remarks	●	No Late evaluation
+●	GCR submissions are mandatory. 
+
+Evaluation Rubrics:
+S. No.	Evaluation Rubrics	Marks 
+1	On-time completion & Domain based knowledge 	2
+2	Execution With Complexity	2
+3	Formatting & Validation	2
+4	Concept Clarity/Completion of task assigned on the spot	2
+5	Viva	2
+...
+* * * * * * * * * 
+"""
+
+# -------------------------------------------------------------------------------------
+# Helper: split text into sections
+# -------------------------------------------------------------------------------------
+SECTION_PATTERN = re.compile(r"(SECTION\s+[IVXLC]+)", flags=re.IGNORECASE)
+
+def split_sections(text: str):
     parts = SECTION_PATTERN.split(text)
     if len(parts) == 1:
         return {"Full Document": text}
@@ -76,180 +186,46 @@ def extract_headings_and_sections(paragraphs: list) -> dict:
         i += 2
     return sections
 
-# -------------------------
-# Load docx: automatic file + upload
-# -------------------------
-DEFAULT_DOCX_PATH = Path("/mnt/data/BCA301-4 Updated.docx")
 
-uploaded_docx = st.sidebar.file_uploader("Upload a .docx file (optional)", type=["docx"])
+# -------------------------------------------------------------------------------------
+# Display logic
+# -------------------------------------------------------------------------------------
+sections = split_sections(COURSE_PLAN)
 
-use_default = False
-if DEFAULT_DOCX_PATH.exists() and uploaded_docx is None:
-    use_default = st.sidebar.checkbox(f"Use existing file: {DEFAULT_DOCX_PATH.name}", value=True)
-else:
-    # If default not present, don't show check; user can upload
-    use_default = False
+st.sidebar.header("Navigate")
+selected = st.sidebar.radio("Select Section", list(sections.keys()), index=0)
+search = st.sidebar.text_input("Search text")
 
-docx_bytes = None
-docx_source_name = None
+col1, col2 = st.columns([3, 1])
 
-if use_default and DEFAULT_DOCX_PATH.exists():
-    docx_bytes = str(DEFAULT_DOCX_PATH)  # path; our read functions accept path string
-    docx_source_name = DEFAULT_DOCX_PATH.name
-elif uploaded_docx is not None:
-    # streamlit gives a UploadedFile which behaves like BytesIO
-    docx_bytes = io.BytesIO(uploaded_docx.read())
-    docx_source_name = uploaded_docx.name
-
-# -------------------------
-# Fallback text input (when python-docx missing or user wants to paste)
-# -------------------------
-st.sidebar.markdown("---")
-st.sidebar.write("Alternate input (paste text or upload .txt/.md)")
-
-paste_text = st.sidebar.text_area("Paste course content (plain text)", height=120)
-txt_upload = st.sidebar.file_uploader("Or upload .txt/.md", type=["txt", "md"])
-
-txt_uploaded_content = None
-if txt_upload is not None:
-    txt_uploaded_content = txt_upload.read().decode("utf-8")
-
-# -------------------------
-# Main display
-# -------------------------
-col_main, col_right = st.columns([3, 1])
-
-with col_main:
-    st.header("Document Contents")
-
-    if docx_bytes and HAS_DOCX:
-        try:
-            # Read paragraphs and tables
-            paras = read_docx_paragraphs(docx_bytes)
-            tables = read_docx_tables(docx_bytes)
-
-            st.success(f"Loaded DOCX: {docx_source_name}")
-
-            # Extract and show sections (based on 'SECTION' headings)
-            sections = extract_headings_and_sections(paras)
-            # Sidebar navigation for sections
-            st.sidebar.header("Sections")
-            section_keys = list(sections.keys())
-            selected_section = st.sidebar.selectbox("Select section to view", section_keys, index=0)
-
-            # Search inside document (global)
-            search_query = st.sidebar.text_input("Search whole document")
-            if search_query:
-                # naive search through paragraphs
-                matches = []
-                for i, p in enumerate(paras):
-                    if search_query.lower() in p.lower():
-                        matches.append((i + 1, p.strip()))
-                st.info(f"Found {len(matches)} paragraph matches for '{search_query}'.")
-                for idx, text in matches[:200]:
-                    st.write(f"Paragraph {idx}: {text}")
-
-            # Display the selected section's text (split into blocks)
-            st.subheader(selected_section)
-            section_text = sections.get(selected_section, "")
-            if section_text.strip() == "":
-                st.write("_(no textual content detected in this section)_")
-            else:
-                blocks = [b for b in re.split(r"\n{2,}", section_text) if b.strip()]
-                for i, b in enumerate(blocks):
-                    if len(b) > 400:
-                        with st.expander(f"Part {i+1}"):
-                            st.write(b)
-                    else:
-                        st.write(b)
-
-            # Show tables (if any) after the textual contents
-            if tables:
-                st.markdown("---")
-                st.subheader("Tables found in document")
-                for t_idx, table in enumerate(tables, start=1):
-                    st.markdown(f"**Table {t_idx}**")
-                    # Render as st.table using list of dicts if header-like row detected
-                    # Heuristic: if first row looks like headers (no empty cells), use it
-                    rows = table
-                    if not rows:
-                        continue
-                    # Use the first row as headers if all unique
-                    headers = rows[0]
-                    # build list of dicts for dataframe
-                    data = []
-                    for r in rows[1:]:
-                        # pad shorter rows
-                        row_cells = r + [""] * (len(headers) - len(r))
-                        data.append({headers[j] if headers[j] else f"Col {j+1}": row_cells[j] for j in range(len(headers))})
-                    if data:
-                        st.table(data)
-                    else:
-                        # only single-row table, show as single-row table
-                        st.write(headers)
-
-            # Provide download of full extracted text
-            full_text = "\n\n".join(paras)
-            st.download_button("Download extracted text (.txt)", full_text, file_name="BCA301-4_extracted.txt", mime="text/plain")
-
-        except Exception as e:
-            st.error(f"Error parsing DOCX: {e}")
-            st.write("You can paste the document text in the sidebar or upload a .txt/.md file as fallback.")
-    else:
-        # Either no docx uploaded/selected, or python-docx missing
-        if docx_bytes and not HAS_DOCX:
-            st.warning("python-docx is not installed in the environment. Install it to enable .docx parsing.")
-            st.info("Install by running: pip install python-docx")
-            st.write("After installing, re-run the Streamlit app.")
-            st.markdown("---")
-
-        # Prefer pasted text, then txt upload, else show message
-        input_text = None
-        if paste_text and paste_text.strip():
-            input_text = paste_text
-            st.success("Showing pasted text")
-        elif txt_uploaded_content:
-            input_text = txt_uploaded_content
-            st.success(f"Showing uploaded text: {txt_upload.name}")
+with col1:
+    st.subheader(selected)
+    text = sections[selected]
+    if search:
+        lines = text.splitlines()
+        hits = [ln for ln in lines if search.lower() in ln.lower()]
+        if hits:
+            st.markdown(f"**Search results for '{search}':**")
+            for h in hits:
+                st.markdown(f"- {h}")
         else:
-            st.info("No DOCX parsed. Either upload a .docx (and have python-docx installed) or paste/upload plain text in the sidebar.")
-            input_text = ""
-
-        if input_text:
-            # Try to split into SECTIONs if present
-            SECTION_PATTERN = re.compile(r"(SECTION\s+[IVXLC]+)", flags=re.IGNORECASE)
-            parts = SECTION_PATTERN.split(input_text)
-            if len(parts) == 1:
-                st.write(input_text)
-            else:
-                sections = {}
-                i = 1
-                while i < len(parts):
-                    header = parts[i].strip()
-                    content = parts[i+1].strip() if (i+1) < len(parts) else ""
-                    sections[header] = content
-                    i += 2
-                st.sidebar.header("Sections")
-                selected_section = st.sidebar.selectbox("Select section to view", list(sections.keys()), index=0)
-                st.subheader(selected_section)
-                st.write(sections[selected_section])
-            # download button for pasted/ uploaded text
-            if input_text.strip():
-                st.download_button("Download shown text (.txt)", input_text, file_name="BCA301-4_shown.txt", mime="text/plain")
-
-with col_right:
-    st.markdown("### Quick actions")
-    if HAS_DOCX:
-        st.write("- `python-docx` is available.")
+            st.info("No matches found.")
     else:
-        st.warning("- `python-docx` not installed.")
-        st.write("Install with:")
-        st.code("pip install python-docx")
-    st.markdown("---")
-    st.write("Tips:")
-    st.write("• If you have `/mnt/data/BCA301-4 Updated.docx` on the server, enable the checkbox to load it.")
-    st.write("• You can upload a .docx file or paste the content as fallback.")
-    st.write("• Tables are displayed as Streamlit tables when possible.")
+        blocks = [b for b in re.split(r"\n{2,}", text) if b.strip()]
+        for i, b in enumerate(blocks):
+            if len(b) > 600:
+                with st.expander(f"Part {i+1}"):
+                    st.markdown(b)
+            else:
+                st.markdown(b)
+
+with col2:
+    st.markdown("### Quick View")
+    for name, content in sections.items():
+        with st.expander(name, expanded=False):
+            preview = content[:800] + ("..." if len(content) > 800 else "")
+            st.text(preview)
 
 st.markdown("---")
-st.caption("This app attempts to show the full contents of your DOCX (paragraphs & tables).")
+st.download_button("Download Full Course Plan (TXT)", COURSE_PLAN, file_name="BCA301-4_DOTNET_COURSE_PLAN.txt")
+st.caption("Exact course plan text displayed — no deviations or edits.")
