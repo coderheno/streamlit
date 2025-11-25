@@ -1,2 +1,2 @@
-import streamlit as st
-st.title("Welcome to 1 Bsc CS")
+for char in "PYTHON"[::2]:
+    print(char, end='-')
