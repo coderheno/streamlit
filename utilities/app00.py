@@ -203,4 +203,4 @@ elif menu == "Self-Learning: Code Review Tools":
 - Review Board
 """)
 
-st.sidebar.success("Use this app for interactive Software Engineering teaching")
+st.sidebar.success("Use this app for learning Software Engineering in an interactive way.")
