@@ -127,42 +127,196 @@ elif menu == "Windows Forms & Common Controls":
 
     st.markdown("""
     ### Windows Forms (WinForms)
-    Windows Forms is a .NET framework used to create **desktop GUI applications** using C# or VB.NET.
+    Windows Forms is a .NET framework used to create **event-driven desktop applications**
+    using **C#.NET or VB.NET**.
 
-    A **Form** acts as the main window of the application.
+    A **Form** is not just a window — it acts as:
+    - The container for controls
+    - The coordinator of events
+    - The controller of application logic
+
+    💡 Real-world WinForms applications work based on **process flow**, not individual controls.
     """)
 
-    st.subheader("Button (Calculator / Quiz)")
-    st.write("Used to perform actions when clicked.")
+    st.markdown("""
+    ---
+    ### Mini Project 1: Calculator – Process-Based Working
+
+    **Working Principle:**
+    1. User enters numbers
+    2. Selects an operation
+    3. Clicks a button
+    4. Result is calculated and displayed
+
+    **Controls involved:**
+    - TextBox → Input
+    - Button → Trigger calculation
+    - Label → Display result
+    """)
+
+    st.markdown("#### C#.NET – Calculator Logic")
     st.code("""
-// C# Button Click Event
 private void btnAdd_Click(object sender, EventArgs e)
 {
-    int a = int.Parse(txtA.Text);
-    int b = int.Parse(txtB.Text);
-    lblResult.Text = (a + b).ToString();
+    int num1 = int.Parse(txtNum1.Text);
+    int num2 = int.Parse(txtNum2.Text);
+    int result = num1 + num2;
+
+    lblResult.Text = "Result: " + result;
 }
 """, language="csharp")
 
-    st.subheader("TextBox (Notepad)")
+    st.markdown("#### VB.NET – Calculator Logic")
+    st.code("""
+Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
+    Dim num1 As Integer = Integer.Parse(txtNum1.Text)
+    Dim num2 As Integer = Integer.Parse(txtNum2.Text)
+    lblResult.Text = "Result: " & (num1 + num2)
+End Sub
+""", language="vbnet")
+
     st.markdown("""
-    Used to accept user input.
-    - `Multiline = true` → Notepad
-    - `ReadOnly = true` → Display-only
+    ✔️ This shows how **input → processing → output** happens through events.
     """)
 
-    st.subheader("Label (Stopwatch Display)")
-    st.write("Used to display output like time, result, messages.")
+    st.markdown("""
+    ---
+    ### Mini Project 2: Stopwatch – Time-Based Working Mechanism
 
-    st.subheader("RadioButton (Quiz App)")
+    ❗ Stopwatch is **not just a Label**.
+
+    **Working Principle:**
+    - Timer generates `Tick` events at regular intervals
+    - Time value is updated internally
+    - Label displays formatted time
+    - Buttons control Start / Stop / Reset
+
+    **Controls involved:**
+    - Timer
+    - Label
+    - Button
+    """)
+
+    st.markdown("#### C#.NET – Stopwatch Core Logic")
     st.code("""
-If RadioButton1.Checked Then
-    score = score + 1
+int seconds = 0;
+
+private void timer1_Tick(object sender, EventArgs e)
+{
+    seconds++;
+    lblTime.Text = seconds + " sec";
+}
+
+private void btnStart_Click(object sender, EventArgs e)
+{
+    timer1.Start();
+}
+
+private void btnStop_Click(object sender, EventArgs e)
+{
+    timer1.Stop();
+}
+""", language="csharp")
+
+    st.markdown("#### VB.NET – Stopwatch Core Logic")
+    st.code("""
+Dim seconds As Integer = 0
+
+Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+    seconds += 1
+    lblTime.Text = seconds & " sec"
+End Sub
+
+Private Sub btnStart_Click(sender As Object, e As EventArgs) Handles btnStart.Click
+    Timer1.Start()
+End Sub
+""", language="vbnet")
+
+    st.markdown("""
+    ✔️ Demonstrates **time-driven event processing**, not user-triggered events.
+    """)
+
+    st.markdown("""
+    ---
+    ### Mini Project 3: Quiz Application – Decision-Based Flow
+
+    **Working Principle:**
+    - User selects an option
+    - Selection is validated
+    - Score is updated
+    - Final result is displayed
+
+    **Controls involved:**
+    - RadioButton
+    - Button
+    - Label
+    """)
+
+    st.markdown("#### VB.NET – Quiz Answer Evaluation")
+    st.code("""
+If RadioButton2.Checked Then
+    score += 1
 End If
 """, language="vbnet")
 
-    st.subheader("CheckBox (Settings / Quiz)")
-    st.write("Allows multiple selections.")
+    st.markdown("""
+    ✔️ Logic depends on **state checking**, not UI appearance.
+    """)
+
+    st.markdown("""
+    ---
+    ### Mini Project 4: Notepad – Continuous Input Processing
+
+    **Working Principle:**
+    - User types text
+    - Content is updated continuously
+    - Text can be saved or cleared
+
+    **Controls involved:**
+    - TextBox (Multiline)
+    - Menu / Button
+    """)
+
+    st.markdown("#### C#.NET – Text Change Detection")
+    st.code("""
+private void txtEditor_TextChanged(object sender, EventArgs e)
+{
+    lblStatus.Text = "Editing...";
+}
+""", language="csharp")
+
+    st.markdown("""
+    ✔️ Shows **real-time response to user input**.
+    """)
+
+    st.markdown("""
+    ---
+    ### Mini Project 5: Settings / Preferences – State Management
+
+    **Working Principle:**
+    - User selects preferences
+    - Options are stored
+    - Application behavior changes accordingly
+
+    **Controls involved:**
+    - CheckBox
+    - Button
+    """)
+
+    st.markdown("#### VB.NET – Settings Example")
+    st.code("""
+If chkDarkMode.Checked Then
+    Me.BackColor = Color.Black
+Else
+    Me.BackColor = Color.White
+End If
+""", language="vbnet")
+
+    st.success("""
+    ✅ Key Learning:
+    WinForms applications are built around **workflows and mechanisms**,  
+    where controls collaborate through **events, conditions, and timers**.
+    """)
 
 # --------------------------------------------------
 elif menu == "ListView, TreeView & ProgressBar":
