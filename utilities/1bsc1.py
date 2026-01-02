@@ -494,72 +494,451 @@ progressBar1.Value += 10;  // Progress per task
 
 # --------------------------------------------------
 elif menu == "Timer, ErrorProvider & Components":
-    st.header("4. Timer, ErrorProvider & Components")
+    st.header("4. Timer, ErrorProvider & Components – Working Mechanisms")
 
-    st.subheader("Timer (Stopwatch / Quiz)")
-    st.markdown("Timer triggers code at fixed intervals.")
+    st.markdown("""
+    Components in WinForms work **behind the scenes**.
+    They do not directly interact with users but control **timing, validation,
+    and application behavior**.
+    """)
 
+    st.markdown("""
+    ---
+    ## Timer – Time-Driven Execution (Mini Project: Stopwatch / Quiz Timer)
+
+    **Working Principle:**
+    - Timer runs in the background
+    - Generates `Tick` events at fixed intervals
+    - Each tick updates application logic
+    - Stops automatically based on condition
+
+    **Common Uses:**
+    - Stopwatch
+    - Countdown timer in quizzes
+    - Auto-save
+    - Progress monitoring
+
+    **Controls involved:**
+    - Timer
+    - Label
+    - Button
+    """)
+
+    st.markdown("### C#.NET – Stopwatch Core Mechanism")
     st.code("""
+int seconds = 0;
+
 private void timer1_Tick(object sender, EventArgs e)
 {
     seconds++;
-    lblTime.Text = seconds.ToString();
+    lblTime.Text = seconds.ToString() + " sec";
 }
 """, language="csharp")
 
-    st.subheader("ErrorProvider (Validation)")
-    st.markdown("Used to show validation errors in forms.")
+    st.markdown("### VB.NET – Timer Controlled Execution")
+    st.code("""
+Dim seconds As Integer = 0
 
+Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+    seconds += 1
+    lblTime.Text = seconds & " sec"
+End Sub
+""", language="vbnet")
+
+    st.info("""
+    ✔️ Demonstrates **system-generated events**
+    ✔️ Code executes automatically without user action
+    ✔️ Key concept for real-time applications
+    """)
+
+    st.markdown("""
+    ---
+    ## Timer – Quiz Countdown Example (Process Flow)
+
+    **Working Principle:**
+    - Quiz starts
+    - Timer counts down
+    - When time reaches zero, quiz ends automatically
+    """)
+
+    st.code("""
+int timeLeft = 30;
+
+private void timer1_Tick(object sender, EventArgs e)
+{
+    timeLeft--;
+    lblTime.Text = timeLeft.ToString();
+
+    if (timeLeft == 0)
+    {
+        timer1.Stop();
+        MessageBox.Show("Time Up!");
+    }
+}
+""", language="csharp")
+
+    st.markdown("""
+    ---
+    ## ErrorProvider – Input Validation Mechanism
+
+    **Working Principle:**
+    - User enters data
+    - System checks validity
+    - ErrorProvider shows visual feedback
+    - Error disappears once corrected
+
+    **Used in:**
+    - Registration forms
+    - Login validation
+    - Data entry applications
+    """)
+
+    st.markdown("### VB.NET – Required Field Validation")
     st.code("""
 If TextBox1.Text = "" Then
     ErrorProvider1.SetError(TextBox1, "Required field")
+Else
+    ErrorProvider1.Clear()
 End If
 """, language="vbnet")
 
-# --------------------------------------------------
-elif menu == "Menus, Toolbars & Dialog Boxes":
-    st.header("5. Menus, Toolbars & Dialog Boxes")
+    st.markdown("### C#.NET – Numeric Validation Example")
+    st.code("""
+if (string.IsNullOrEmpty(txtAge.Text))
+{
+    errorProvider1.SetError(txtAge, "Age is required");
+}
+else
+{
+    errorProvider1.Clear();
+}
+""", language="csharp")
 
-    st.subheader("MenuStrip (Notepad)")
-    st.write("File → New | Open | Save | Exit")
-
-    st.subheader("ToolStrip (Paint)")
-    st.write("Icons for brush, eraser, color picker")
-
-    st.subheader("Dialog Boxes")
-    st.markdown("""
-    - OpenFileDialog
-    - SaveFileDialog
-    - ColorDialog
-    - FontDialog
+    st.success("""
+    ✔️ Validation happens **without blocking the user**
+    ✔️ Improves usability and data correctness
     """)
 
+    st.markdown("""
+    ---
+    ## Components – Non-Visual Controllers
+
+    **Definition:**
+    Components are non-visual objects that:
+    - Control application logic
+    - Manage resources
+    - Support background processing
+
+    **Examples:**
+    - Timer
+    - ErrorProvider
+    - BackgroundWorker
+    - FileSystemWatcher
+    """)
+
+    st.markdown("""
+    ---
+    ### Learning Summary
+
+    - **Timer** controls *when* code executes
+    - **ErrorProvider** controls *data correctness*
+    - **Components** manage application behavior behind the UI
+
+    🎯 Controls show data, components **drive logic**
+    """)
+
+
+# --------------------------------------------------
+elif menu == "Menus, Toolbars & Dialog Boxes":
+    st.header("5. Menus, Toolbars & Dialog Boxes – Command & Interaction Flow")
+
+    st.markdown("""
+    Menus and toolbars act as **command controllers** in desktop applications.
+    They do not perform work themselves but **trigger processes**
+    such as file handling, formatting, and system interaction using dialog boxes.
+    """)
+
+    st.markdown("""
+    ---
+    ## MenuStrip – Command-Based Workflow (Mini Project: Notepad)
+
+    **Working Principle:**
+    - User selects a menu option
+    - Corresponding event handler is triggered
+    - Application executes required logic
+    - Dialog box may appear for user input
+
+    **Typical Menu Flow:**
+    ```
+    Menu Click → Event Handler → Dialog → Action → UI Update
+    ```
+
+    **Common Menu Commands:**
+    - File → New / Open / Save / Exit
+    - Edit → Cut / Copy / Paste
+    - Format → Font / Color
+    """)
+
+    st.markdown("### C#.NET – File Open Using MenuStrip")
+    st.code("""
+private void openToolStripMenuItem_Click(object sender, EventArgs e)
+{
+    OpenFileDialog dlg = new OpenFileDialog();
+    if (dlg.ShowDialog() == DialogResult.OK)
+    {
+        richTextBox1.Text = System.IO.File.ReadAllText(dlg.FileName);
+    }
+}
+""", language="csharp")
+
+    st.markdown("### VB.NET – File Save Using MenuStrip")
+    st.code("""
+Private Sub SaveToolStripMenuItem_Click(sender As Object, e As EventArgs)
+    SaveFileDialog1.ShowDialog()
+    System.IO.File.WriteAllText(SaveFileDialog1.FileName, RichTextBox1.Text)
+End Sub
+""", language="vbnet")
+
+    st.info("""
+    ✔️ MenuStrip acts as a **command dispatcher**
+    ✔️ Used in editors, IDEs, management systems
+    """)
+
+    st.markdown("""
+    ---
+    ## ToolStrip – Quick Action Workflow (Mini Project: Paint / Editor)
+
+    **Working Principle:**
+    - Icons represent frequently used commands
+    - Clicking an icon triggers the same logic as menu items
+    - Improves speed and usability
+
+    **Used in:**
+    - Paint applications
+    - Text editors
+    - Design tools
+    """)
+
+    st.markdown("### C#.NET – ToolStrip Color Selection")
+    st.code("""
+private void toolStripButtonColor_Click(object sender, EventArgs e)
+{
+    ColorDialog cd = new ColorDialog();
+    if (cd.ShowDialog() == DialogResult.OK)
+        richTextBox1.ForeColor = cd.Color;
+}
+""", language="csharp")
+
+    st.markdown("""
+    ✔️ ToolStrip is a **shortcut interface**
+    ✔️ Often linked to the same logic as MenuStrip
+    """)
+
+    st.markdown("""
+    ---
+    ## Dialog Boxes – User Interaction Mechanism
+
+    **Working Principle:**
+    - Dialog box collects user input or preference
+    - Returns selected value to application
+    - Application updates behavior accordingly
+
+    **Common Dialogs:**
+    - OpenFileDialog → Select file
+    - SaveFileDialog → Save content
+    - ColorDialog → Choose colors
+    - FontDialog → Select font
+    """)
+
+    st.markdown("### C#.NET – Open File Dialog")
     st.code("""
 OpenFileDialog dlg = new OpenFileDialog();
 dlg.ShowDialog();
 """, language="csharp")
 
+    st.markdown("### VB.NET – Font Selection Dialog")
+    st.code("""
+FontDialog1.ShowDialog()
+RichTextBox1.Font = FontDialog1.Font
+""", language="vbnet")
+
+    st.success("""
+    ✔️ Dialogs provide **safe and standardized interaction**
+    ✔️ Prevent invalid input and improve UX
+    """)
+
+    st.markdown("""
+    ---
+    ### Learning Summary
+
+    - **MenuStrip** organizes application commands
+    - **ToolStrip** provides quick access to actions
+    - **Dialog Boxes** gather user choices securely
+
+    🎯 Menus & dialogs **control workflow**, not data
+    """)
+
+
 # --------------------------------------------------
 elif menu == "Custom Controls & VB.NET–C# Interoperability":
-    st.header("6. Custom Controls & Interoperability")
+    st.header("6. Custom Controls & VB.NET–C# Interoperability – Reuse & Integration")
 
-    st.subheader("Custom Controls")
     st.markdown("""
-    A custom control is a **user-defined control** created by combining existing controls.
-
-    **Example:**
-    - Stopwatch control
-    - Calculator keypad
+    Advanced Windows Forms applications focus on **reuse, modularity, and integration**.
+    Custom Controls and Interoperability help developers **avoid rewriting code**
+    and **separate UI from logic**.
     """)
 
-    st.subheader("VB.NET & C# Interoperability")
     st.markdown("""
-    Allows using VB.NET code inside C# projects and vice versa.
+    ---
+    ## Custom Controls – Component Reuse Mechanism
 
-    **Example:**
-    - Business logic in C# DLL
-    - UI in VB.NET
+    **What is a Custom Control?**
+    A Custom Control is a **user-defined reusable component** created by
+    combining multiple controls and logic into a single unit.
+
+    **Why Custom Controls?**
+    - Reduce repeated coding
+    - Maintain consistent UI behavior
+    - Simplify large applications
     """)
+
+    st.markdown("""
+    ### Mini Project: Stopwatch as a Custom Control
+
+    **Working Principle:**
+    - Timer controls time progression
+    - Internal logic handles start/stop/reset
+    - External form simply **uses** the control
+
+    **Internal Components Used:**
+    - Label
+    - Button
+    - Timer
+    """)
+
+    st.markdown("### C#.NET – Stopwatch Custom Control (Core Logic)")
+    st.code("""
+public partial class StopwatchControl : UserControl
+{
+    int seconds = 0;
+
+    public StopwatchControl()
+    {
+        InitializeComponent();
+    }
+
+    private void timer1_Tick(object sender, EventArgs e)
+    {
+        seconds++;
+        lblTime.Text = seconds + " sec";
+    }
+
+    public void Start()
+    {
+        timer1.Start();
+    }
+
+    public void Stop()
+    {
+        timer1.Stop();
+    }
+}
+""", language="csharp")
+
+    st.markdown("""
+    ✔️ Control exposes **methods**, not internal UI  
+    ✔️ Used like a ready-made component
+    """)
+
+    st.markdown("### VB.NET – Using Custom Control in a Form")
+    st.code("""
+Private Sub btnStart_Click(sender As Object, e As EventArgs) Handles btnStart.Click
+    StopwatchControl1.Start()
+End Sub
+""", language="vbnet")
+
+    st.success("""
+    ✔️ Demonstrates **encapsulation and reusability**
+    ✔️ Ideal for dashboards, timers, calculators
+    """)
+
+    st.markdown("""
+    ---
+    ## Custom Controls – Another Example (Calculator Keypad)
+
+    **Working Principle:**
+    - Buttons are grouped into one control
+    - Key press logic handled internally
+    - Main form receives final value only
+    """)
+
+    st.markdown("""
+    ✔️ Used in billing systems, POS, kiosks
+    """)
+
+    st.markdown("""
+    ---
+    ## VB.NET & C#.NET Interoperability – Cross-Language Integration
+
+    **What is Interoperability?**
+    Interoperability allows **VB.NET and C#.NET to work together**
+    within the same application using the .NET Common Language Runtime (CLR).
+
+    **Why Interoperability?**
+    - Use existing code without rewriting
+    - Separate business logic from UI
+    - Team flexibility (VB & C# developers)
+    """)
+
+    st.markdown("""
+    ### Mini Project: Shared Business Logic DLL
+
+    **Architecture:**
+    ```
+    C# Class Library (Logic)
+           ↓
+    VB.NET WinForms (UI)
+    ```
+    """)
+
+    st.markdown("### C#.NET – Business Logic Class (DLL)")
+    st.code("""
+namespace SharedLogic
+{
+    public class CalculatorLogic
+    {
+        public int Add(int a, int b)
+        {
+            return a + b;
+        }
+    }
+}
+""", language="csharp")
+
+    st.markdown("### VB.NET – Consuming C# DLL")
+    st.code("""
+Dim calc As New SharedLogic.CalculatorLogic()
+Dim result As Integer = calc.Add(10, 20)
+MessageBox.Show(result.ToString())
+""", language="vbnet")
+
+    st.info("""
+    ✔️ Language-independent execution via CLR
+    ✔️ Logic reused across multiple applications
+    """)
+
+    st.markdown("""
+    ---
+    ### Learning Summary
+
+    - **Custom Controls** promote reuse and modular design
+    - **Interoperability** enables cross-language collaboration
+    - Both support **scalable and maintainable applications**
+
+    🎯 Build once, reuse everywhere
+    """)
+
 
 # --------------------------------------------------
 elif menu == "Lab-3: Calculator":
