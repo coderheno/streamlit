@@ -27,42 +27,99 @@ if menu == "Introduction & Event-Driven Programming":
     st.markdown("""
     ### Windows Applications
     Windows Applications are **GUI-based desktop applications** developed to run on the Windows Operating System.
-    They interact with users using **windows, buttons, menus, text boxes, dialogs, etc.**
+    They allow users to interact through **visual components** instead of typing commands.
 
-    **Examples:**
-    - Calculator
-    - Notepad
-    - Paint
-    - Stopwatch
-    - Web Browser
+    **Common GUI Controls:**
+    - Button – triggers an action
+    - TextBox – accepts user input
+    - Label – displays text
+    - RadioButton / CheckBox – selection options
+    - Timer – performs actions at fixed intervals
+
+    **Real-Time Examples:**
+    - **Calculator** – Buttons for numbers and operators
+    - **Notepad** – TextBox for typing text
+    - **Paint** – Mouse events for drawing
+    - **Stopwatch** – Timer control updates time
+    - **Login Form** – Button click validates username/password
     """)
 
     st.markdown("""
     ### Event-Driven Programming
-    In event-driven programming, the **flow of execution depends on events**.
+    In event-driven programming, the **program does not execute line by line**.
+    Instead, it **waits for an event** (user action or system action) and responds to it.
 
-    **What is an Event?**
-    An event is an action performed by the user or system.
+    #### What is an Event?
+    An **event** is an action that occurs when the user interacts with the application or when the system triggers it.
 
-    | User Action | Event |
-    |------------|------|
-    | Button click | Click |
-    | Typing text | TextChanged |
-    | Form load | Load |
-    | Mouse move | MouseMove |
-    | Timer tick | Tick |
+    | User Action | Event Name |
+    |------------|-----------|
+    | Clicking a button | Click |
+    | Typing in TextBox | TextChanged |
+    | Opening the form | Load |
+    | Moving the mouse | MouseMove |
+    | Timer interval | Tick |
 
-    **Event Flow:**
+    **Event Execution Flow:**
     ```
-    User Action → Event → Event Handler → Output
+    User Action → Event → Event Handler → Application Response
     ```
-
-    **Real-Time Mapping:**
-    - Calculator → Button Click Event
-    - Quiz App → RadioButton CheckedChanged
-    - Stopwatch → Timer Tick
-    - Paint → MouseMove
     """)
+
+    st.markdown("""
+    ### Simple Example – Button Click Event
+
+    #### Scenario:
+    When the user clicks a button, a message should be displayed.
+
+    #### VB.NET Example:
+    ```vbnet
+    Private Sub btnHello_Click(sender As Object, e As EventArgs) Handles btnHello.Click
+        MessageBox.Show("Hello, Welcome to Windows Application!")
+    End Sub
+    ```
+
+    **Explanation:**
+    - `btnHello_Click` is the **event handler**
+    - `Handles btnHello.Click` connects the button to the event
+    - Code executes **only when the button is clicked**
+
+    #### C#.NET Example:
+    ```csharp
+    private void btnHello_Click(object sender, EventArgs e)
+    {
+        MessageBox.Show("Hello, Welcome to Windows Application!");
+    }
+    ```
+
+    **Explanation:**
+    - Method runs automatically when `btnHello` is clicked
+    - `sender` refers to the control that triggered the event
+    """)
+
+    st.markdown("""
+    ### Real-Time Event Mapping Examples
+
+    - **Calculator App**
+      - Number Button → `Click`
+      - Equals Button → `Click`
+
+    - **Quiz Application**
+      - RadioButton selection → `CheckedChanged`
+      - Submit Button → `Click`
+
+    - **Stopwatch**
+      - Timer → `Tick`
+      - Start/Stop Button → `Click`
+
+    - **Paint Application**
+      - Mouse movement → `MouseMove`
+      - Mouse click → `MouseDown`
+
+    ✔️ Each action happens **only when its event is triggered**, making applications responsive and efficient.
+    """)
+
+    st.info("👉 Key Idea: Event-driven programming reacts to user actions instead of running continuously.")
 
 # --------------------------------------------------
 elif menu == "Windows Forms & Common Controls":
