@@ -3,8 +3,6 @@ import streamlit as st
 st.set_page_config(page_title="Windows Applications & Event-Driven Programming", layout="wide")
 
 st.title("Windows Applications & Event-Driven Programming")
-st.write("Detailed, Practical & Application-Oriented Study Material")
-
 # Sidebar Menu (kept simple to avoid duplicate ID issues)
 menu = st.sidebar.selectbox(
     "Select Topic",
@@ -22,7 +20,7 @@ menu = st.sidebar.selectbox(
 
 # --------------------------------------------------
 if menu == "Introduction & Event-Driven Programming":
-    st.header("1. Windows Applications & Event-Driven Programming")
+    st.header("Windows Applications & Event-Driven Programming")
 
     st.markdown("""
     ### Windows Applications
@@ -123,239 +121,376 @@ if menu == "Introduction & Event-Driven Programming":
 
 # --------------------------------------------------
 elif menu == "Windows Forms & Common Controls":
-    st.header("2. Windows Forms Development & Common Controls")
+    st.header("2. Windows Forms Development & Working Mechanisms")
 
     st.markdown("""
-    ### Windows Forms (WinForms)
-    Windows Forms is a .NET framework used to create **event-driven desktop applications**
-    using **C#.NET or VB.NET**.
+    Windows Forms applications work on **event-driven execution** where multiple
+    controls cooperate to complete a **process or workflow**.
 
-    A **Form** is not just a window — it acts as:
-    - The container for controls
-    - The coordinator of events
-    - The controller of application logic
-
-    💡 Real-world WinForms applications work based on **process flow**, not individual controls.
+    Below examples demonstrate **how real applications function internally**
+    using the same code taught in class.
     """)
 
     st.markdown("""
     ---
-    ### Mini Project 1: Calculator – Process-Based Working
+    ### Mini Project 1: Progress Tracker – Time-Driven Processing
 
     **Working Principle:**
-    1. User enters numbers
-    2. Selects an operation
-    3. Clicks a button
-    4. Result is calculated and displayed
+    - Application initializes on form load
+    - Progress bar range is configured
+    - Timer generates periodic `Tick` events
+    - Progress updates automatically
+    - Process stops when completion is reached
 
     **Controls involved:**
-    - TextBox → Input
-    - Button → Trigger calculation
-    - Label → Display result
-    """)
-
-    st.markdown("#### C#.NET – Calculator Logic")
-    st.code("""
-private void btnAdd_Click(object sender, EventArgs e)
-{
-    int num1 = int.Parse(txtNum1.Text);
-    int num2 = int.Parse(txtNum2.Text);
-    int result = num1 + num2;
-
-    lblResult.Text = "Result: " + result;
-}
-""", language="csharp")
-
-    st.markdown("#### VB.NET – Calculator Logic")
-    st.code("""
-Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
-    Dim num1 As Integer = Integer.Parse(txtNum1.Text)
-    Dim num2 As Integer = Integer.Parse(txtNum2.Text)
-    lblResult.Text = "Result: " & (num1 + num2)
-End Sub
-""", language="vbnet")
-
-    st.markdown("""
-    ✔️ This shows how **input → processing → output** happens through events.
-    """)
-
-    st.markdown("""
-    ---
-    ### Mini Project 2: Stopwatch – Time-Based Working Mechanism
-
-    ❗ Stopwatch is **not just a Label**.
-
-    **Working Principle:**
-    - Timer generates `Tick` events at regular intervals
-    - Time value is updated internally
-    - Label displays formatted time
-    - Buttons control Start / Stop / Reset
-
-    **Controls involved:**
+    - Form
+    - ProgressBar
     - Timer
     - Label
-    - Button
     """)
 
-    st.markdown("#### C#.NET – Stopwatch Core Logic")
+    st.markdown("#### VB.NET – Initialization Phase (Form Load)")
     st.code("""
-int seconds = 0;
+Private Sub Form3_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    ProgressBar1.Minimum = 0
+    ProgressBar1.Maximum = 1000
+    Timer1.Enabled = True
+End Sub
+""", language="vbnet")
 
-private void timer1_Tick(object sender, EventArgs e)
-{
-    seconds++;
-    lblTime.Text = seconds + " sec";
-}
-
-private void btnStart_Click(object sender, EventArgs e)
-{
-    timer1.Start();
-}
-
-private void btnStop_Click(object sender, EventArgs e)
-{
-    timer1.Stop();
-}
-""", language="csharp")
-
-    st.markdown("#### VB.NET – Stopwatch Core Logic")
+    st.markdown("#### VB.NET – Execution Phase (Timer Tick)")
     st.code("""
-Dim seconds As Integer = 0
-
 Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
-    seconds += 1
-    lblTime.Text = seconds & " sec"
-End Sub
+    ProgressBar1.Value = ProgressBar1.Value + 1
+    Label8.Text = (ProgressBar1.Value / 10) & " % completed"
 
-Private Sub btnStart_Click(sender As Object, e As EventArgs) Handles btnStart.Click
-    Timer1.Start()
+    If ProgressBar1.Value >= 1000 Then
+        Timer1.Enabled = False
+    End If
 End Sub
 """, language="vbnet")
 
-    st.markdown("""
-    ✔️ Demonstrates **time-driven event processing**, not user-triggered events.
+    st.info("""
+    ✔️ This demonstrates **automation using system events**  
+    ✔️ No user action required after start  
+    ✔️ Commonly used in loaders, installers, file transfers
     """)
 
     st.markdown("""
     ---
-    ### Mini Project 3: Quiz Application – Decision-Based Flow
+    ### Mini Project 2: Notepad Editor – File Handling Workflow
 
     **Working Principle:**
-    - User selects an option
-    - Selection is validated
-    - Score is updated
-    - Final result is displayed
+    - User selects a file using dialog
+    - File content is loaded into editor
+    - User modifies text
+    - Updated content is saved back to file
 
     **Controls involved:**
-    - RadioButton
-    - Button
-    - Label
+    - MenuStrip
+    - RichTextBox
+    - OpenFileDialog
+    - SaveFileDialog
     """)
 
-    st.markdown("#### VB.NET – Quiz Answer Evaluation")
+    st.markdown("#### VB.NET – Open & Save File Mechanism")
     st.code("""
-If RadioButton2.Checked Then
-    score += 1
-End If
+OpenFileDialog1.ShowDialog()
+RichTextBox1.Text = System.IO.File.ReadAllText(OpenFileDialog1.FileName)
+
+SaveFileDialog1.ShowDialog()
+System.IO.File.WriteAllText(SaveFileDialog1.FileName, RichTextBox1.Text)
 """, language="vbnet")
 
-    st.markdown("""
-    ✔️ Logic depends on **state checking**, not UI appearance.
-    """)
-
-    st.markdown("""
-    ---
-    ### Mini Project 4: Notepad – Continuous Input Processing
-
-    **Working Principle:**
-    - User types text
-    - Content is updated continuously
-    - Text can be saved or cleared
-
-    **Controls involved:**
-    - TextBox (Multiline)
-    - Menu / Button
-    """)
-
-    st.markdown("#### C#.NET – Text Change Detection")
+    st.markdown("#### C#.NET – Menu-Driven File Operations")
     st.code("""
-private void txtEditor_TextChanged(object sender, EventArgs e)
+private void openToolStripMenuItem_Click(object sender, EventArgs e)
 {
-    lblStatus.Text = "Editing...";
+    OpenFileDialog ofd = new OpenFileDialog();
+    if (ofd.ShowDialog() == DialogResult.OK)
+        richTextBox1.Text = System.IO.File.ReadAllText(ofd.FileName);
+}
+
+private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+{
+    SaveFileDialog sfd = new SaveFileDialog();
+    if (sfd.ShowDialog() == DialogResult.OK)
+        System.IO.File.WriteAllText(sfd.FileName, richTextBox1.Text);
 }
 """, language="csharp")
-
-    st.markdown("""
-    ✔️ Shows **real-time response to user input**.
-    """)
-
-    st.markdown("""
-    ---
-    ### Mini Project 5: Settings / Preferences – State Management
-
-    **Working Principle:**
-    - User selects preferences
-    - Options are stored
-    - Application behavior changes accordingly
-
-    **Controls involved:**
-    - CheckBox
-    - Button
-    """)
-
-    st.markdown("#### VB.NET – Settings Example")
-    st.code("""
-If chkDarkMode.Checked Then
-    Me.BackColor = Color.Black
-Else
-    Me.BackColor = Color.White
-End If
-""", language="vbnet")
 
     st.success("""
-    ✅ Key Learning:
-    WinForms applications are built around **workflows and mechanisms**,  
-    where controls collaborate through **events, conditions, and timers**.
+    ✔️ Demonstrates **file I/O workflow**
+    ✔️ Separates UI action from data handling
+    ✔️ Real-world editor behavior
+    """)
+
+    st.markdown("""
+    ---
+    ### Mini Project 3: Notepad Customization – Runtime Configuration
+
+    **Working Principle:**
+    - User selects visual preferences
+    - Dialog returns selected value
+    - Editor appearance updates dynamically
+
+    **Controls involved:**
+    - ColorDialog
+    - FontDialog
+    - RichTextBox
+    """)
+
+    st.markdown("#### C#.NET – Appearance Customization")
+    st.code("""
+private void foregroundToolStripMenuItem_Click(object sender, EventArgs e)
+{
+    ColorDialog cd = new ColorDialog();
+    if (cd.ShowDialog() == DialogResult.OK)
+        richTextBox1.ForeColor = cd.Color;
+}
+
+private void fontToolStripMenuItem_Click(object sender, EventArgs e)
+{
+    FontDialog fd = new FontDialog();
+    if (fd.ShowDialog() == DialogResult.OK)
+        richTextBox1.Font = fd.Font;
+}
+""", language="csharp")
+
+    st.markdown("""
+    ✔️ Shows **runtime UI reconfiguration**
+    ✔️ Used in IDEs, editors, accessibility tools
+    """)
+
+    st.markdown("""
+    ---
+    ### Mini Project 4: Calculator – State-Based Computation
+
+    **Working Principle:**
+    - Numbers are entered step-by-step
+    - Operator selection stores state
+    - Final computation occurs on action trigger
+
+    **Controls involved:**
+    - Button
+    - TextBox
+    """)
+
+    st.markdown("#### C#.NET – Calculator Logic (State Handling)")
+    st.code("""
+int a, b, c, option;
+
+private void button5_Click(object sender, EventArgs e)
+{
+    a = int.Parse(textBox1.Text);
+    textBox1.Text = "";
+    option = 1; // Addition
+}
+
+private void button4_Click(object sender, EventArgs e)
+{
+    b = int.Parse(textBox1.Text);
+    textBox1.Text = "";
+
+    if (option == 1)
+    {
+        c = a + b;
+        textBox1.Text = c.ToString();
+    }
+}
+""", language="csharp")
+
+    st.warning("""
+    ✔️ Demonstrates **state retention**
+    ✔️ Operator logic separated from input
+    ✔️ Core concept for calculators, billing apps
+    """)
+
+    st.markdown("""
+    ---
+    ### Overall Learning Outcome
+
+    These examples show that **WinForms applications are process-oriented systems**:
+    - Some react to **time**
+    - Some manage **files**
+    - Some store **state**
+    - Some automate **progress**
+
+    🎯 Controls are just tools — **logic and workflow drive the application**
     """)
 
 # --------------------------------------------------
 elif menu == "ListView, TreeView & ProgressBar":
-    st.header("3. ListView, TreeView & ProgressBar")
+    st.header("3. ListView, TreeView & ProgressBar – Process-Based Working")
 
-    st.subheader("ListView")
     st.markdown("""
-    Displays items in a list format.
+    In real applications, these controls are used to **organize, visualize, and track data flow**.
+    The focus here is on **how the data moves and changes**, not just on displaying it.
+    """)
+
+    st.markdown("""
+    ---
+    ## ListView – Structured Data Management (Mini Project: Student Records)
+
+    **Working Principle:**
+    1. Configure ListView display style
+    2. Define columns (structure)
+    3. Create items (data objects)
+    4. Add items to ListView
+    5. Select and retrieve data
+    6. Dynamically insert new records from input
+
+    This mimics **tables in real applications** like:
+    - Student Management System
+    - Marks / Results Viewer
+    - File Explorer (Details View)
+    """)
+
+    st.markdown("### Step 1: Configure ListView Layout")
+    st.code("""
+ListView1.View = View.Details
+ListView1.FullRowSelect = True
+ListView1.GridLines = True
+""", language="vbnet")
+
+    st.markdown("""
+    ✔️ Sets ListView to behave like a **table**
+    ✔️ Improves readability and row-based selection
+    """)
+
+    st.markdown("### Step 2: Define Columns (Data Structure)")
+    st.code("""
+ListView1.Columns.Add("Roll No", 100)
+ListView1.Columns.Add("Name", 150)
+ListView1.Columns.Add("Department", 120)
+""", language="vbnet")
+
+    st.markdown("""
+    ✔️ Columns act as **field definitions**
+    ✔️ Similar to attributes in a database table
+    """)
+
+    st.markdown("### Step 3 & 4: Create and Add Data Item")
+    st.code("""
+Dim item1 As New ListViewItem("101")
+item1.SubItems.Add("Arjun")
+item1.SubItems.Add("BCA")
+
+ListView1.Items.Add(item1)
+""", language="vbnet")
+
+    st.markdown("""
+    ✔️ `ListViewItem` represents **one complete record**
+    ✔️ `SubItems` represent additional fields
+    """)
+
+    st.markdown("### Step 5: Access Selected Record (User Interaction)")
+    st.code("""
+If ListView1.SelectedItems.Count > 0 Then
+    MessageBox.Show(ListView1.SelectedItems(0).Text)
+End If
+""", language="vbnet")
+
+    st.markdown("""
+    ✔️ Demonstrates **selection-based processing**
+    ✔️ Used in delete, edit, view-details operations
+    """)
+
+    st.markdown("### Step 6: Dynamic Data Entry Using TextBoxes")
+    st.code("""
+Dim newItem As New ListViewItem(TextBox1.Text)
+newItem.SubItems.Add(TextBox2.Text)
+newItem.SubItems.Add(TextBox3.Text)
+
+ListView1.Items.Add(newItem)
+
+TextBox1.Clear()
+TextBox2.Clear()
+TextBox3.Clear()
+
+MessageBox.Show("Data Added Successfully")
+""", language="vbnet")
+
+    st.success("""
+    ✔️ Demonstrates **runtime data insertion**
+    ✔️ Common in CRUD-based applications
+    """)
+
+    st.markdown("""
+    ---
+    ## ListView – Equivalent C#.NET Logic (For Reference)
+    """)
+
+    st.code("""
+listView1.View = View.Details;
+listView1.FullRowSelect = true;
+listView1.GridLines = true;
+
+listView1.Columns.Add("Roll No", 100);
+listView1.Columns.Add("Name", 150);
+listView1.Columns.Add("Department", 120);
+
+ListViewItem item = new ListViewItem("101");
+item.SubItems.Add("Arjun");
+item.SubItems.Add("BCA");
+
+listView1.Items.Add(item);
+""", language="csharp")
+
+    st.markdown("""
+    ---
+    ## TreeView – Hierarchical Data Representation
+
+    **Working Principle:**
+    - Parent nodes represent categories
+    - Child nodes represent sub-items
+    - Used when data follows a **tree structure**
 
     **Real Applications:**
-    - File Explorer
-    - Quiz Results
-    - Browser History
+    - Folder structure
+    - Organization hierarchy
+    - Course → Semester → Subject
     """)
 
     st.code("""
-listView1.Items.Add("Student1 - 8/10");
+TreeNode root = new TreeNode("Courses");
+root.Nodes.Add("BCA");
+root.Nodes.Add("BSc CS");
+
+treeView1.Nodes.Add(root);
 """, language="csharp")
 
-    st.subheader("TreeView")
     st.markdown("""
-    Displays **hierarchical data**.
-
-    **Example:** Folder structure, Menu structure
+    ✔️ TreeView represents **parent–child relationships**
+    ✔️ Navigation-based control
     """)
 
-    st.subheader("ProgressBar")
     st.markdown("""
-    Shows progress of a task.
+    ---
+    ## ProgressBar – Task Progress Monitoring
 
-    **Examples:**
-    - Quiz progress
-    - File download
-    - Installation
+    **Working Principle:**
+    - ProgressBar reflects task completion
+    - Value updated during processing
+    - Often combined with Timer or loops
+
+    **Real Applications:**
+    - File upload/download
+    - Quiz completion status
+    - Installation process
     """)
 
     st.code("""
-progressBar1.Value += 10; // Each question
+progressBar1.Value += 10;  // Progress per task
 """, language="csharp")
+
+    st.info("""
+    🎯 Key Insight:
+    ListView manages **structured records**,  
+    TreeView manages **hierarchies**,  
+    ProgressBar tracks **process completion**.
+    """)
+
 
 # --------------------------------------------------
 elif menu == "Timer, ErrorProvider & Components":
