@@ -299,7 +299,6 @@ elif menu == "Assessment Rubrics":
     
 elif menu == "CPCG Attendance Mini Project":
 
-    st.header("CPCG Class Attendance Management Mini Project")
     st.subheader("Real-World Application for CHRIST University")
 
     st.write("""
@@ -502,7 +501,5 @@ Role
     """)
 
     st.markdown("---")
-
-    st.success("Total Marks: 40")
 
     st.info("Tip: Students are encouraged to design the system following real-world software development practices.")
