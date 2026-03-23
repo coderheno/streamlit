@@ -47,7 +47,7 @@ stages = [
         "years": "Future",
         "title": "A Magical, Student-Empowered Future, Dream Classroom",
         "place": "Right here",
-        "text": "Students learn, create, and solve real problems using AI, VR, AR, and no-code tools. Technology fades into the background, but learning becomes limitless and magical.",
+        "text": "Students learn, create, and solve real problems using AI. Technology fades into the background, but learning becomes limitless and magical. We don’t need to control AI. We need to guide its use.",
         "default_image": None,
     },
 ]
