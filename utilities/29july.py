@@ -3,8 +3,8 @@ import streamlit as st
 st.set_page_config(page_title="AR/VR, AI, and Emerging Tech", layout="wide")
 
 st.title("🚀 Augmented Reality (AR) and Virtual Reality (VR)")
-st.markdown("##### Presented by: Dr. Vijay Arputharaj, CHRIST (Deemed to be University), India")
-st.markdown("##### Practical Demo by: Mr.Anson and Mr. Sambhav Jain, CHRIST (Deemed to be University), India")
+st.markdown("##### Presented by: Dr. Suresh K and Dr. Vijay Arputharaj, CHRIST (Deemed to be University), India")
+# st.markdown("##### Practical Demo by: Mr.Anson and Mr. Sambhav Jain, CHRIST (Deemed to be University), India")
 
 # Sidebar navigation
 section = st.sidebar.radio("Choose a Section", [
@@ -27,7 +27,7 @@ if section == "Welcome":
 
     # First Guess Video - AR
     st.markdown("##### 🔍 Video 1")
-    st.video("https://www.youtube.com/watch?v=miXPEPpHTwA")
+    st.video("https://www.youtube.com/watch?v=E4reHuAmNs8")
     guess1 = st.text_input("Your guess for Video 1:")
 
     if guess1:
