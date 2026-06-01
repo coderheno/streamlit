@@ -1,0 +1,1 @@
+create table cott1(sno NUMBER(5), name VARCHAR(20));
