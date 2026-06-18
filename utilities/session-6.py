@@ -320,7 +320,38 @@ Examples include:
 # ---------------------------------------------------
 # MODULE 1 : EVENTS & EVENT HANDLING
 # ---------------------------------------------------
+# ---------------------------------------------------
+# AI TUTOR
+# ---------------------------------------------------
 
+elif module == "6. AI Tutor":
+
+    st.title("🤖 AI Tutor")
+
+    st.markdown("""
+### Full Stack Development AI Tutor
+
+Ask questions related to:
+
+- HTML5
+- Tailwind CSS
+- JavaScript
+- Async & Await
+- Git & GitHub
+- Browser APIs
+- Full Stack Development
+
+Click the button below to launch the AI Tutor.
+""")
+
+    st.link_button(
+        "🚀 Open AI Tutor",
+        "https://fscbot.streamlit.app/"
+    )
+
+    st.info(
+        "The AI Tutor will open in a new browser tab."
+    )
 elif module == "1. Events & Event Handling":
 
     st.title("🖱️ JavaScript Events & Event Handling")
