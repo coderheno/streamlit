@@ -56,8 +56,8 @@ module = st.sidebar.selectbox(
         "🏠 Home",
         "1. Events & Event Handling",
         "2. Async & Await",
-        "3. JavaScript Navigator",
-        "4. JavaScript Cookies",
+        "3. Future Scope",
+        "4. Navigator & Cookies",
         "5. Quiz",
         "6. AI Tutor"
     ]
@@ -66,7 +66,380 @@ module = st.sidebar.selectbox(
 # ---------------------------------------------------
 # HOME PAGE
 # ---------------------------------------------------
+# ---------------------------------------------------
+# WHY ASYNC & AWAIT MATTERS
+# ---------------------------------------------------
 
+def async_future_scope():
+
+    st.divider()
+
+    st.header("🚀 Why Async & Await is the Backbone of Full Stack Development")
+
+    st.markdown("""
+Async & Await is one of the most important JavaScript concepts for every Full Stack Developer.
+
+Although we are learning it in JavaScript, you will use it extensively in almost every upcoming technology throughout this course.
+""")
+
+    st.info("""
+Think of Async & Await as the **bridge** between JavaScript fundamentals and modern Full Stack Development.
+""")
+
+    st.divider()
+
+    st.subheader("📈 Learning Journey")
+
+    st.code("""
+
+HTML + Tailwind CSS
+
+        ↓
+
+JavaScript
+
+        ↓
+
+Events & Event Handling
+
+        ↓
+
+Async & Await ⭐
+
+        ↓
+
+React
+
+        ↓
+
+Node.js
+
+        ↓
+
+Express.js
+
+        ↓
+
+MongoDB
+
+        ↓
+
+Next.js
+
+        ↓
+
+AI Integration
+
+""")
+
+    st.divider()
+
+    st.subheader("📚 Where will we use Async & Await?")
+
+    future = {
+
+        "Upcoming Topic":[
+
+            "React",
+
+            "Node.js",
+
+            "Express.js",
+
+            "MongoDB",
+
+            "Next.js",
+
+            "Authentication",
+
+            "Cloud Storage",
+
+            "REST APIs",
+
+            "AI APIs",
+
+            "Payment Gateway"
+
+        ],
+
+        "Usage":[
+
+            "Fetching API Data",
+
+            "Reading Files",
+
+            "Database Queries",
+
+            "CRUD Operations",
+
+            "Server-side Data Fetching",
+
+            "Login Verification",
+
+            "Uploading Files",
+
+            "GET / POST Requests",
+
+            "Gemini / OpenAI",
+
+            "Payment Processing"
+
+        ]
+
+    }
+
+    st.table(future)
+
+    st.divider()
+
+    st.subheader("🌍 Real-World Applications")
+
+    apps = st.selectbox(
+
+        "Choose an Application",
+
+        [
+
+            "Netflix",
+
+            "Amazon",
+
+            "Google Maps",
+
+            "Instagram",
+
+            "Swiggy",
+
+            "Student Management System"
+
+        ]
+
+    )
+
+    if apps == "Netflix":
+
+        st.success("""
+
+Movie Page
+
+↓
+
+Fetch Movie Details
+
+↓
+
+Load Trailer
+
+↓
+
+Load Reviews
+
+↓
+
+Load Recommendations
+
+All these operations happen asynchronously.
+
+""")
+
+    elif apps == "Amazon":
+
+        st.success("""
+
+Product Page
+
+↓
+
+Load Product
+
+↓
+
+Load Reviews
+
+↓
+
+Load Ratings
+
+↓
+
+Load Related Products
+
+""")
+
+    elif apps == "Google Maps":
+
+        st.success("""
+
+Load Map
+
+↓
+
+Detect Location
+
+↓
+
+Traffic Updates
+
+↓
+
+Nearby Places
+
+""")
+
+    elif apps == "Instagram":
+
+        st.success("""
+
+User Login
+
+↓
+
+Load Feed
+
+↓
+
+Load Stories
+
+↓
+
+Load Messages
+
+↓
+
+Notifications
+
+""")
+
+    elif apps == "Swiggy":
+
+        st.success("""
+
+Restaurant List
+
+↓
+
+Order Placement
+
+↓
+
+Payment
+
+↓
+
+Live Tracking
+
+↓
+
+Delivery Updates
+
+""")
+
+    else:
+
+        st.success("""
+
+Student Login
+
+↓
+
+Verify User
+
+↓
+
+Fetch Courses
+
+↓
+
+Fetch Attendance
+
+↓
+
+Fetch Marks
+
+↓
+
+Display Dashboard
+
+""")
+
+    st.divider()
+
+    st.subheader("💼 Industry Applications")
+
+    col1, col2 = st.columns(2)
+
+    with col1:
+
+        st.markdown("""
+
+✔ React
+
+✔ Node.js
+
+✔ Express.js
+
+✔ MongoDB
+
+✔ Firebase
+
+✔ REST APIs
+
+""")
+
+    with col2:
+
+        st.markdown("""
+
+✔ AI Chatbots
+
+✔ Payment Gateways
+
+✔ Cloud Storage
+
+✔ Authentication
+
+✔ Notifications
+
+✔ File Uploads
+
+""")
+
+    st.divider()
+
+    st.subheader("🎯 Key Takeaways")
+
+    st.success("""
+
+After mastering Async & Await, you can confidently:
+
+✅ Fetch API Data
+
+✅ Build REST API Clients
+
+✅ Connect Databases
+
+✅ Develop Backend APIs
+
+✅ Authenticate Users
+
+✅ Upload Files
+
+✅ Integrate AI Models
+
+✅ Build Real Full Stack Applications
+
+""")
+
+    st.divider()
+
+    st.warning("""
+💡 **Remember:**
+
+You are not learning Async & Await just for JavaScript.
+
+You are learning one of the most fundamental concepts that powers React, Node.js, Express.js, MongoDB, Next.js, AI applications, Cloud Platforms, and almost every modern Full Stack web application.
+""")
+    
 if module == "🏠 Home":
 
     st.markdown(
@@ -323,6 +696,9 @@ Examples include:
 # ---------------------------------------------------
 # AI TUTOR
 # ---------------------------------------------------
+elif module == "3.Future Scope":
+
+    async_future_scope()
 
 elif module == "6. AI Tutor":
 
