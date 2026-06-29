@@ -20,3 +20,4 @@ if st.button("Check Risk"):
         st.warning("High Risk - Please consult a doctor.")
     else:
         st.success("Low Risk - Maintain your current lifestyle.")
+        
