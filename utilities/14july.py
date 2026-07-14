@@ -57,6 +57,10 @@ if section == "Welcome":
     st.markdown("📘 **Creating Immersive VR Environments-2:**")
     st.markdown(
         "[📄 Link](https://vrclass.streamlit.app/", unsafe_allow_html=True )
+    st.markdown("---")
+    st.markdown("📘 **Online Tools:**")
+    st.markdown(
+        "[📄 Link](https://8july.streamlit.app/", unsafe_allow_html=True )
 elif section == "AR/VR Fundamentals":
     st.header("🕶️ AR and VR Fundamentals")
 
@@ -283,17 +287,12 @@ elif section == "Career Outlook":
     st.markdown("---")
     st.subheader("📬 Contact Information")
     st.markdown("""
-    **Dr. Vijay Arputharaj**  
-    📱 09677188654  
-    📧 [vijay.arputharaj@christuniversity.in](mailto:vijay.arputharaj@christuniversity.in)  
+    **Dr. Chanti S**  
+    📱 07598422762  
+    📧 [chanti.s@christuniversity.in](mailto:chanti.s@christuniversity.in)  
     🌐 [Christ University Faculty Profile](https://m.christuniversity.in/dept/faculty-details/NzAyNQ==/NjI=)
     """)
-    st.markdown("""
-    **Mr. Sambhav Jain**  
-    📱 07878559290  
-    📧 [sambhav.jain@bcah.christuniversity.in](mailto:sambhav.jain@bcah.christuniversity.in)  
-    🌐 [Linkedin Profile](https://www.linkedin.com/in/sambhav-jain-8243a526a/)
-    """)
+    
     st.markdown("---")
     st.caption("For queries regarding coursework, industry sessions, or project guidance, feel free to reach out.")
 
