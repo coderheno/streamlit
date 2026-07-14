@@ -60,7 +60,7 @@ if section == "Welcome":
     st.markdown("---")
     st.markdown("📘 **Online Tools:**")
     st.markdown(
-        "[📄 Link](https://8july.streamlit.app/", unsafe_allow_html=True )
+        "[📄 Link](https://8july26.streamlit.app/", unsafe_allow_html=True )
 elif section == "AR/VR Fundamentals":
     st.header("🕶️ AR and VR Fundamentals")
 
